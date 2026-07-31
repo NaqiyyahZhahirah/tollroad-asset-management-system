@@ -1,10 +1,13 @@
 const supabase = require('../config/supabase');
 
 async function getAllKategori(req, res) {
-    const { data, error } = await supabase
-        .from('kategori_aset')
-        .select('*')
-        .eq('is_active', true);
+    let query = supabase.from('kategori_aset').select('*');
+
+    if (req.query.include_inactive !== 'true') {
+        query = query.eq('is_active', true);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
         return res.status(500).json({ error: error.message });
@@ -41,7 +44,7 @@ async function createKategori(req, res) {
 
 async function updateKategori(req, res) {
     const { id } = req.params;
-    const { nama_kategori, deskripsi, skema_formulir, naikkan_versi } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, naikkan_versi, is_active } = req.body;
 
     // Ambil versi_skema saat ini
     const { data: current, error: currentError } = await supabase
@@ -55,10 +58,12 @@ async function updateKategori(req, res) {
     }
 
     const updatePayload = {
-        nama_kategori,
-        deskripsi,
         updated_at: new Date().toISOString()
     };
+
+    if (nama_kategori !== undefined) updatePayload.nama_kategori = nama_kategori;
+    if (deskripsi !== undefined) updatePayload.deskripsi = deskripsi;
+    if (is_active !== undefined) updatePayload.is_active = is_active;
 
     // Kalau skema_formulir berubah, naikkan versi_skema
     // biar data lama yang pakai versi lama tetap tercatat valid dengan snapshot-nya sendiri
@@ -100,4 +105,21 @@ async function deactivateKategori(req, res) {
     res.json({ data, message: 'Kategori dinonaktifkan' });
 }
 
-module.exports = { getAllKategori, createKategori, updateKategori, deactivateKategori };
+async function activateKategori(req, res) {
+    const { id } = req.params;
+
+    const { data, error } = await supabase
+        .from('kategori_aset')
+        .update({ is_active: true })
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+    res.json({ data, message: 'Kategori diaktifkan' });
+}
+
+module.exports = { getAllKategori, createKategori, updateKategori, deactivateKategori, activateKategori };

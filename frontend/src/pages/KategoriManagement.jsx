@@ -6,9 +6,19 @@ import TopBar from '../components/TopBar';
 
 export default function KategoriManagement() {
     const [kategoriList, setKategoriList] = useState([]);
+    const [editingKategori, setEditingKategori] = useState(null);
     const [namaKategori, setNamaKategori] = useState('');
     const [deskripsi, setDeskripsi] = useState('');
-    const [fields, setFields] = useState([{ key: '', label: '', type: 'text', required: false, options: '' }]);
+    const [naikkanVersi, setNaikkanVersi] = useState(false);
+    const [fields, setFields] = useState([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+    
+    // Accordion state
+    const [isAktifOpen, setIsAktifOpen] = useState(true);
+    const [isNonaktifOpen, setIsNonaktifOpen] = useState(true);
+
+    // Drag and drop state
+    const [draggedIndex, setDraggedIndex] = useState(null);
+
     const { user } = useAuthStore();
 
     useEffect(() => {
@@ -16,53 +26,212 @@ export default function KategoriManagement() {
     }, []);
 
     async function fetchKategori() {
-        const res = await axiosClient.get('/kategori');
-        setKategoriList(res.data.data);
+        try {
+            const res = await axiosClient.get('/kategori?include_inactive=true');
+            setKategoriList(res.data.data || []);
+        } catch (err) {
+            console.error('Error fetching kategori:', err);
+        }
+    }
+
+    function generateKeyFromLabel(label) {
+        if (!label) return '';
+        return label
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '_')
+            .replace(/^_+|_+$/g, '');
+    }
+
+    function resetForm() {
+        setEditingKategori(null);
+        setNamaKategori('');
+        setDeskripsi('');
+        setNaikkanVersi(false);
+        setFields([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+    }
+
+    function startEdit(kategori) {
+        setEditingKategori(kategori);
+        setNamaKategori(kategori.nama_kategori || '');
+        setDeskripsi(kategori.deskripsi || '');
+        setNaikkanVersi(false);
+        
+        const loadedFields = kategori.skema_formulir?.fields || [];
+        if (loadedFields.length > 0) {
+            setFields(loadedFields.map(f => {
+                let parsedOpts = [''];
+                if (Array.isArray(f.options)) {
+                    parsedOpts = f.options.length > 0 ? f.options : [''];
+                } else if (typeof f.options === 'string' && f.options.trim()) {
+                    parsedOpts = f.options.split(',').map(o => o.trim()).filter(Boolean);
+                    if (parsedOpts.length === 0) parsedOpts = [''];
+                }
+
+                return {
+                    key: f.key || generateKeyFromLabel(f.label || ''),
+                    label: f.label || '',
+                    type: f.type || 'text',
+                    required: !!f.required,
+                    options: parsedOpts
+                };
+            }));
+        } else {
+            setFields([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+        }
+
+        // Scroll to form on small screens
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function addField() {
-        setFields([...fields, { key: '', label: '', type: 'text', required: false, options: '' }]);
+        setFields([...fields, { key: '', label: '', type: 'text', required: false, options: [''] }]);
+    }
+
+    function removeField(index) {
+        if (fields.length === 1) {
+            alert('Kategori harus memiliki minimal 1 field.');
+            return;
+        }
+        setFields(fields.filter((_, i) => i !== index));
     }
 
     function updateField(index, key, value) {
         const updated = [...fields];
         updated[index][key] = value;
+
+        // Auto-generate key based on label (lowercase, underscore for spaces)
+        if (key === 'label') {
+            updated[index]['key'] = generateKeyFromLabel(value);
+        }
+
+        // Initialize options array if type is changed to select
+        if (key === 'type' && value === 'select') {
+            if (!Array.isArray(updated[index].options) || updated[index].options.length === 0) {
+                updated[index].options = [''];
+            }
+        }
+
         setFields(updated);
+    }
+
+    // Dynamic Select Option Helpers
+    function addOption(fieldIndex) {
+        const updated = [...fields];
+        const currentOpts = Array.isArray(updated[fieldIndex].options) ? updated[fieldIndex].options : [];
+        updated[fieldIndex].options = [...currentOpts, ''];
+        setFields(updated);
+    }
+
+    function updateOption(fieldIndex, optionIndex, value) {
+        const updated = [...fields];
+        const currentOpts = Array.isArray(updated[fieldIndex].options) ? [...updated[fieldIndex].options] : [];
+        currentOpts[optionIndex] = value;
+        updated[fieldIndex].options = currentOpts;
+        setFields(updated);
+    }
+
+    function removeOption(fieldIndex, optionIndex) {
+        const updated = [...fields];
+        const currentOpts = Array.isArray(updated[fieldIndex].options) ? updated[fieldIndex].options : [];
+        if (currentOpts.length <= 1) return;
+        updated[fieldIndex].options = currentOpts.filter((_, i) => i !== optionIndex);
+        setFields(updated);
+    }
+
+    // Drag and Drop reordering handlers
+    function handleDragStart(e, index) {
+        setDraggedIndex(index);
+        e.dataTransfer.effectAllowed = 'move';
+    }
+
+    function handleDragOver(e, index) {
+        e.preventDefault();
+        if (draggedIndex === null || draggedIndex === index) return;
+
+        const updatedFields = [...fields];
+        const [draggedItem] = updatedFields.splice(draggedIndex, 1);
+        updatedFields.splice(index, 0, draggedItem);
+        setDraggedIndex(index);
+        setFields(updatedFields);
+    }
+
+    function handleDragEnd() {
+        setDraggedIndex(null);
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         const skema_formulir = {
             fields: fields.map((f) => ({
-                key: f.key,
+                key: f.key || generateKeyFromLabel(f.label),
                 label: f.label,
                 type: f.type,
                 required: f.required,
-                ...(f.type === 'select' ? { options: f.options.split(',').map((o) => o.trim()) } : {})
+                ...(f.type === 'select'
+                    ? {
+                        options: (Array.isArray(f.options)
+                            ? f.options
+                            : typeof f.options === 'string'
+                            ? f.options.split(',')
+                            : []
+                        )
+                            .map((o) => o.trim())
+                            .filter(Boolean)
+                      }
+                    : {})
             }))
         };
 
         try {
-            await axiosClient.post('/kategori', {
-                nama_kategori: namaKategori,
-                deskripsi,
-                skema_formulir,
-                created_by: user.id
-            });
-            setNamaKategori('');
-            setDeskripsi('');
-            setFields([{ key: '', label: '', type: 'text', required: false, options: '' }]);
+            if (editingKategori) {
+                await axiosClient.patch(`/kategori/${editingKategori.id}`, {
+                    nama_kategori: namaKategori,
+                    deskripsi,
+                    skema_formulir,
+                    naikkan_versi: naikkanVersi
+                });
+                alert('Kategori berhasil diperbarui!');
+            } else {
+                await axiosClient.post('/kategori', {
+                    nama_kategori: namaKategori,
+                    deskripsi,
+                    skema_formulir,
+                    created_by: user?.id
+                });
+                alert('Kategori berhasil dibuat!');
+            }
+
+            resetForm();
             fetchKategori();
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal membuat kategori');
+            alert(err.response?.data?.error || 'Gagal menyimpan kategori');
         }
     }
 
     async function handleDeactivate(id) {
         if (!confirm('Nonaktifkan kategori ini?')) return;
-        await axiosClient.delete(`/kategori/${id}`);
-        fetchKategori();
+        try {
+            await axiosClient.delete(`/kategori/${id}`);
+            if (editingKategori?.id === id) resetForm();
+            fetchKategori();
+        } catch (err) {
+            alert(err.response?.data?.error || 'Gagal menonaktifkan kategori');
+        }
     }
+
+    async function handleActivate(id) {
+        if (!confirm('Aktifkan kembali kategori ini?')) return;
+        try {
+            await axiosClient.patch(`/kategori/${id}/activate`);
+            fetchKategori();
+        } catch (err) {
+            alert(err.response?.data?.error || 'Gagal mengaktifkan kategori');
+        }
+    }
+
+    const activeKategori = kategoriList.filter((k) => k.is_active !== false);
+    const inactiveKategori = kategoriList.filter((k) => k.is_active === false);
 
     return (
         <div className="min-h-screen flex bg-[#f8f9ff]">
@@ -72,48 +241,162 @@ export default function KategoriManagement() {
                 <TopBar />
 
                 <section className="flex-1 overflow-y-auto p-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6">
 
-                        {/* ==== Panel Kiri: Kategori Aktif ==== */}
-                        <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] h-fit overflow-hidden">
-                            <div className="px-6 py-4 border-b border-[#c5c6cd] bg-[#eff4ff]">
-                                <h1 className="text-[20px] font-bold text-[#091426]">Kategori Aktif</h1>
-                            </div>
-
-                            <div className="p-4 space-y-2">
-                                {kategoriList.map((k) => (
-                                    <div
-                                        key={k.id}
-                                        className="group flex justify-between items-center p-3 bg-white border border-[#c5c6cd] rounded-[0.25rem] hover:border-[#fea619] hover:shadow-sm transition-all"
-                                    >
-                                        <div>
-                                            <p className="text-sm font-bold text-[#0b1c30]">{k.nama_kategori}</p>
-                                            <p className="text-[11px] uppercase tracking-widest text-[#45474c] mt-1">
-                                                v{k.versi_skema}
-                                            </p>
-                                        </div>
-                                        <button
-                                            onClick={() => handleDeactivate(k.id)}
-                                            className="text-[#ba1a1a] text-xs font-bold opacity-0 group-hover:opacity-100 hover:underline transition-opacity"
-                                        >
-                                            Nonaktifkan
-                                        </button>
+                        {/* ==== Panel Kiri: Kategori Aktif & Nonaktif ==== */}
+                        <div className="space-y-4">
+                            {/* Kotak Kategori Aktif */}
+                            <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsAktifOpen(!isAktifOpen)}
+                                    className="w-full px-5 py-4 border-b border-[#c5c6cd] bg-[#eff4ff] flex items-center justify-between hover:bg-[#e4edff] transition-colors text-left"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-[#091426] text-xl">
+                                            {isAktifOpen ? 'expand_more' : 'chevron_right'}
+                                        </span>
+                                        <h1 className="text-[17px] font-bold text-[#091426]">
+                                            Kategori Aktif
+                                        </h1>
+                                        <span className="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#107c41]/10 text-[#107c41]">
+                                            {activeKategori.length}
+                                        </span>
                                     </div>
-                                ))}
+                                </button>
 
-                                {kategoriList.length === 0 && (
-                                    <p className="text-sm text-[#45474c] italic">Belum ada kategori.</p>
+                                {isAktifOpen && (
+                                    <div className="p-4 space-y-2 max-h-[350px] overflow-y-auto">
+                                        {activeKategori.map((k) => {
+                                            const isSelected = editingKategori?.id === k.id;
+                                            return (
+                                                <div
+                                                    key={k.id}
+                                                    className={`group flex justify-between items-center p-3 bg-white border rounded-[0.25rem] transition-all ${
+                                                        isSelected
+                                                            ? 'border-[#fea619] ring-2 ring-[#fea619]/20 bg-[#fffdfa]'
+                                                            : 'border-[#c5c6cd] hover:border-[#fea619] hover:shadow-sm'
+                                                    }`}
+                                                >
+                                                    <div>
+                                                        <p className="text-sm font-bold text-[#0b1c30]">{k.nama_kategori}</p>
+                                                        <p className="text-[11px] uppercase tracking-widest text-[#45474c] mt-1">
+                                                            v{k.versi_skema}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <button
+                                                            onClick={() => startEdit(k)}
+                                                            className="text-[#091426] hover:bg-[#091426]/10 text-xs font-bold px-2 py-1 rounded flex items-center gap-0.5"
+                                                            title="Edit Kategori"
+                                                        >
+                                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                                            Edit
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeactivate(k.id)}
+                                                            className="text-[#ba1a1a] hover:bg-[#ba1a1a]/10 text-xs font-bold px-2 py-1 rounded"
+                                                        >
+                                                            Nonaktifkan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+
+                                        {activeKategori.length === 0 && (
+                                            <p className="text-sm text-[#45474c] italic py-2 text-center">
+                                                Tidak ada kategori aktif.
+                                            </p>
+                                        )}
+                                    </div>
                                 )}
-                            </div>
-                        </section>
+                            </section>
 
-                        {/* ==== Panel Kanan: Bikin Kategori Baru ==== */}
-                        <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden">
-                            <div className="px-6 py-4 border-b border-[#c5c6cd] bg-[#eff4ff]">
-                                <h1 className="text-[20px] font-bold text-[#091426]">Bikin Kategori Baru</h1>
-                                <p className="text-sm text-[#45474c] mt-1">
-                                    Definisikan atribut spesifik untuk kategori ini.
-                                </p>
+                            {/* Kotak Kategori Nonaktif */}
+                            <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsNonaktifOpen(!isNonaktifOpen)}
+                                    className="w-full px-5 py-4 border-b border-[#c5c6cd] bg-[#f0f0f3] flex items-center justify-between hover:bg-[#e4e4e8] transition-colors text-left"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-[#45474c] text-xl">
+                                            {isNonaktifOpen ? 'expand_more' : 'chevron_right'}
+                                        </span>
+                                        <h1 className="text-[17px] font-bold text-[#45474c]">
+                                            Kategori Nonaktif
+                                        </h1>
+                                        <span className="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#ba1a1a]/10 text-[#ba1a1a]">
+                                            {inactiveKategori.length}
+                                        </span>
+                                    </div>
+                                </button>
+
+                                {isNonaktifOpen && (
+                                    <div className="p-4 space-y-2 max-h-[350px] overflow-y-auto bg-[#fafafa]">
+                                        {inactiveKategori.map((k) => {
+                                            const isSelected = editingKategori?.id === k.id;
+                                            return (
+                                                <div
+                                                    key={k.id}
+                                                    className={`group flex justify-between items-center p-3 bg-white border rounded-[0.25rem] transition-all opacity-85 hover:opacity-100 ${
+                                                        isSelected
+                                                            ? 'border-[#fea619] ring-2 ring-[#fea619]/20'
+                                                            : 'border-[#e0e0e0] hover:border-[#091426]'
+                                                    }`}
+                                                >
+                                                    <div>
+                                                        <p className="text-sm font-bold text-[#45474c] line-through decoration-1">
+                                                            {k.nama_kategori}
+                                                        </p>
+                                                        <p className="text-[11px] uppercase tracking-widest text-[#75777c] mt-1">
+                                                            v{k.versi_skema}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <button
+                                                            onClick={() => startEdit(k)}
+                                                            className="text-[#091426] hover:bg-[#091426]/10 text-xs font-bold px-2 py-1 rounded flex items-center gap-0.5"
+                                                            title="Edit Kategori"
+                                                        >
+                                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                                            Edit
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleActivate(k.id)}
+                                                            className="text-[#107c41] hover:bg-[#107c41]/10 text-xs font-bold px-2 py-1 rounded"
+                                                        >
+                                                            Aktifkan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+
+                                        {inactiveKategori.length === 0 && (
+                                            <p className="text-sm text-[#75777c] italic py-2 text-center">
+                                                Tidak ada kategori nonaktif.
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+                            </section>
+                        </div>
+
+                        {/* ==== Panel Kanan: Bikin / Edit Kategori ==== */}
+                        <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
+                            <div className="px-6 py-4 border-b border-[#c5c6cd] bg-[#eff4ff] flex items-center justify-between">
+                                <div>
+                                    <h1 className="text-[20px] font-bold text-[#091426]">
+                                        {editingKategori ? `Edit Kategori: ${editingKategori.nama_kategori}` : 'Buat Kategori Baru'}
+                                    </h1>
+                                    <p className="text-sm text-[#45474c] mt-1">
+                                        {editingKategori
+                                            ? `Mengubah definisi atribut dan skema kategori (Versi Saat Ini: v${editingKategori.versi_skema}).`
+                                            : 'Definisikan atribut spesifik untuk kategori ini.'}
+                                    </p>
+                                </div>
                             </div>
 
                             <form onSubmit={handleSubmit} className="p-6 space-y-6">
@@ -125,7 +408,7 @@ export default function KategoriManagement() {
                                         placeholder="Nama Kategori"
                                         value={namaKategori}
                                         onChange={(e) => setNamaKategori(e.target.value)}
-                                        className="w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm transition-colors"
+                                        className="w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm transition-colors bg-white"
                                         required
                                     />
                                 </div>
@@ -138,49 +421,107 @@ export default function KategoriManagement() {
                                         placeholder="Deskripsi"
                                         value={deskripsi}
                                         onChange={(e) => setDeskripsi(e.target.value)}
-                                        className="w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm transition-colors"
+                                        className="w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm transition-colors bg-white"
                                     />
                                 </div>
 
+                                {editingKategori && (
+                                    <div className="p-3 bg-[#eff4ff] border border-[#c5c6cd] rounded-[0.25rem]">
+                                        <label className="flex items-center gap-2.5 text-xs font-bold text-[#091426] cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={naikkanVersi}
+                                                onChange={(e) => setNaikkanVersi(e.target.checked)}
+                                                className="h-4 w-4 rounded-[0.125rem] border-[#c5c6cd] text-[#091426] focus:ring-[#fea619]"
+                                            />
+                                            Naikkan Versi Skema (v{editingKategori.versi_skema} → v{editingKategori.versi_skema + 1})
+                                        </label>
+                                        <p className="text-[11px] text-[#45474c] mt-1 ml-6">
+                                            Centang jika perubahan skema cukup besar agar aset lama tetap tercatat menggunakan snapshot skema v{editingKategori.versi_skema}.
+                                        </p>
+                                    </div>
+                                )}
+
                                 <div className="pt-4 border-t border-[#c5c6cd]">
-                                    <h3 className="text-[12px] font-bold uppercase tracking-widest text-[#45474c] mb-3">
-                                        Field Spesifik
-                                    </h3>
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h3 className="text-[12px] font-bold uppercase tracking-widest text-[#45474c]">
+                                            Atribut Spesifik
+                                        </h3>
+                                        <span className="text-xs text-[#75777c]">
+                                            Tarik titik 6 untuk mengatur urutan
+                                        </span>
+                                    </div>
 
                                     <div className="space-y-3">
                                         {fields.map((field, i) => (
                                             <div
                                                 key={i}
-                                                className="border border-[#c5c6cd] rounded-[0.25rem] p-4 space-y-3 bg-[#f8f9ff] hover:border-[#fea619] transition-colors"
+                                                draggable
+                                                onDragStart={(e) => handleDragStart(e, i)}
+                                                onDragOver={(e) => handleDragOver(e, i)}
+                                                onDragEnd={handleDragEnd}
+                                                className={`border border-[#c5c6cd] rounded-[0.25rem] p-4 space-y-3 bg-[#f8f9ff] hover:border-[#fea619] transition-all relative ${
+                                                    draggedIndex === i ? 'opacity-40 border-dashed border-[#fea619]' : ''
+                                                }`}
                                             >
-                                                <div className="grid grid-cols-2 gap-3">
-                                                    <input
-                                                        placeholder="key (contoh: tipe_guardrail)"
-                                                        value={field.key}
-                                                        onChange={(e) => updateField(i, 'key', e.target.value)}
-                                                        className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-2 text-sm bg-white"
-                                                    />
-                                                    <input
-                                                        placeholder="Label"
-                                                        value={field.label}
-                                                        onChange={(e) => updateField(i, 'label', e.target.value)}
-                                                        className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-2 text-sm bg-white"
-                                                    />
+                                                {/* Header Field Row: Drag Handle + Field Title/Number + Delete Button */}
+                                                <div className="flex items-center justify-between pb-2 border-b border-[#e0e0e0]">
+                                                    <div className="flex items-center gap-2">
+                                                        <span
+                                                            className="material-symbols-outlined text-[#75777c] hover:text-[#091426] cursor-grab active:cursor-grabbing select-none text-xl"
+                                                            title="Tarik untuk mengubah urutan"
+                                                        >
+                                                            drag_indicator
+                                                        </span>
+                                                        <span className="text-xs font-bold text-[#091426]">
+                                                            Atribut #{i + 1}
+                                                        </span>
+                                                    </div>
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeField(i)}
+                                                        className="flex items-center gap-1 text-[#ba1a1a] hover:bg-[#ba1a1a]/10 px-2 py-1 rounded text-xs font-bold transition-colors"
+                                                        title="Hapus field ini"
+                                                    >
+                                                        <span className="material-symbols-outlined text-base">delete</span>
+                                                        Hapus
+                                                    </button>
                                                 </div>
 
-                                                <div className="flex flex-wrap items-center gap-4">
-                                                    <select
-                                                        value={field.type}
-                                                        onChange={(e) => updateField(i, 'type', e.target.value)}
-                                                        className="h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-2 text-sm bg-white"
-                                                    >
-                                                        <option value="text">Text</option>
-                                                        <option value="number">Number</option>
-                                                        <option value="select">Select</option>
-                                                        <option value="date">Date</option>
-                                                    </select>
+                                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+                                                    <div className="sm:col-span-2">
+                                                        <label className="block text-xs font-semibold text-[#45474c] mb-1">
+                                                            Label Atribut <span className="text-[#ba1a1a]">*</span>
+                                                        </label>
+                                                        <input
+                                                            placeholder="contoh: Tipe Guardrail"
+                                                            value={field.label}
+                                                            onChange={(e) => updateField(i, 'label', e.target.value)}
+                                                            className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm bg-white"
+                                                            required
+                                                        />
+                                                    </div>
 
-                                                    <label className="flex items-center gap-2 text-xs font-bold text-[#45474c]">
+                                                    <div>
+                                                        <label className="block text-xs font-semibold text-[#45474c] mb-1">
+                                                            Tipe Data
+                                                        </label>
+                                                        <select
+                                                            value={field.type}
+                                                            onChange={(e) => updateField(i, 'type', e.target.value)}
+                                                            className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] pl-2 pr-8 text-sm bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat"
+                                                        >
+                                                            <option value="text">Teks</option>
+                                                            <option value="number">Angka</option>
+                                                            <option value="select">Pilihan</option>
+                                                            <option value="date">Tanggal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center">
+                                                    <label className="flex items-center gap-2 text-xs font-bold text-[#45474c] cursor-pointer">
                                                         <input
                                                             type="checkbox"
                                                             checked={field.required}
@@ -192,12 +533,51 @@ export default function KategoriManagement() {
                                                 </div>
 
                                                 {field.type === 'select' && (
-                                                    <input
-                                                        placeholder="Opsi, pisah koma (misal: Single,Double)"
-                                                        value={field.options}
-                                                        onChange={(e) => updateField(i, 'options', e.target.value)}
-                                                        className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-2 text-sm bg-white"
-                                                    />
+                                                    <div className="pt-3 border-t border-[#e0e0e0] space-y-2">
+                                                        <div className="flex items-center justify-between">
+                                                            <label className="block text-xs font-semibold text-[#45474c]">
+                                                                Opsi Pilihan (Select Options) <span className="text-[#ba1a1a]">*</span>
+                                                            </label>
+                                                            <span className="text-[11px] text-[#75777c]">
+                                                                Tambahkan pilihan yang bisa dipilih user
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="space-y-2">
+                                                            {(Array.isArray(field.options) && field.options.length > 0 ? field.options : ['']).map((opt, optIdx) => (
+                                                                <div key={optIdx} className="flex items-center gap-2">
+                                                                    <span className="text-xs font-semibold text-[#75777c] w-5 text-right shrink-0">
+                                                                        {optIdx + 1}.
+                                                                    </span>
+                                                                    <input
+                                                                        placeholder={`Nama Opsi #${optIdx + 1} (misal: Single)`}
+                                                                        value={opt}
+                                                                        onChange={(e) => updateOption(i, optIdx, e.target.value)}
+                                                                        className="flex-1 h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm bg-white"
+                                                                        required
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => removeOption(i, optIdx)}
+                                                                        className="p-1.5 text-[#75777c] hover:text-[#ba1a1a] hover:bg-[#ba1a1a]/10 rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-[#75777c]"
+                                                                        title="Hapus opsi ini"
+                                                                        disabled={(field.options?.length || 0) <= 1}
+                                                                    >
+                                                                        <span className="material-symbols-outlined text-lg">close</span>
+                                                                    </button>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => addOption(i)}
+                                                            className="mt-1 inline-flex items-center gap-1 text-xs font-bold text-[#855300] group"
+                                                        >
+                                                            <span className="material-symbols-outlined text-sm">add_circle</span>
+                                                            <span className="group-hover:underline">Tambah Opsi Pilihan</span>
+                                                        </button>
+                                                    </div>
                                                 )}
                                             </div>
                                         ))}
@@ -206,18 +586,33 @@ export default function KategoriManagement() {
                                     <button
                                         type="button"
                                         onClick={addField}
-                                        className="mt-3 text-[#855300] text-sm font-bold hover:underline"
+                                        className="mt-3 inline-flex items-center gap-1.5 text-[#855300] text-sm font-bold group"
                                     >
-                                        + Tambah Field
+                                        <span className="material-symbols-outlined text-base">add</span>
+                                        <span className="group-hover:underline">Tambah Atribut</span>
                                     </button>
                                 </div>
 
-                                <button
-                                    type="submit"
-                                    className="w-full h-12 bg-[#091426] text-white font-bold rounded-[0.125rem] hover:opacity-90 transition-opacity"
-                                >
-                                    Simpan Kategori
-                                </button>
+                                <div className="flex gap-3">
+                                    {editingKategori && (
+                                        <button
+                                            type="button"
+                                            onClick={resetForm}
+                                            className="w-1/3 h-12 border border-[#c5c6cd] text-[#091426] font-bold rounded-[0.125rem] hover:bg-gray-100 transition-colors"
+                                        >
+                                            Batal
+                                        </button>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        className={`${editingKategori ? 'w-2/3' : 'w-full'} h-12 bg-[#091426] text-white font-bold rounded-[0.125rem] hover:opacity-90 transition-opacity flex items-center justify-center gap-2`}
+                                    >
+                                        <span className="material-symbols-outlined text-lg">
+                                            {editingKategori ? 'save' : 'check'}
+                                        </span>
+                                        {editingKategori ? 'Update Kategori' : 'Simpan Kategori'}
+                                    </button>
+                                </div>
                             </form>
                         </section>
                     </div>
