@@ -22,6 +22,48 @@ export default function AsetForm() {
     const { user } = useAuthStore();
     const navigate = useNavigate();
 
+    async function fetchElevation(lat, lng) {
+        // 1. Coba Open-Meteo (paling cepat & stabil)
+        try {
+            const ctrl1 = new AbortController();
+            const t1 = setTimeout(() => ctrl1.abort(), 5000);
+            const res1 = await fetch(
+                `https://api.open-meteo.com/v1/elevation?latitude=${lat}&longitude=${lng}`,
+                { signal: ctrl1.signal }
+            );
+            clearTimeout(t1);
+            if (res1.ok) {
+                const d1 = await res1.json();
+                if (d1.elevation && d1.elevation.length > 0) {
+                    return d1.elevation[0];
+                }
+            }
+        } catch (e) {
+            console.warn('Open-Meteo elevation failed, trying fallback...', e);
+        }
+
+        // 2. Fallback: Open-Elevation
+        try {
+            const ctrl2 = new AbortController();
+            const t2 = setTimeout(() => ctrl2.abort(), 7000);
+            const res2 = await fetch(
+                `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lng}`,
+                { signal: ctrl2.signal }
+            );
+            clearTimeout(t2);
+            if (res2.ok) {
+                const d2 = await res2.json();
+                if (d2.results && d2.results.length > 0) {
+                    return d2.results[0].elevation;
+                }
+            }
+        } catch (e) {
+            console.warn('Open-Elevation fallback juga gagal:', e);
+        }
+
+        return null;
+    }
+
     async function handleGeometryChange(geojson) {
         setFormData((prev) => ({ ...prev, koordinat_geojson: geojson }));
         if (!geojson) return;
@@ -38,19 +80,34 @@ export default function AsetForm() {
         if (lat !== undefined && lng !== undefined && !isNaN(lat) && !isNaN(lng)) {
             setFetchingElevation(true);
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 6000);
-                const res = await fetch(`https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lng}`, {
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                const data = await res.json();
-                if (data.results && data.results.length > 0) {
-                    const elev = data.results[0].elevation;
+                const elev = await fetchElevation(lat, lng);
+                if (elev !== null) {
                     setFormData((prev) => ({ ...prev, elevasi_mdpl: elev }));
+                } else {
+                    console.warn('Tidak berhasil mendapatkan elevasi dari semua API');
                 }
-            } catch (err) {
-                console.warn('Open-Elevation API lookup failed:', err);
+            } finally {
+                setFetchingElevation(false);
+            }
+        }
+    }
+
+    async function handleRetryElevation() {
+        const geojson = formData.koordinat_geojson;
+        if (!geojson) return;
+        let lat, lng;
+        if (geojson.type === 'Point' && Array.isArray(geojson.coordinates)) {
+            [lng, lat] = geojson.coordinates;
+        } else if (geojson.type === 'LineString' && geojson.coordinates?.length > 0) {
+            [lng, lat] = geojson.coordinates[0];
+        } else if (geojson.type === 'Polygon' && geojson.coordinates[0]?.length > 0) {
+            [lng, lat] = geojson.coordinates[0][0];
+        }
+        if (lat !== undefined && lng !== undefined && !isNaN(lat) && !isNaN(lng)) {
+            setFetchingElevation(true);
+            try {
+                const elev = await fetchElevation(lat, lng);
+                if (elev !== null) setFormData((prev) => ({ ...prev, elevasi_mdpl: elev }));
             } finally {
                 setFetchingElevation(false);
             }
@@ -375,12 +432,26 @@ export default function AsetForm() {
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide flex items-center justify-between">
                                                 <span>Elevasi (mdpl) <span className="text-red-500">*</span></span>
-                                                {fetchingElevation && (
-                                                    <span className="text-[10px] text-amber-dark font-semibold flex items-center gap-1">
-                                                        <span className="material-symbols-outlined text-[12px] animate-spin">progress_activity</span>
-                                                        Mengambil elevasi...
-                                                    </span>
-                                                )}
+                                                <span className="flex items-center gap-1">
+                                                    {fetchingElevation ? (
+                                                        <span className="text-[10px] text-amber-dark font-semibold flex items-center gap-1">
+                                                            <span className="material-symbols-outlined text-[12px] animate-spin">progress_activity</span>
+                                                            Mengambil elevasi...
+                                                        </span>
+                                                    ) : (
+                                                        formData.koordinat_geojson && (
+                                                            <button
+                                                                type="button"
+                                                                onClick={handleRetryElevation}
+                                                                title="Ambil ulang elevasi dari koordinat"
+                                                                className="text-[10px] text-amber-dark font-semibold flex items-center gap-0.5 hover:opacity-70 transition-opacity"
+                                                            >
+                                                                <span className="material-symbols-outlined text-[12px]">refresh</span>
+                                                                Ambil ulang
+                                                            </button>
+                                                        )
+                                                    )}
+                                                </span>
                                             </label>
                                             <input
                                                 type="number"
