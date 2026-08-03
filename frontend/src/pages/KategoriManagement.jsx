@@ -219,12 +219,32 @@ export default function KategoriManagement() {
             message: 'Kategori ini akan dinonaktifkan dari sistem.',
             onConfirm: async () => {
                 try {
-                    await axiosClient.delete(`/kategori/${id}`);
+                    await axiosClient.patch(`/kategori/${id}/deactivate`);
                     toast.success('Kategori berhasil dinonaktifkan');
                     if (editingKategori?.id === id) resetForm();
                     fetchKategori();
                 } catch (err) {
                     toast.error(err.response?.data?.error || 'Gagal menonaktifkan kategori');
+                } finally {
+                    setConfirmModal(null);
+                }
+            }
+        });
+    }
+
+    function handleDelete(kategori) {
+        setConfirmModal({
+            title: 'Hapus Kategori Permanen',
+            message: `Apakah Anda yakin ingin menghapus kategori "${kategori.nama_kategori}" secara permanen?`,
+            danger: true,
+            onConfirm: async () => {
+                try {
+                    await axiosClient.delete(`/kategori/${kategori.id}`);
+                    toast.success(`Kategori "${kategori.nama_kategori}" berhasil dihapus`);
+                    if (editingKategori?.id === kategori.id) resetForm();
+                    fetchKategori();
+                } catch (err) {
+                    toast.error(err.response?.data?.error || 'Gagal menghapus kategori');
                 } finally {
                     setConfirmModal(null);
                 }
@@ -270,16 +290,16 @@ export default function KategoriManagement() {
                                 <button
                                     type="button"
                                     onClick={() => setIsAktifOpen(!isAktifOpen)}
-                                    className="w-full px-5 py-4 border-b border-[#c5c6cd] bg-[#eff4ff] flex items-center justify-between hover:bg-[#e4edff] transition-colors text-left"
+                                    className="w-full px-5 py-4 border-b border-navy/30 bg-navy text-white flex items-center justify-between hover:opacity-95 transition-colors text-left"
                                 >
                                     <div className="flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-[#091426] text-xl">
+                                        <span className="material-symbols-outlined text-white text-xl">
                                             {isAktifOpen ? 'expand_more' : 'chevron_right'}
                                         </span>
-                                        <h1 className="text-[17px] font-bold text-[#091426]">
+                                        <h1 className="text-[17px] font-bold text-white">
                                             Kategori Aktif
                                         </h1>
-                                        <span className="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#107c41]/10 text-[#107c41]">
+                                        <span className="ml-1 px-2 py-0.5 text-xs font-bold rounded-full bg-amber text-navy">
                                             {activeKategori.length}
                                         </span>
                                     </div>
@@ -338,16 +358,16 @@ export default function KategoriManagement() {
                                 <button
                                     type="button"
                                     onClick={() => setIsNonaktifOpen(!isNonaktifOpen)}
-                                    className="w-full px-5 py-4 border-b border-[#c5c6cd] bg-[#f0f0f3] flex items-center justify-between hover:bg-[#e4e4e8] transition-colors text-left"
+                                    className="w-full px-5 py-4 border-b border-navy/30 bg-navy/90 text-white flex items-center justify-between hover:opacity-95 transition-colors text-left"
                                 >
                                     <div className="flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-[#45474c] text-xl">
+                                        <span className="material-symbols-outlined text-white/80 text-xl">
                                             {isNonaktifOpen ? 'expand_more' : 'chevron_right'}
                                         </span>
-                                        <h1 className="text-[17px] font-bold text-[#45474c]">
+                                        <h1 className="text-[17px] font-bold text-white">
                                             Kategori Nonaktif
                                         </h1>
-                                        <span className="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#ba1a1a]/10 text-[#ba1a1a]">
+                                        <span className="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-red-500/20 text-red-200 border border-red-400/30">
                                             {inactiveKategori.length}
                                         </span>
                                     </div>
@@ -376,12 +396,12 @@ export default function KategoriManagement() {
                                                     </div>
                                                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                         <button
-                                                            onClick={() => startEdit(k)}
-                                                            className="h-7 px-2.5 text-[#091426] hover:bg-[#091426]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
-                                                            title="Edit Kategori"
+                                                            onClick={() => handleDelete(k)}
+                                                            className="h-7 px-2.5 text-[#ba1a1a] hover:bg-[#ba1a1a]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
+                                                            title="Hapus Kategori Permanen"
                                                         >
-                                                            <span className="material-symbols-outlined text-[15px]">edit</span>
-                                                            Edit
+                                                            <span className="material-symbols-outlined text-[15px]">delete</span>
+                                                            Hapus
                                                         </button>
                                                         <button
                                                             onClick={() => handleActivate(k.id)}
@@ -406,12 +426,12 @@ export default function KategoriManagement() {
 
                         {/* ==== Panel Kanan: Bikin / Edit Kategori ==== */}
                         <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
-                            <div className="px-6 py-4 border-b border-[#c5c6cd] bg-[#eff4ff] flex items-center justify-between">
+                            <div className="px-6 py-4 border-b border-navy/30 bg-navy text-white flex items-center justify-between">
                                 <div>
-                                    <h1 className="text-[20px] font-bold text-[#091426]">
+                                    <h1 className="text-[20px] font-bold text-white">
                                         {editingKategori ? `Edit Kategori: ${editingKategori.nama_kategori}` : 'Buat Kategori Baru'}
                                     </h1>
-                                    <p className="text-sm text-[#45474c] mt-1">
+                                    <p className="text-sm text-gray-300 mt-1">
                                         {editingKategori
                                             ? `Mengubah definisi atribut dan skema kategori (Versi Saat Ini: v${editingKategori.versi_skema}).`
                                             : 'Definisikan atribut spesifik untuk kategori ini.'}

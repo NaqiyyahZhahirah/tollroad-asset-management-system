@@ -24,54 +24,57 @@ export default function Sidebar() {
             {isSidebarOpen && (
                 <div
                     onClick={closeSidebar}
-                    className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-xs z-[9998] md:hidden"
                 />
             )}
 
             <aside
-                className={`bg-card h-screen flex flex-col border-r border-border py-6 gap-2 shrink-0
-                    fixed md:sticky top-0 left-0 z-[9999] overflow-hidden
+                className={`bg-navy text-white h-screen flex flex-col border-r border-white/10 shrink-0
+                    fixed md:sticky top-0 left-0 z-[9999] overflow-hidden shadow-2xl
                     transition-all duration-200 ease-in-out
                     ${isSidebarOpen
-                        ? 'w-[280px] translate-x-0 shadow-2xl'
-                        : 'w-[280px] -translate-x-full md:w-0 md:translate-x-0 md:border-r-0 md:py-0'
+                        ? 'w-[280px] translate-x-0'
+                        : 'w-[280px] -translate-x-full md:w-0 md:translate-x-0 md:border-r-0'
                     }`}
             >
                 <div className="w-[280px] flex flex-col h-full">
-                    <div className="px-6 mb-6 flex items-center justify-between">
+                    {/* Header Sidebar Full Biru Navy */}
+                    <div className="px-6 py-5 flex items-center justify-between border-b border-white/10 shrink-0">
                         <div>
-                            <h1 className="text-xl font-bold text-navy">JMTM-AMS</h1>
-                            <p className="text-xs text-text-muted uppercase tracking-wider mt-1">Asset Management</p>
+                            <h1 className="text-xl font-bold text-white tracking-tight">Tollroad-AMS</h1>
+                            <p className="text-xs text-amber font-semibold uppercase tracking-wider mt-0.5">Asset Management System</p>
                         </div>
-                        <button onClick={closeSidebar} className="md:hidden p-1 text-text-muted">
+                        <button onClick={closeSidebar} className="md:hidden p-1 text-white/70 hover:text-white transition-colors">
                             <span className="material-symbols-outlined">close</span>
                         </button>
                     </div>
 
-                    <div className="px-6 mb-4 flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-card-strong flex items-center justify-center font-bold text-navy">
-                            {user?.nama?.charAt(0) || '?'}
+                    {/* Profil Pengguna Singkat */}
+                    <div className="px-6 py-4 flex items-center gap-3 border-b border-white/10 shrink-0 bg-white/5">
+                        <div className="w-10 h-10 rounded-full bg-amber/20 text-amber flex items-center justify-center font-bold text-sm shrink-0 border border-amber/30">
+                            {user?.nama?.charAt(0)?.toUpperCase() || '?'}
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-sm font-bold text-text-dark">{user?.nama}</span>
-                            <span className="text-xs text-text-muted capitalize">{user?.role}</span>
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-sm font-bold text-white truncate">{user?.nama}</span>
+                            <span className="text-xs text-gray-300 capitalize">{user?.role}</span>
                         </div>
                     </div>
 
-                    <nav className="flex flex-col flex-grow">
+                    {/* Menu Navigasi */}
+                    <nav className="flex flex-col flex-grow py-3 overflow-y-auto">
                         {menuItems.map((item) => (
                             <NavLink
                                 key={item.to}
                                 to={item.to}
                                 className={({ isActive }) =>
-                                    `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
+                                    `flex items-center px-6 py-3.5 gap-3 transition-all whitespace-nowrap ${
                                         isActive
-                                            ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
-                                            : 'text-text-muted opacity-70 hover:bg-card-hover'
+                                            ? 'border-l-4 border-amber bg-white/15 text-white font-bold shadow-sm'
+                                            : 'text-gray-300 hover:bg-white/10 hover:text-white'
                                     }`
                                 }
                             >
-                                <span className="material-symbols-outlined">{item.icon}</span>
+                                <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
                                 <span className="text-sm">{item.label}</span>
                             </NavLink>
                         ))}
@@ -80,37 +83,41 @@ export default function Sidebar() {
                                 <NavLink
                                     to="/kategori"
                                     className={({ isActive }) =>
-                                        `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
+                                        `flex items-center px-6 py-3.5 gap-3 transition-all whitespace-nowrap ${
                                             isActive
-                                                ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
-                                                : 'text-text-muted opacity-70 hover:bg-card-hover'
+                                                ? 'border-l-4 border-amber bg-white/15 text-white font-bold shadow-sm'
+                                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
                                         }`
                                     }
                                 >
-                                    <span className="material-symbols-outlined">fact_check</span>
+                                    <span className="material-symbols-outlined text-[20px]">fact_check</span>
                                     <span className="text-sm">Kelola Kategori</span>
                                 </NavLink>
                                 <NavLink
                                     to="/pengguna"
                                     className={({ isActive }) =>
-                                        `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
+                                        `flex items-center px-6 py-3.5 gap-3 transition-all whitespace-nowrap ${
                                             isActive
-                                                ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
-                                                : 'text-text-muted opacity-70 hover:bg-card-hover'
+                                                ? 'border-l-4 border-amber bg-white/15 text-white font-bold shadow-sm'
+                                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
                                         }`
                                     }
                                 >
-                                    <span className="material-symbols-outlined">manage_accounts</span>
+                                    <span className="material-symbols-outlined text-[20px]">manage_accounts</span>
                                     <span className="text-sm">Kelola Pengguna</span>
                                 </NavLink>
                             </>
                         )}
                     </nav>
 
-                    <div className="px-6 pt-6 mt-auto">
-                        <button onClick={handleLogout} className="flex items-center gap-3 text-text-muted hover:text-danger transition-colors w-full py-2 whitespace-nowrap">
-                            <span className="material-symbols-outlined">logout</span>
-                            <span className="text-xs font-semibold">Sign Out</span>
+                    {/* Sign Out Section Bottom */}
+                    <div className="p-4 border-t border-white/10 shrink-0 mt-auto bg-black/20">
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center justify-center gap-2.5 text-white/90 hover:text-red-300 hover:bg-red-500/20 transition-all w-full py-2.5 px-4 rounded-lg bg-white/10 font-semibold text-xs uppercase tracking-wider"
+                        >
+                            <span className="material-symbols-outlined text-[18px]">logout</span>
+                            <span>Sign Out</span>
                         </button>
                     </div>
                 </div>

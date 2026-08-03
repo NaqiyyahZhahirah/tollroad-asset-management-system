@@ -128,13 +128,13 @@ export default function Dashboard() {
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="border-b border-border">
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">Nama Aset</th>
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">Kategori</th>
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">KM</th>
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">Jalur</th>
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">Status Kondisi</th>
-                                        <th className="py-3 px-3 text-xs text-text-muted uppercase">Approval</th>
+                                    <tr className="bg-navy text-white">
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Nama Aset</th>
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Kategori</th>
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">KM</th>
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Jalur</th>
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Status Kondisi</th>
+                                        <th className="py-3 px-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Approval</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-sm divide-y divide-border">

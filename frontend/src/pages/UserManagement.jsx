@@ -501,13 +501,13 @@ export default function UserManagement() {
                     <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
-                                <thead className="bg-card-alt border-b border-border">
+                                <thead className="bg-navy text-white">
                                     <tr>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Pengguna</th>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider hidden md:table-cell">Wilayah Kerja</th>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Role</th>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Status</th>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider text-left">Aksi</th>
+                                        <th className="p-3 text-xs font-bold text-white/90 uppercase tracking-wider">Pengguna</th>
+                                        <th className="p-3 text-xs font-bold text-white/90 uppercase tracking-wider hidden md:table-cell">Wilayah Kerja</th>
+                                        <th className="p-3 text-xs font-bold text-white/90 uppercase tracking-wider">Role</th>
+                                        <th className="p-3 text-xs font-bold text-white/90 uppercase tracking-wider">Status</th>
+                                        <th className="p-3 text-xs font-bold text-white/90 uppercase tracking-wider text-left">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-border">

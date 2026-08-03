@@ -117,31 +117,44 @@ export default function AsetForm() {
     }
 
     useEffect(() => {
-        axiosClient.get('/kategori').then((res) => setKategoriList(res.data.data));
-    }, []);
-
-    useEffect(() => {
         if (isEdit) {
             setLoadingAsset(true);
-            axiosClient.get(`/aset/${id}`).then((res) => {
-                const aset = res.data.data;
+            Promise.all([
+                axiosClient.get('/kategori'),
+                axiosClient.get(`/aset/${id}`)
+            ]).then(([resKategori, resAset]) => {
+                const listKategori = resKategori.data.data || [];
+                setKategoriList(listKategori);
+
+                const aset = resAset.data.data;
+
+                // Cari objek kategori lengkap dari listKategori atau data join API
+                const matchedKategori = listKategori.find((k) => k.id === aset.kategori_id) || aset.kategori_aset;
+                setSelectedKategori(matchedKategori || null);
+
+                // Format tanggal_aset_dibuat menjadi YYYY-MM-DD agar input type="date" terisi sempurna
+                let formattedDate = '';
+                if (aset.tanggal_aset_dibuat) {
+                    formattedDate = String(aset.tanggal_aset_dibuat).substring(0, 10);
+                }
+
                 setFormData({
+                    kategori_id: aset.kategori_id || matchedKategori?.id || '',
                     nama_aset: aset.nama_aset || '',
                     nomor_seri: aset.nomor_seri || '',
                     ruas_tol: aset.ruas_tol || 'Purbaleunyi',
-                    lokasi_km: aset.lokasi_km !== undefined ? aset.lokasi_km : '',
+                    lokasi_km: aset.lokasi_km !== undefined && aset.lokasi_km !== null ? aset.lokasi_km : '',
                     jalur: aset.jalur || '',
-                    tanggal_aset_dibuat: aset.tanggal_aset_dibuat || '',
-                    elevasi_mdpl: aset.elevasi_mdpl !== undefined ? aset.elevasi_mdpl : '',
+                    tanggal_aset_dibuat: formattedDate,
+                    elevasi_mdpl: aset.elevasi_mdpl !== undefined && aset.elevasi_mdpl !== null ? aset.elevasi_mdpl : '',
                     status_kondisi: aset.status_kondisi || 'baik',
                     status_validasi: aset.status_validasi || '',
                     catatan_validasi: aset.catatan_validasi || '',
                     koordinat_geojson: aset.koordinat_geojson || null,
                 });
+
                 setAtributSpesifik(aset.atribut_spesifik || {});
-                if (aset.kategori_aset) {
-                    setSelectedKategori(aset.kategori_aset);
-                }
+
                 if (aset.foto_aset) {
                     setPhotos(aset.foto_aset.map((f) => ({ preview: f.url_foto, isExisting: true, id: f.id })));
                 }
@@ -151,6 +164,8 @@ export default function AsetForm() {
             }).finally(() => {
                 setLoadingAsset(false);
             });
+        } else {
+            axiosClient.get('/kategori').then((res) => setKategoriList(res.data.data || []));
         }
     }, [id, isEdit]);
 

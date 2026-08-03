@@ -61,18 +61,22 @@ export default function TopBar() {
     }
 
     return (
-        <header className="bg-card flex items-center justify-between gap-3 w-full px-4 md:px-8 h-14 md:h-16 border-b border-border z-30 shrink-0">
+        <header className="bg-navy text-white flex items-center justify-between gap-3 w-full px-4 md:px-8 h-14 md:h-16 border-b border-navy/40 z-30 shrink-0 shadow-md">
             <div className="flex items-center gap-3 flex-1 min-w-0">
-                <button onClick={toggleSidebar} className="p-2 -ml-2 hover:bg-card-hover rounded-full shrink-0" title="Buka Menu">
-                    <span className="material-symbols-outlined text-navy">menu</span>
+                <button
+                    onClick={toggleSidebar}
+                    className="p-2 -ml-2 hover:bg-white/10 rounded-full shrink-0 text-white transition-colors"
+                    title="Buka Menu"
+                >
+                    <span className="material-symbols-outlined text-[22px]">menu</span>
                 </button>
 
                 {/* TopBar Search Input */}
                 <div ref={wrapperRef} className="relative w-full max-w-md md:max-w-xl">
                     <div className="relative flex items-center">
-                        <span className="material-symbols-outlined absolute left-3 text-text-muted text-[20px]">search</span>
+                        <span className="material-symbols-outlined absolute left-3 text-white/60 text-[20px]">search</span>
                         <input
-                            className="w-full bg-app-bg border border-border rounded-xl pl-10 pr-8 py-2 text-xs md:text-sm outline-none focus:border-amber focus:ring-1 focus:ring-amber transition-all text-navy placeholder:text-text-muted"
+                            className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-8 py-2 text-xs md:text-sm outline-none focus:border-amber focus:ring-1 focus:ring-amber/40 transition-all text-white placeholder:text-white/60"
                             placeholder="Cari aset, ID, kategori, atau KM..."
                             type="text"
                             value={query}
@@ -83,7 +87,7 @@ export default function TopBar() {
                             <button
                                 type="button"
                                 onClick={() => { setQuery(''); setOpen(false); }}
-                                className="absolute right-2.5 text-text-muted hover:text-navy"
+                                className="absolute right-2.5 text-white/60 hover:text-white"
                             >
                                 <span className="material-symbols-outlined text-[18px]">close</span>
                             </button>
@@ -92,7 +96,7 @@ export default function TopBar() {
 
                     {/* Results Dropdown */}
                     {open && (
-                        <div className="absolute top-full left-0 right-0 mt-1.5 bg-card/98 backdrop-blur-xl border border-border rounded-xl shadow-2xl z-[1200] overflow-hidden max-h-80 overflow-y-auto">
+                        <div className="absolute top-full left-0 right-0 mt-1.5 bg-card text-text-dark border border-border rounded-xl shadow-2xl z-[1200] overflow-hidden max-h-80 overflow-y-auto">
                             {results.length > 0 ? (
                                 results.map((aset) => (
                                     <button

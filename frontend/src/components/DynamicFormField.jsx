@@ -27,8 +27,8 @@ export default function DynamicFormField({ field, value, onChange }) {
                     <input
                         type="number"
                         onWheel={(e) => e.target.blur()}
-                        value={value || ''}
-                        onChange={(e) => onChange(field.key, Number(e.target.value))}
+                        value={value !== undefined && value !== null ? value : ''}
+                        onChange={(e) => onChange(field.key, e.target.value === '' ? '' : Number(e.target.value))}
                         className={baseClass}
                         required={field.required}
                     />
@@ -40,7 +40,7 @@ export default function DynamicFormField({ field, value, onChange }) {
                     <label className={labelClass}>{field.label}</label>
                     <input
                         type="date"
-                        value={value || ''}
+                        value={value ? String(value).substring(0, 10) : ''}
                         onChange={(e) => onChange(field.key, e.target.value)}
                         className={baseClass}
                         required={field.required}
@@ -53,7 +53,7 @@ export default function DynamicFormField({ field, value, onChange }) {
                     <label className={labelClass}>{field.label}</label>
                     <input
                         type="text"
-                        value={value || ''}
+                        value={value !== undefined && value !== null ? value : ''}
                         onChange={(e) => onChange(field.key, e.target.value)}
                         className={baseClass}
                         required={field.required}
