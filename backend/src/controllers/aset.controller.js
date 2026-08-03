@@ -37,7 +37,7 @@ async function getAsetById(req, res) {
 
     const { data, error } = await supabase
         .from('aset_tol')
-        .select(`*, kategori_aset ( nama_kategori, skema_formulir ), foto_aset ( id, url_foto, keterangan )`)
+        .select(`*, kategori_aset (*), foto_aset ( id, url_foto, keterangan )`)
         .eq('id', id)
         .single();
 
@@ -225,9 +225,13 @@ async function updateAset(req, res) {
     if (atribut_spesifik !== undefined) updatePayload.atribut_spesifik = atribut_spesifik;
     if (tanggal_aset_dibuat !== undefined) updatePayload.tanggal_aset_dibuat = tanggal_aset_dibuat;
 
-    // Business rule: Jika status saat ini 'approved' atau 'rejected' dan editor BUKAN admin,
-    // otomatis reset status_validasi ke 'pending' & hapus data validasi sebelumnya
-    if (['approved', 'rejected'].includes(sebelum.status_validasi) && user?.role !== 'admin') {
+    // Business rule:
+    // 1. Jika aset berstatus 'rejected', diedit oleh SIAPAPUN (admin maupun operator), status_validasi reset ke 'pending'
+    // 2. Jika aset berstatus 'approved' dan editor BUKAN admin, status_validasi reset ke 'pending'
+    const isRejectedEdit = sebelum.status_validasi === 'rejected';
+    const isApprovedNonAdminEdit = sebelum.status_validasi === 'approved' && user?.role !== 'admin';
+
+    if (isRejectedEdit || isApprovedNonAdminEdit) {
         updatePayload.status_validasi = 'pending';
         updatePayload.validated_by = null;
         updatePayload.validated_at = null;

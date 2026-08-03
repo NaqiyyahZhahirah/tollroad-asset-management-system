@@ -6,13 +6,15 @@ const {
     createKategori,
     updateKategori,
     deactivateKategori,
-    activateKategori
+    activateKategori,
+    deleteKategoriPermanently
 } = require('../controllers/kategori.controller');
 
 router.get('/', verifyToken, getAllKategori);
 router.post('/', verifyToken, requireAdmin, createKategori);
 router.patch('/:id/activate', verifyToken, requireAdmin, activateKategori);
+router.patch('/:id/deactivate', verifyToken, requireAdmin, deactivateKategori);
 router.patch('/:id', verifyToken, requireAdmin, updateKategori);
-router.delete('/:id', verifyToken, requireAdmin, deactivateKategori);
+router.delete('/:id', verifyToken, requireAdmin, deleteKategoriPermanently);
 
 module.exports = router;

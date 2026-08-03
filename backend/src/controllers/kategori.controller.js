@@ -38,7 +38,7 @@ async function createKategori(req, res) {
 
 async function updateKategori(req, res) {
     const { id } = req.params;
-    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, naikkan_versi, is_active } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, is_active } = req.body;
 
     // Ambil versi_skema saat ini
     const { data: current, error: currentError } = await supabase
@@ -52,20 +52,16 @@ async function updateKategori(req, res) {
     }
 
     const updatePayload = {
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
+        // Otomatis menaikkan versi_skema setiap kali kategori di-edit
+        versi_skema: (current.versi_skema || 1) + 1
     };
 
     if (nama_kategori !== undefined) updatePayload.nama_kategori = nama_kategori;
     if (deskripsi !== undefined) updatePayload.deskripsi = deskripsi;
     if (tipe_geometri !== undefined) updatePayload.tipe_geometri = tipe_geometri;
+    if (skema_formulir !== undefined) updatePayload.skema_formulir = skema_formulir;
     if (is_active !== undefined) updatePayload.is_active = is_active;
-
-    // Kalau skema_formulir berubah, naikkan versi_skema
-    // biar data lama yang pakai versi lama tetap tercatat valid dengan snapshot-nya sendiri
-    if (skema_formulir) {
-        updatePayload.skema_formulir = skema_formulir;
-        updatePayload.versi_skema = naikkan_versi ? current.versi_skema + 1 : current.versi_skema;
-    }
 
     const { data, error } = await supabase
         .from('kategori_aset')
@@ -81,8 +77,6 @@ async function updateKategori(req, res) {
     res.json({ data });
 }
 
-// Soft-delete: nonaktifkan kategori, JANGAN hapus permanen
-// karena aset lama masih merujuk ke kategori ini
 async function deactivateKategori(req, res) {
     const { id } = req.params;
 
@@ -117,4 +111,43 @@ async function activateKategori(req, res) {
     res.json({ data, message: 'Kategori diaktifkan' });
 }
 
-module.exports = { getAllKategori, createKategori, updateKategori, deactivateKategori, activateKategori };
+async function deleteKategoriPermanently(req, res) {
+    const { id } = req.params;
+
+    // Cek apakah masih ada aset yang menggunakan kategori ini
+    const { count, error: countError } = await supabase
+        .from('aset_tol')
+        .select('id', { count: 'exact', head: true })
+        .eq('kategori_id', id);
+
+    if (countError) {
+        return res.status(500).json({ error: countError.message });
+    }
+
+    if (count > 0) {
+        return res.status(400).json({
+            error: `Kategori ini tidak dapat dihapus karena masih digunakan oleh ${count} aset.`
+        });
+    }
+
+    // Jika tidak ada aset yang memakai, hapus permanen dari database
+    const { error: deleteError } = await supabase
+        .from('kategori_aset')
+        .delete()
+        .eq('id', id);
+
+    if (deleteError) {
+        return res.status(500).json({ error: deleteError.message });
+    }
+
+    res.json({ message: 'Kategori berhasil dihapus secara permanen' });
+}
+
+module.exports = {
+    getAllKategori,
+    createKategori,
+    updateKategori,
+    deactivateKategori,
+    activateKategori,
+    deleteKategoriPermanently
+};
