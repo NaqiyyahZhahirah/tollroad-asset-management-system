@@ -51,30 +51,18 @@ async function getAsetById(req, res) {
 // POST bikin aset baru
 async function createAset(req, res) {
     const {
-        kategori_id,
-        versi_skema_saat_input,
-        nama_aset,
-        nomor_seri,
-        ruas_tol,
-        lokasi_km,
-        jalur,
-        latitude,
-        longitude,
-        elevasi_mdpl,
-        status_kondisi,
-        atribut_spesifik,
-        tanggal_aset_dibuat,
-        input_by
+        kategori_id, versi_skema_saat_input, nama_aset, nomor_seri, ruas_tol,
+        lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
+        status_kondisi, atribut_spesifik, tanggal_aset_dibuat, input_by
     } = req.body;
 
-    if (!kategori_id || !nama_aset || !lokasi_km || !jalur || !latitude || !longitude || !input_by) {
-        return res.status(400).json({ error: 'Field wajib belum lengkap' });
+    if (!kategori_id || !nama_aset || !lokasi_km || !jalur || !koordinat_geojson || !input_by) {
+        return res.status(400).json({ error: 'Field wajib belum lengkap (termasuk koordinat_geojson)' });
     }
 
-    // Ambil skema_formulir dari kategori terkait
     const { data: kategori, error: kategoriError } = await supabase
         .from('kategori_aset')
-        .select('skema_formulir, versi_skema')
+        .select('skema_formulir, versi_skema, tipe_geometri')
         .eq('id', kategori_id)
         .single();
 
@@ -82,7 +70,14 @@ async function createAset(req, res) {
         return res.status(400).json({ error: 'Kategori tidak ditemukan' });
     }
 
-    // Validasi atribut_spesifik sesuai skema
+    // Validasi tipe geometri yang dikirim harus sesuai kategori
+    const expectedType = { titik: 'Point', garis: 'LineString', area: 'Polygon' }[kategori.tipe_geometri];
+    if (koordinat_geojson.type !== expectedType) {
+        return res.status(400).json({
+            error: `Kategori ini butuh geometri tipe ${expectedType}, tapi dikirim ${koordinat_geojson.type}`
+        });
+    }
+
     const validationErrors = validateAtributSpesifik(atribut_spesifik, kategori.skema_formulir);
     if (validationErrors.length > 0) {
         return res.status(400).json({ error: 'Validasi gagal', details: validationErrors });
@@ -93,33 +88,21 @@ async function createAset(req, res) {
         .insert([{
             kategori_id,
             versi_skema_saat_input: versi_skema_saat_input || kategori.versi_skema,
-            nama_aset,
-            nomor_seri,
-            ruas_tol: ruas_tol || 'Purbaleunyi',
-            lokasi_km,
-            jalur,
-            latitude,
-            longitude,
-            elevasi_mdpl,
+            nama_aset, nomor_seri, ruas_tol: ruas_tol || 'Purbaleunyi',
+            lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
             status_kondisi: status_kondisi || 'baik',
             status_validasi: 'pending',
             atribut_spesifik: atribut_spesifik || {},
-            tanggal_aset_dibuat,
-            input_by
+            tanggal_aset_dibuat, input_by
         }])
         .select()
         .single();
 
-    if (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    if (error) return res.status(500).json({ error: error.message });
 
     await supabase.from('log_aktivitas').insert([{
-        aset_id: data.id,
-        user_id: input_by,
-        aksi: 'create',
-        data_sebelum: null,
-        data_sesudah: data,
+        aset_id: data.id, user_id: input_by, aksi: 'create',
+        data_sebelum: null, data_sesudah: data,
         keterangan: 'Aset baru dibuat oleh operator'
     }]);
 
@@ -170,4 +153,93 @@ async function updateStatusValidasi(req, res) {
     res.json({ data });
 }
 
-module.exports = { getAllAset, getAsetById, createAset, updateStatusValidasi };
+// PUT / PATCH update data aset
+async function updateAset(req, res) {
+    const { id } = req.params;
+    const {
+        kategori_id, versi_skema_saat_input, nama_aset, nomor_seri, ruas_tol,
+        lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
+        status_kondisi, atribut_spesifik, tanggal_aset_dibuat
+    } = req.body;
+
+    const userId = req.user?.id;
+
+    // Ambil data sebelum diubah
+    const { data: sebelum, error: fetchError } = await supabase
+        .from('aset_tol')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (fetchError || !sebelum) {
+        return res.status(404).json({ error: 'Aset tidak ditemukan' });
+    }
+
+    const targetKategoriId = kategori_id || sebelum.kategori_id;
+    const { data: kategori, error: kategoriError } = await supabase
+        .from('kategori_aset')
+        .select('skema_formulir, versi_skema, tipe_geometri')
+        .eq('id', targetKategoriId)
+        .single();
+
+    if (kategoriError || !kategori) {
+        return res.status(400).json({ error: 'Kategori tidak ditemukan' });
+    }
+
+    if (koordinat_geojson) {
+        const expectedType = { titik: 'Point', garis: 'LineString', area: 'Polygon' }[kategori.tipe_geometri];
+        if (koordinat_geojson.type !== expectedType) {
+            return res.status(400).json({
+                error: `Kategori ini butuh geometri tipe ${expectedType}, tapi dikirim ${koordinat_geojson.type}`
+            });
+        }
+    }
+
+    if (atribut_spesifik) {
+        const validationErrors = validateAtributSpesifik(atribut_spesifik, kategori.skema_formulir);
+        if (validationErrors.length > 0) {
+            return res.status(400).json({ error: 'Validasi gagal', details: validationErrors });
+        }
+    }
+
+    const updatePayload = {
+        updated_at: new Date().toISOString()
+    };
+
+    if (kategori_id !== undefined) updatePayload.kategori_id = kategori_id;
+    if (versi_skema_saat_input !== undefined) updatePayload.versi_skema_saat_input = versi_skema_saat_input;
+    if (nama_aset !== undefined) updatePayload.nama_aset = nama_aset;
+    if (nomor_seri !== undefined) updatePayload.nomor_seri = nomor_seri;
+    if (ruas_tol !== undefined) updatePayload.ruas_tol = ruas_tol;
+    if (lokasi_km !== undefined) updatePayload.lokasi_km = Number(lokasi_km);
+    if (jalur !== undefined) updatePayload.jalur = jalur;
+    if (koordinat_geojson !== undefined) updatePayload.koordinat_geojson = koordinat_geojson;
+    if (elevasi_mdpl !== undefined) updatePayload.elevasi_mdpl = elevasi_mdpl ? Number(elevasi_mdpl) : null;
+    if (status_kondisi !== undefined) updatePayload.status_kondisi = status_kondisi;
+    if (atribut_spesifik !== undefined) updatePayload.atribut_spesifik = atribut_spesifik;
+    if (tanggal_aset_dibuat !== undefined) updatePayload.tanggal_aset_dibuat = tanggal_aset_dibuat;
+
+    const { data, error } = await supabase
+        .from('aset_tol')
+        .update(updatePayload)
+        .eq('id', id)
+        .select(`*, kategori_aset ( nama_kategori, skema_formulir ), foto_aset ( id, url_foto, keterangan )`)
+        .single();
+
+    if (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+    await supabase.from('log_aktivitas').insert([{
+        aset_id: id,
+        user_id: userId || sebelum.input_by,
+        aksi: 'update',
+        data_sebelum: sebelum,
+        data_sesudah: data,
+        keterangan: 'Aset diperbarui'
+    }]);
+
+    res.json({ data });
+}
+
+module.exports = { getAllAset, getAsetById, createAset, updateStatusValidasi, updateAset };
