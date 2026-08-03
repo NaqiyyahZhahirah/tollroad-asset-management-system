@@ -20,11 +20,44 @@ import {
 const pinColor = { baik: '#10b981', perlu_perawatan: '#f59e0b', rusak: '#dc2626' };
 const actionIcon = { create: 'upload', approve: 'check_circle', reject: 'cancel', update: 'edit' };
 
-function coloredIcon(color, isSelected, isOther) {
+function getAssetStyle(aset, isSelected, isOther) {
+    const isRejected = aset.status_validasi === 'rejected';
+    const isPending = aset.status_validasi === 'pending';
+    const color = isRejected ? '#6b7280' : (pinColor[aset.status_kondisi] || '#6b7280');
+
+    let opacity = isSelected ? 0.95 : isOther ? 0.2 : 0.65;
+    let fillOpacity = isSelected ? 0.25 : isOther ? 0.03 : 0.1;
+
+    if (isPending) {
+        opacity = isSelected ? 0.7 : isOther ? 0.15 : 0.5;
+        fillOpacity = isSelected ? 0.15 : isOther ? 0.02 : 0.05;
+    } else if (isRejected) {
+        opacity = isSelected ? 0.8 : isOther ? 0.15 : 0.4;
+        fillOpacity = isSelected ? 0.2 : isOther ? 0.02 : 0.05;
+    }
+
+    return {
+        color,
+        fillColor: color,
+        weight: isSelected ? 4 : 2,
+        opacity,
+        fillOpacity,
+        dashArray: isPending ? '6, 6' : undefined
+    };
+}
+
+function coloredIcon(color, isSelected, isOther, isPending) {
     const size = isSelected ? 26 : isOther ? 18 : 22;
-    const opacity = isSelected ? 1 : isOther ? 0.25 : 0.85;
+    let opacity = isSelected ? 1 : isOther ? 0.25 : 0.85;
+
+    if (isPending) {
+        opacity = isSelected ? 0.75 : isOther ? 0.2 : 0.5;
+    }
+
+    const borderStyle = isPending ? '1.5px dashed white' : '1.5px solid white';
+
     return L.divIcon({
-        html: `<div style="width:${size}px;height:${size}px;background:${color};border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:1.5px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.25);opacity:${opacity}"></div>`,
+        html: `<div style="width:${size}px;height:${size}px;background:${color};border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:${borderStyle};box-shadow:0 1px 4px rgba(0,0,0,0.25);opacity:${opacity}"></div>`,
         className: '',
         iconSize: [size, size],
         iconAnchor: [size / 2, size]
@@ -93,7 +126,19 @@ function CtrlScrollZoom() {
 }
 
 // ---------- Filter Panel Component ----------
-function FilterPanel({ filters, onChange, onReset, activeCount, totalCount, filteredCount, showTollRoute, onToggleTollRoute }) {
+function FilterPanel({
+    filters,
+    onChange,
+    onReset,
+    activeCount,
+    totalCount,
+    filteredCount,
+    showTollRoute,
+    onToggleTollRoute,
+    showRejected,
+    onToggleShowRejected,
+    isAdmin
+}) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -102,7 +147,7 @@ function FilterPanel({ filters, onChange, onReset, activeCount, totalCount, filt
             <button
                 onClick={() => setOpen((v) => !v)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-xl border backdrop-blur-md font-bold text-sm transition-colors ${
-                    activeCount > 0 || showTollRoute
+                    activeCount > 0 || showTollRoute || showRejected
                         ? 'bg-navy text-white border-navy'
                         : 'bg-card/90 text-navy border-border'
                 }`}
@@ -153,6 +198,24 @@ function FilterPanel({ filters, onChange, onReset, activeCount, totalCount, filt
                             <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showTollRoute ? 'translate-x-4' : 'translate-x-0'}`} />
                         </button>
                     </div>
+
+                    {/* Toggle Tampilkan yang ditolak (Khusus Admin) */}
+                    {isAdmin && (
+                        <div className="p-2.5 bg-app-bg rounded-xl border border-border flex items-center justify-between">
+                            <span className="text-xs font-bold text-navy flex items-center gap-2">
+                                <span className="material-symbols-outlined text-[18px] text-gray-500">cancel</span>
+                                Tampilkan yang ditolak
+                            </span>
+                            <button
+                                type="button"
+                                onClick={() => onToggleShowRejected(!showRejected)}
+                                className={`w-9 h-5 rounded-full transition-colors relative p-0.5 ${showRejected ? 'bg-gray-700' : 'bg-gray-300'}`}
+                                title="Tampilkan aset berstatus rejected di peta"
+                            >
+                                <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showRejected ? 'translate-x-4' : 'translate-x-0'}`} />
+                            </button>
+                        </div>
+                    )}
 
                     {/* Kondisi */}
                     <div className="space-y-1.5">
@@ -224,6 +287,7 @@ export default function PetaMonitoring() {
     const [processing, setProcessing] = useState(false);
     const [previewPhoto, setPreviewPhoto] = useState(null);
     const [showTollRoute, setShowTollRoute] = useState(true);
+    const [showRejected, setShowRejected] = useState(false);
     const [searchFlyTarget, setSearchFlyTarget] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const { user } = useAuthStore();
@@ -245,21 +309,19 @@ export default function PetaMonitoring() {
             const data = res.data.data || [];
             setAsetData(data);
             if (selectedId) {
-                const found = data.find((a) => a.id === selectedId);
-                if (found) setSelectedAset(found);
+                const target = data.find((a) => a.id === selectedId);
+                if (target) setSelectedAset(target);
             }
         });
     }, [selectedId]);
 
     useEffect(() => {
-        if (selectedAset?.id) {
-            axiosClient.get(`/log/${selectedAset.id}`)
-                .then((res) => setLogs(res.data.data || []))
-                .catch(() => setLogs([]));
-        } else {
-            setLogs([]);
+        if (selectedAset) {
+            axiosClient.get(`/log/aset/${selectedAset.id}`).then((res) => {
+                setLogs(res.data.data || []);
+            });
         }
-    }, [selectedAset?.id]);
+    }, [selectedAset]);
 
     function handleFilterChange(key, value) {
         setFilters((prev) => ({ ...prev, [key]: value }));
@@ -274,13 +336,17 @@ export default function PetaMonitoring() {
     // Client-side filtering
     const filtered = useMemo(() => {
         return asetData.filter((aset) => {
+            // Asset dengan status_validasi === 'rejected' di-exclude dari peta secara default
+            if (aset.status_validasi === 'rejected' && (!showRejected || user?.role !== 'admin')) {
+                return false;
+            }
             if (filters.kondisi && aset.status_kondisi !== filters.kondisi) return false;
             if (filters.geomType && aset.koordinat_geojson?.type !== filters.geomType) return false;
             if (filters.dateFrom && aset.tanggal_aset_dibuat && aset.tanggal_aset_dibuat < filters.dateFrom) return false;
             if (filters.dateTo && aset.tanggal_aset_dibuat && aset.tanggal_aset_dibuat > filters.dateTo) return false;
             return true;
         });
-    }, [asetData, filters]);
+    }, [asetData, filters, showRejected, user?.role]);
 
     // Urutkan aset agar geometri Polygon berada paling bawah, LineString di tengah,
     // dan Point (marker) paling atas. Dengan demikian, titik/garis yang berada di dalam area polygon
@@ -352,7 +418,7 @@ export default function PetaMonitoring() {
         if (type === 'Point') return `[${geojson.coordinates[1]?.toFixed(6)}, ${geojson.coordinates[0]?.toFixed(6)}]`;
         if (type === 'LineString') return `${geojson.coordinates.length} titik bentangan`;
         if (type === 'Polygon') return `${geojson.coordinates[0]?.length || 0} titik sudut area`;
-        return '-';
+        return type;
     };
 
     return (
@@ -360,23 +426,18 @@ export default function PetaMonitoring() {
             <Sidebar />
             <main className="flex-1 flex flex-col overflow-hidden">
                 <TopBar />
-                <div className="relative flex-1 overflow-hidden flex">
+                <div className="flex-1 relative overflow-hidden">
 
-                    {/* ── Map Container ── */}
-                    <div className="flex-1 h-full relative">
+                    {/* ── Main Map Canvas ── */}
+                    <div className="w-full h-full">
                         <MapContainer
                             center={PURBALEUNYI_CENTER}
                             zoom={PURBALEUNYI_DEFAULT_ZOOM}
                             minZoom={PURBALEUNYI_MIN_ZOOM}
-                            maxZoom={19}
                             maxBounds={PURBALEUNYI_BOUNDS}
-                            maxBoundsViscosity={1.0}
                             zoomControl={false}
-                            scrollWheelZoom={false}
-                            style={{ height: '100%', width: '100%' }}
+                            className="w-full h-full z-0"
                         >
-                            <CtrlScrollZoom />
-                            {/* CartoDB Voyager: tampil jalan + nama jalan utama, minim POI */}
                             <TileLayer
                                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -384,8 +445,7 @@ export default function PetaMonitoring() {
                                 maxZoom={19}
                             />
 
-                            {/* Rute tol dari Overpass API — dirender SEBELUM mask
-                                agar garis yang keluar bbox tertutup oleh overlay */}
+                            {/* Rute tol dari Overpass API — dirender SEBELUM mask */}
                             {showTollRoute && <TollRouteLayer />}
 
                             {/* Mask / dim di luar koridor Purbaleunyi */}
@@ -400,19 +460,19 @@ export default function PetaMonitoring() {
                             {sortedFiltered.map((aset) => {
                                 const isSelected = selectedAset?.id === aset.id;
                                 const isOther = selectedAset && !isSelected;
+                                const isPending = aset.status_validasi === 'pending';
+                                const isRejected = aset.status_validasi === 'rejected';
+                                const color = isRejected ? '#6b7280' : (pinColor[aset.status_kondisi] || '#6b7280');
+                                const style = getAssetStyle(aset, isSelected, isOther);
+
                                 return (
                                 <GeoJSON
-                                    key={`${aset.id}-${aset.status_kondisi}-${isSelected}`}
+                                    key={`${aset.id}-${aset.status_kondisi}-${aset.status_validasi}-${isSelected}`}
                                     data={aset.koordinat_geojson}
-                                    style={{
-                                        color: pinColor[aset.status_kondisi] || '#6b7280',
-                                        weight: isSelected ? 4 : 2,
-                                        fillOpacity: isSelected ? 0.25 : isOther ? 0.03 : 0.1,
-                                        opacity: isSelected ? 0.95 : isOther ? 0.2 : 0.65
-                                    }}
+                                    style={style}
                                     pointToLayer={(feature, latlng) =>
                                         L.marker(latlng, {
-                                            icon: coloredIcon(pinColor[aset.status_kondisi] || '#6b7280', isSelected, isOther),
+                                            icon: coloredIcon(color, isSelected, isOther, isPending),
                                             zIndexOffset: isSelected ? 1000 : isOther ? 10 : 100
                                         })
                                     }
@@ -421,9 +481,6 @@ export default function PetaMonitoring() {
                                 );
                             })}
                         </MapContainer>
-
-                        {/* ── Tombol Zoom Custom ── */}
-                        {/* sudah dirender di dalam MapContainer via ZoomControl */}
 
                         {/* ── Search Bar Mengambang ── */}
                         <MapSearchBar onFly={setSearchFlyTarget} className="top-3 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-[340px]" />
@@ -438,6 +495,9 @@ export default function PetaMonitoring() {
                             filteredCount={filtered.length}
                             showTollRoute={showTollRoute}
                             onToggleTollRoute={setShowTollRoute}
+                            showRejected={showRejected}
+                            onToggleShowRejected={setShowRejected}
+                            isAdmin={user?.role === 'admin'}
                         />
 
                         {/* ── Legenda ── */}
@@ -445,9 +505,9 @@ export default function PetaMonitoring() {
                             <h4 className="text-[10px] font-bold text-text-muted uppercase mb-2 tracking-wider">Legenda Kondisi &amp; Layer</h4>
                             <div className="space-y-1.5">
                                 {[
-                                    { color: 'bg-emerald-500', label: 'Baik', count: asetData.filter(a => a.status_kondisi === 'baik').length },
-                                    { color: 'bg-amber-500', label: 'Perlu Perawatan', count: asetData.filter(a => a.status_kondisi === 'perlu_perawatan').length },
-                                    { color: 'bg-red-600', label: 'Rusak', count: asetData.filter(a => a.status_kondisi === 'rusak').length }
+                                    { color: 'bg-emerald-500', label: 'Baik', count: filtered.filter(a => a.status_kondisi === 'baik' && a.status_validasi !== 'rejected').length },
+                                    { color: 'bg-amber-500', label: 'Perlu Perawatan', count: filtered.filter(a => a.status_kondisi === 'perlu_perawatan' && a.status_validasi !== 'rejected').length },
+                                    { color: 'bg-red-600', label: 'Rusak', count: filtered.filter(a => a.status_kondisi === 'rusak' && a.status_validasi !== 'rejected').length }
                                 ].map(({ color, label, count }) => (
                                     <div key={label} className="flex items-center justify-between gap-2">
                                         <div className="flex items-center gap-2">
@@ -457,6 +517,17 @@ export default function PetaMonitoring() {
                                         <span className="text-[10px] font-bold text-text-muted">{count}</span>
                                     </div>
                                 ))}
+                                {user?.role === 'admin' && showRejected && (
+                                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-border mt-1">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-3 h-3 rounded-full shrink-0 bg-gray-500" />
+                                            <span className="text-xs font-semibold text-navy">Ditolak</span>
+                                        </div>
+                                        <span className="text-[10px] font-bold text-text-muted">
+                                            {filtered.filter(a => a.status_validasi === 'rejected').length}
+                                        </span>
+                                    </div>
+                                )}
                                 <div className="pt-1.5 border-t border-border mt-1.5 flex items-center justify-between">
                                     <div className="flex items-center gap-2">
                                         <div className={`w-4 h-0.5 rounded transition-colors ${showTollRoute ? 'bg-[#1d4ed8]' : 'bg-gray-300'}`} style={{ flexShrink: 0 }} />
@@ -478,7 +549,7 @@ export default function PetaMonitoring() {
                                     <h2 className="text-base font-bold text-navy truncate max-w-[260px] md:max-w-[300px]">{selectedAset.nama_aset}</h2>
                                 </div>
                                 <div className="flex items-center gap-2 shrink-0">
-                                    {(user?.role === 'admin' || user?.role === 'operator') && (
+                                    {(user?.role === 'admin' || (user?.role === 'operator' && selectedAset.input_by === user?.id && (selectedAset.status_validasi === 'pending' || selectedAset.status_validasi === 'rejected'))) && (
                                         <button
                                             onClick={() => navigate(`/aset/edit/${selectedAset.id}`)}
                                             className="flex items-center gap-1 px-3 py-1.5 bg-navy text-white rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
@@ -506,13 +577,19 @@ export default function PetaMonitoring() {
                                         }`}>
                                             Kondisi: {(selectedAset.status_kondisi || '').replace('_', ' ')}
                                         </span>
-                                        <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold uppercase ${
-                                            selectedAset.status_validasi === 'approved' ? 'bg-[#D1FAE5] text-[#065F46]' :
-                                            selectedAset.status_validasi === 'rejected' ? 'bg-[#FEE2E2] text-[#991B1B]' :
-                                            'bg-amber-100 text-amber-900'
-                                        }`}>
-                                            Validasi: {selectedAset.status_validasi || 'pending'}
-                                        </span>
+                                        {selectedAset.status_validasi === 'pending' ? (
+                                            <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1">
+                                                <span className="material-symbols-outlined text-[13px]">hourglass_top</span>
+                                                Menunggu Verifikasi
+                                            </span>
+                                        ) : (
+                                            <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold uppercase ${
+                                                selectedAset.status_validasi === 'approved' ? 'bg-[#D1FAE5] text-[#065F46]' :
+                                                'bg-[#FEE2E2] text-[#991B1B]'
+                                            }`}>
+                                                Validasi: {selectedAset.status_validasi}
+                                            </span>
+                                        )}
                                     </div>
                                     <h3 className="text-lg font-bold text-navy leading-tight">{selectedAset.nama_aset}</h3>
                                     <p className="text-xs text-text-muted font-mono mt-0.5">No. Seri: {selectedAset.nomor_seri || '-'}</p>

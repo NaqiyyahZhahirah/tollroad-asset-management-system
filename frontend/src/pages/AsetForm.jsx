@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import DynamicFormField from '../components/DynamicFormField';
 import GeometryDrawer from '../components/GeometryDrawer';
+import { useToast } from '../components/Toast';
 
 export default function AsetForm() {
     const { id } = useParams();
@@ -21,6 +22,7 @@ export default function AsetForm() {
     const [fetchingElevation, setFetchingElevation] = useState(false);
     const { user } = useAuthStore();
     const navigate = useNavigate();
+    const toast = useToast();
 
     async function fetchElevation(lat, lng) {
         // 1. Coba Open-Meteo (paling cepat & stabil)
@@ -132,6 +134,8 @@ export default function AsetForm() {
                     tanggal_aset_dibuat: aset.tanggal_aset_dibuat || '',
                     elevasi_mdpl: aset.elevasi_mdpl !== undefined ? aset.elevasi_mdpl : '',
                     status_kondisi: aset.status_kondisi || 'baik',
+                    status_validasi: aset.status_validasi || '',
+                    catatan_validasi: aset.catatan_validasi || '',
                     koordinat_geojson: aset.koordinat_geojson || null,
                 });
                 setAtributSpesifik(aset.atribut_spesifik || {});
@@ -255,9 +259,11 @@ export default function AsetForm() {
                 }
             }
 
+            toast.success(isEdit ? 'Aset berhasil diperbarui!' : 'Aset baru berhasil disimpan!');
             navigate('/aset');
         } catch (err) {
             setError(err.response?.data?.error || 'Gagal menyimpan aset');
+            toast.error(err.response?.data?.error || 'Gagal menyimpan aset');
             if (err.response?.data?.details) {
                 setError(err.response.data.details.join(', '));
             }
@@ -296,6 +302,26 @@ export default function AsetForm() {
                 {/* Content: map atas, form bawah */}
                 <div className="flex-1 overflow-y-auto p-4 md:p-8 pb-20 md:pb-8">
                     <div className="max-w-3xl mx-auto flex flex-col gap-6">
+
+                        {/* Rejection Notice Banner */}
+                        {isEdit && formData.status_validasi === 'rejected' && (
+                            <div className="p-4 bg-[#FEE2E2] border border-[#FCA5A5] rounded-2xl flex items-start gap-3 text-[#991B1B] shadow-sm">
+                                <span className="material-symbols-outlined text-xl shrink-0 mt-0.5">error</span>
+                                <div>
+                                    <h4 className="font-bold text-sm">Aset Ini Pernah Ditolak</h4>
+                                    {formData.catatan_validasi ? (
+                                        <p className="text-xs mt-1 leading-relaxed">
+                                            <span className="font-semibold">Alasan penolakan sebelumnya:</span> "{formData.catatan_validasi}"
+                                        </p>
+                                    ) : (
+                                        <p className="text-xs mt-1 leading-relaxed">
+                                            Aset ini pernah ditolak oleh admin. Perbaiki data sebelum mengajukan ulang.
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Top: Map Picker */}
                         <div className="relative h-[360px] md:h-[420px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
                             <GeometryDrawer

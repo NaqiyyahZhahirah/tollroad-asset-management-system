@@ -345,7 +345,7 @@ export default function AsetList() {
                                                     >
                                                         <span className="material-symbols-outlined text-[18px]">visibility</span>
                                                     </button>
-                                                    {(user?.role === 'admin' || user?.role === 'operator') && (
+                                                    {(user?.role === 'admin' || (user?.role === 'operator' && aset.input_by === user?.id && (aset.status_validasi === 'pending' || aset.status_validasi === 'rejected'))) && (
                                                         <button
                                                             onClick={() => navigate(`/aset/edit/${aset.id}`)}
                                                             className="p-2 rounded-lg bg-amber-100 text-amber-900 hover:bg-amber transition-colors"

@@ -162,7 +162,8 @@ async function updateAset(req, res) {
         status_kondisi, atribut_spesifik, tanggal_aset_dibuat
     } = req.body;
 
-    const userId = req.user?.id;
+    const user = req.user;
+    const userId = user?.id;
 
     // Ambil data sebelum diubah
     const { data: sebelum, error: fetchError } = await supabase
@@ -173,6 +174,11 @@ async function updateAset(req, res) {
 
     if (fetchError || !sebelum) {
         return res.status(404).json({ error: 'Aset tidak ditemukan' });
+    }
+
+    // Ownership check: jika bukan admin, hanya pembuat (input_by) yang boleh edit
+    if (user?.role !== 'admin' && sebelum.input_by !== userId) {
+        return res.status(403).json({ error: 'Anda tidak memiliki izin untuk mengedit aset ini' });
     }
 
     const targetKategoriId = kategori_id || sebelum.kategori_id;
@@ -218,6 +224,15 @@ async function updateAset(req, res) {
     if (status_kondisi !== undefined) updatePayload.status_kondisi = status_kondisi;
     if (atribut_spesifik !== undefined) updatePayload.atribut_spesifik = atribut_spesifik;
     if (tanggal_aset_dibuat !== undefined) updatePayload.tanggal_aset_dibuat = tanggal_aset_dibuat;
+
+    // Business rule: Jika status saat ini 'approved' atau 'rejected' dan editor BUKAN admin,
+    // otomatis reset status_validasi ke 'pending' & hapus data validasi sebelumnya
+    if (['approved', 'rejected'].includes(sebelum.status_validasi) && user?.role !== 'admin') {
+        updatePayload.status_validasi = 'pending';
+        updatePayload.validated_by = null;
+        updatePayload.validated_at = null;
+        updatePayload.catatan_validasi = null;
+    }
 
     const { data, error } = await supabase
         .from('aset_tol')
