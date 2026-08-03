@@ -24,16 +24,16 @@ export default function Sidebar() {
             {isSidebarOpen && (
                 <div
                     onClick={closeSidebar}
-                    className="fixed inset-0 bg-black/40 z-40 md:hidden"
+                    className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
                 />
             )}
 
             <aside
-                className={`bg-card h-full flex flex-col border-r border-border py-6 gap-2 shrink-0
-                    fixed md:static top-0 left-0 z-50 overflow-hidden
+                className={`bg-card h-screen flex flex-col border-r border-border py-6 gap-2 shrink-0
+                    fixed md:sticky top-0 left-0 z-[9999] overflow-hidden
                     transition-all duration-200 ease-in-out
                     ${isSidebarOpen
-                        ? 'w-[280px] translate-x-0'
+                        ? 'w-[280px] translate-x-0 shadow-2xl'
                         : 'w-[280px] -translate-x-full md:w-0 md:translate-x-0 md:border-r-0 md:py-0'
                     }`}
             >

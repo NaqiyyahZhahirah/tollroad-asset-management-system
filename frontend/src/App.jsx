@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './utils/leafletIconFix';
 import Login from './pages/Login';
@@ -9,8 +10,18 @@ import PetaMonitoring from './pages/PetaMonitoring';
 import KategoriManagement from './pages/KategoriManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 
-
 function App() {
+    // Matikan scroll wheel untuk mengubah nilai pada seluruh input type="number"
+    useEffect(() => {
+        function handleWheel() {
+            if (document.activeElement && document.activeElement.type === 'number') {
+                document.activeElement.blur();
+            }
+        }
+        window.addEventListener('wheel', handleWheel, { passive: true });
+        return () => window.removeEventListener('wheel', handleWheel);
+    }, []);
+
     return (
         <BrowserRouter>
             <Routes>
@@ -18,6 +29,8 @@ function App() {
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/aset" element={<ProtectedRoute><AsetList /></ProtectedRoute>} />
                 <Route path="/aset/tambah" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
+                <Route path="/aset/edit/:id" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
+                <Route path="/aset/:id" element={<ProtectedRoute><AsetDetail /></ProtectedRoute>} />
                 <Route path="/peta" element={<ProtectedRoute><PetaMonitoring /></ProtectedRoute>} />
                 <Route
                     path="/kategori"
