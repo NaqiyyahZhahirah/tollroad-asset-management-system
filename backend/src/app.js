@@ -7,6 +7,7 @@ const asetRoutes = require('./routes/aset.routes');
 const fotoRoutes = require('./routes/foto.routes');
 const authRoutes = require('./routes/auth.routes');
 const logRoutes = require('./routes/log.routes');
+const userRoutes = require('./routes/user.routes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api/aset', asetRoutes);
 app.use('/api/foto', fotoRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/log', logRoutes);
+app.use('/api/users', userRoutes);
 app.get('/', (req, res) => {
     res.json({ message: 'JMTM-AMS API running' });
 });

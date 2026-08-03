@@ -23,12 +23,16 @@ async function login(req, res) {
     // Query profil pakai client ADMIN (yang tetap bypass RLS)
     const { data: profile, error: profileError } = await supabaseAdmin
         .from('users')
-        .select('id, nama, email, role, wilayah_kerja')
+        .select('id, nama, email, role, wilayah_kerja, is_active')
         .eq('id', data.user.id)
         .single();
 
     if (profileError) {
         return res.status(404).json({ error: 'Profil user tidak ditemukan' });
+    }
+
+    if (!profile.is_active) {
+        return res.status(403).json({ error: 'Akun Anda telah dinonaktifkan. Hubungi admin.' });
     }
 
     res.json({

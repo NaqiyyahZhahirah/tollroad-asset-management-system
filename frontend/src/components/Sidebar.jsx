@@ -76,19 +76,34 @@ export default function Sidebar() {
                             </NavLink>
                         ))}
                         {user?.role === 'admin' && (
-                            <NavLink
-                                to="/kategori"
-                                className={({ isActive }) =>
-                                    `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
-                                        isActive
-                                            ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
-                                            : 'text-text-muted opacity-70 hover:bg-card-hover'
-                                    }`
-                                }
-                            >
-                                <span className="material-symbols-outlined">fact_check</span>
-                                <span className="text-sm">Kelola Kategori</span>
-                            </NavLink>
+                            <>
+                                <NavLink
+                                    to="/kategori"
+                                    className={({ isActive }) =>
+                                        `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
+                                            isActive
+                                                ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
+                                                : 'text-text-muted opacity-70 hover:bg-card-hover'
+                                        }`
+                                    }
+                                >
+                                    <span className="material-symbols-outlined">fact_check</span>
+                                    <span className="text-sm">Kelola Kategori</span>
+                                </NavLink>
+                                <NavLink
+                                    to="/pengguna"
+                                    className={({ isActive }) =>
+                                        `flex items-center px-6 py-3 gap-3 transition-all whitespace-nowrap ${
+                                            isActive
+                                                ? 'border-l-4 border-amber bg-card-strong text-text-dark font-bold'
+                                                : 'text-text-muted opacity-70 hover:bg-card-hover'
+                                        }`
+                                    }
+                                >
+                                    <span className="material-symbols-outlined">manage_accounts</span>
+                                    <span className="text-sm">Kelola Pengguna</span>
+                                </NavLink>
+                            </>
                         )}
                     </nav>
 

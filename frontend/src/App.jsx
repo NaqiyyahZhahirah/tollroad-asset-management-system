@@ -8,6 +8,7 @@ import AsetForm from './pages/AsetForm';
 import AsetDetail from './pages/AsetDetail';
 import PetaMonitoring from './pages/PetaMonitoring';
 import KategoriManagement from './pages/KategoriManagement';
+import UserManagement from './pages/UserManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 import { ToastProvider } from './components/Toast';
 
@@ -39,6 +40,14 @@ function App() {
                         element={
                             <ProtectedRoute adminOnly>
                                 <KategoriManagement />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/pengguna"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <UserManagement />
                             </ProtectedRoute>
                         }
                     />
