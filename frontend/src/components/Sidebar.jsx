@@ -20,7 +20,6 @@ export default function Sidebar() {
 
     return (
         <>
-            {/* Backdrop, cuma muncul kalau sidebar kebuka di layar kecil */}
             {isSidebarOpen && (
                 <div
                     onClick={closeSidebar}
@@ -38,10 +37,9 @@ export default function Sidebar() {
                     }`}
             >
                 <div className="w-[280px] flex flex-col h-full">
-                    {/* Header Sidebar Full Biru Navy */}
                     <div className="px-6 py-5 flex items-center justify-between border-b border-white/10 shrink-0">
                         <div>
-                            <h1 className="text-xl font-bold text-white tracking-tight">Tollroad-AMS</h1>
+                            <h1 className="text-xl font-bold text-white tracking-tight">Tollroad AMS</h1>
                             <p className="text-xs text-amber font-semibold uppercase tracking-wider mt-0.5">Asset Management System</p>
                         </div>
                         <button onClick={closeSidebar} className="md:hidden p-1 text-white/70 hover:text-white transition-colors">
