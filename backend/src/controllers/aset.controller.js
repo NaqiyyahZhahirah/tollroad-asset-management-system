@@ -242,4 +242,44 @@ async function updateAset(req, res) {
     res.json({ data });
 }
 
-module.exports = { getAllAset, getAsetById, createAset, updateStatusValidasi, updateAset };
+// DELETE aset — hanya admin
+async function deleteAset(req, res) {
+    const { id } = req.params;
+    const userId = req.user?.id;
+
+    // Ambil data sebelum dihapus untuk log
+    const { data: sebelum, error: fetchError } = await supabase
+        .from('aset_tol')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (fetchError || !sebelum) {
+        return res.status(404).json({ error: 'Aset tidak ditemukan' });
+    }
+
+    // Hapus foto terkait terlebih dahulu
+    await supabase.from('foto_aset').delete().eq('aset_id', id);
+
+    const { error } = await supabase
+        .from('aset_tol')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+    await supabase.from('log_aktivitas').insert([{
+        aset_id: id,
+        user_id: userId,
+        aksi: 'delete',
+        data_sebelum: sebelum,
+        data_sesudah: null,
+        keterangan: `Aset "${sebelum.nama_aset}" dihapus oleh admin`
+    }]);
+
+    res.json({ message: `Aset "${sebelum.nama_aset}" berhasil dihapus` });
+}
+
+module.exports = { getAllAset, getAsetById, createAset, updateStatusValidasi, updateAset, deleteAset };

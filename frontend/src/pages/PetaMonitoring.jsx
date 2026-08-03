@@ -6,6 +6,7 @@ import axiosClient from '../api/axiosClient';
 import { useAuthStore } from '../store/authStore';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
+import { useToast } from '../components/Toast';
 import MapMask from '../components/MapMask';
 import TollRouteLayer from '../components/TollRouteLayer';
 import { MapSearchBar, MapSearchLayer } from '../components/MapSearchBar';
@@ -227,6 +228,7 @@ export default function PetaMonitoring() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { user } = useAuthStore();
     const navigate = useNavigate();
+    const toast = useToast();
 
     // Filters state
     const [filters, setFilters] = useState({
@@ -321,10 +323,6 @@ export default function PetaMonitoring() {
     }
 
     async function handleDecision(status) {
-        if (status === 'rejected' && !rejectReason) {
-            alert('Isi alasan penolakan dulu');
-            return;
-        }
         setProcessing(true);
         try {
             await axiosClient.patch(`/aset/${selectedAset.id}/validasi`, {
@@ -332,6 +330,7 @@ export default function PetaMonitoring() {
                 validated_by: user?.id,
                 catatan_validasi: status === 'rejected' ? rejectReason : null
             });
+            toast.success(status === 'approved' ? 'Aset berhasil disetujui' : 'Aset ditolak');
             const res = await axiosClient.get('/aset');
             setAsetData(res.data.data || []);
             const updated = (res.data.data || []).find((a) => a.id === selectedAset.id);
@@ -339,7 +338,7 @@ export default function PetaMonitoring() {
             setShowRejectBox(false);
             setRejectReason('');
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal memproses keputusan');
+            toast.error(err.response?.data?.error || 'Gagal memproses keputusan');
         } finally {
             setProcessing(false);
         }

@@ -3,6 +3,7 @@ import axiosClient from '../api/axiosClient';
 import { useAuthStore } from '../store/authStore';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
+import { useToast } from '../components/Toast';
 
 export default function KategoriManagement() {
     const [kategoriList, setKategoriList] = useState([]);
@@ -19,8 +20,10 @@ export default function KategoriManagement() {
 
     // Drag and drop state
     const [draggedIndex, setDraggedIndex] = useState(null);
+    const [confirmModal, setConfirmModal] = useState(null); // { title, message, action }
 
     const { user } = useAuthStore();
+    const toast = useToast();
 
     useEffect(() => {
         fetchKategori();
@@ -191,7 +194,7 @@ export default function KategoriManagement() {
                     skema_formulir,
                     naikkan_versi: naikkanVersi
                 });
-                alert('Kategori berhasil diperbarui!');
+                toast.success('Kategori berhasil diperbarui!');
             } else {
                 await axiosClient.post('/kategori', {
                     nama_kategori: namaKategori,
@@ -200,35 +203,51 @@ export default function KategoriManagement() {
                     skema_formulir,
                     created_by: user?.id
                 });
-                alert('Kategori berhasil dibuat!');
+                toast.success('Kategori berhasil dibuat!');
             }
 
             resetForm();
             fetchKategori();
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal menyimpan kategori');
+            toast.error(err.response?.data?.error || 'Gagal menyimpan kategori');
         }
     }
 
-    async function handleDeactivate(id) {
-        if (!confirm('Nonaktifkan kategori ini?')) return;
-        try {
-            await axiosClient.delete(`/kategori/${id}`);
-            if (editingKategori?.id === id) resetForm();
-            fetchKategori();
-        } catch (err) {
-            alert(err.response?.data?.error || 'Gagal menonaktifkan kategori');
-        }
+    function handleDeactivate(id) {
+        setConfirmModal({
+            title: 'Nonaktifkan Kategori',
+            message: 'Kategori ini akan dinonaktifkan dari sistem.',
+            onConfirm: async () => {
+                try {
+                    await axiosClient.delete(`/kategori/${id}`);
+                    toast.success('Kategori berhasil dinonaktifkan');
+                    if (editingKategori?.id === id) resetForm();
+                    fetchKategori();
+                } catch (err) {
+                    toast.error(err.response?.data?.error || 'Gagal menonaktifkan kategori');
+                } finally {
+                    setConfirmModal(null);
+                }
+            }
+        });
     }
 
-    async function handleActivate(id) {
-        if (!confirm('Aktifkan kembali kategori ini?')) return;
-        try {
-            await axiosClient.patch(`/kategori/${id}/activate`);
-            fetchKategori();
-        } catch (err) {
-            alert(err.response?.data?.error || 'Gagal mengaktifkan kategori');
-        }
+    function handleActivate(id) {
+        setConfirmModal({
+            title: 'Aktifkan Kategori',
+            message: 'Kategori ini akan diaktifkan kembali.',
+            onConfirm: async () => {
+                try {
+                    await axiosClient.patch(`/kategori/${id}/activate`);
+                    toast.success('Kategori berhasil diaktifkan kembali');
+                    fetchKategori();
+                } catch (err) {
+                    toast.error(err.response?.data?.error || 'Gagal mengaktifkan kategori');
+                } finally {
+                    setConfirmModal(null);
+                }
+            }
+        });
     }
 
     const activeKategori = kategoriList.filter((k) => k.is_active !== false);
@@ -670,6 +689,37 @@ export default function KategoriManagement() {
                     </div>
                 </section>
             </main>
+
+            {/* Confirmation Modal */}
+            {confirmModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+                    <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-sm p-6 flex flex-col gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
+                                <span className="material-symbols-outlined text-amber-700">help_outline</span>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-navy text-base">{confirmModal.title}</h3>
+                                <p className="text-xs text-text-muted">{confirmModal.message}</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-2 justify-end mt-2">
+                            <button
+                                onClick={() => setConfirmModal(null)}
+                                className="px-4 py-2 rounded-lg border border-border text-navy font-semibold text-sm hover:bg-card-hover transition-colors"
+                            >
+                                Batal
+                            </button>
+                            <button
+                                onClick={confirmModal.onConfirm}
+                                className="px-4 py-2 rounded-lg bg-navy text-white font-semibold text-sm hover:opacity-90 transition-opacity"
+                            >
+                                Ya, Lanjutkan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

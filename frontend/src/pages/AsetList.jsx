@@ -4,6 +4,8 @@ import axiosClient from '../api/axiosClient';
 import { useAuthStore } from '../store/authStore';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
+import { useToast } from '../components/Toast';
+import PromptModal from '../components/PromptModal';
 
 const conditionBadge = {
     baik: 'bg-[#D1FAE5] text-[#065F46]',
@@ -32,8 +34,11 @@ export default function AsetList() {
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [deleting, setDeleting] = useState(false);
     const [bulkLoading, setBulkLoading] = useState(false);
+    // Prompt modal state
+    const [rejectPrompt, setRejectPrompt] = useState({ open: false, mode: null, targetId: null, count: 0 });
     const { user } = useAuthStore();
     const navigate = useNavigate();
+    const toast = useToast();
 
     useEffect(() => {
         axiosClient.get('/kategori').then((res) => setKategoriList(res.data.data));
@@ -73,55 +78,68 @@ export default function AsetList() {
     }
 
     // --- Single approve/reject ---
-    async function handleApprove(id, status) {
+    function handleApprove(id, status) {
+        if (status === 'rejected') {
+            setRejectPrompt({ open: true, mode: 'single', targetId: id, count: 1 });
+        } else {
+            doApprove(id, 'approved', null);
+        }
+    }
+
+    async function doApprove(id, status, catatan) {
         try {
-            const catatan = status === 'rejected' ? prompt('Alasan reject?') : null;
-            if (status === 'rejected' && !catatan) return;
             await axiosClient.patch(`/aset/${id}/validasi`, {
                 status_validasi: status,
-                validated_by: user.id,
-                catatan_validasi: catatan
+                validated_by: user?.id,
+                catatan_validasi: catatan || null
             });
+            toast.success(status === 'approved' ? 'Aset berhasil di-approve' : 'Aset berhasil di-reject');
             fetchAset();
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal update status');
+            toast.error(err.response?.data?.error || 'Gagal update status');
         }
     }
 
     // --- Bulk approve/reject ---
-    async function handleBulkAction(status) {
-        // Saring hanya yang statusnya pending
+    function handleBulkAction(status) {
         const pendingIds = selectedIds.filter((id) => {
             const aset = asetData.find((a) => a.id === id);
             return aset?.status_validasi === 'pending';
         });
 
         if (pendingIds.length === 0) {
-            alert('Tidak ada aset berstatus pending dari pilihan yang dipilih.');
+            toast.warning('Tidak ada aset berstatus pending dari pilihan yang dipilih.');
             return;
         }
 
-        let catatan = null;
         if (status === 'rejected') {
-            catatan = prompt(`Alasan reject untuk ${pendingIds.length} aset?`);
-            if (!catatan) return;
+            setRejectPrompt({ open: true, mode: 'bulk', targetId: null, count: pendingIds.length });
+        } else {
+            doBulkAction('approved', null);
         }
+    }
 
+    async function doBulkAction(status, catatan) {
+        const pendingIds = selectedIds.filter((id) => {
+            const aset = asetData.find((a) => a.id === id);
+            return aset?.status_validasi === 'pending';
+        });
         setBulkLoading(true);
         try {
             await Promise.all(
                 pendingIds.map((id) =>
                     axiosClient.patch(`/aset/${id}/validasi`, {
                         status_validasi: status,
-                        validated_by: user.id,
-                        catatan_validasi: catatan
+                        validated_by: user?.id,
+                        catatan_validasi: catatan || null
                     })
                 )
             );
+            toast.success(`${pendingIds.length} aset berhasil di-${status === 'approved' ? 'approve' : 'reject'}`);
             setSelectedIds([]);
             fetchAset();
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal bulk update status');
+            toast.error(err.response?.data?.error || 'Gagal bulk update status');
         } finally {
             setBulkLoading(false);
         }
@@ -133,10 +151,11 @@ export default function AsetList() {
         setDeleting(true);
         try {
             await axiosClient.delete(`/aset/${deleteTarget.id}`);
+            toast.success(`Aset "${deleteTarget.nama}" berhasil dihapus`);
             setDeleteTarget(null);
             fetchAset();
         } catch (err) {
-            alert(err.response?.data?.error || 'Gagal menghapus aset');
+            toast.error(err.response?.data?.error || 'Gagal menghapus aset');
         } finally {
             setDeleting(false);
         }
@@ -509,6 +528,27 @@ export default function AsetList() {
                     </div>
                 </div>
             )}
+
+            {/* Reject Reason Prompt Modal */}
+            <PromptModal
+                open={rejectPrompt.open}
+                title={rejectPrompt.mode === 'bulk' ? `Reject ${rejectPrompt.count} Aset` : 'Reject Aset'}
+                message="Masukkan alasan penolakan (opsional):"
+                placeholder="Tulis alasan penolakan..."
+                required={false}
+                confirmText="Reject Aset"
+                confirmVariant="danger"
+                onConfirm={(catatan) => {
+                    const { mode, targetId } = rejectPrompt;
+                    setRejectPrompt({ open: false, mode: null, targetId: null, count: 0 });
+                    if (mode === 'single') {
+                        doApprove(targetId, 'rejected', catatan);
+                    } else if (mode === 'bulk') {
+                        doBulkAction('rejected', catatan);
+                    }
+                }}
+                onCancel={() => setRejectPrompt({ open: false, mode: null, targetId: null, count: 0 })}
+            />
         </div>
     );
 }

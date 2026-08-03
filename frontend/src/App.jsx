@@ -9,6 +9,7 @@ import AsetDetail from './pages/AsetDetail';
 import PetaMonitoring from './pages/PetaMonitoring';
 import KategoriManagement from './pages/KategoriManagement';
 import ProtectedRoute from './components/ProtectedRoute';
+import { ToastProvider } from './components/Toast';
 
 function App() {
     // Matikan scroll wheel untuk mengubah nilai pada seluruh input type="number"
@@ -23,26 +24,28 @@ function App() {
     }, []);
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="/aset" element={<ProtectedRoute><AsetList /></ProtectedRoute>} />
-                <Route path="/aset/tambah" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
-                <Route path="/aset/edit/:id" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
-                <Route path="/aset/:id" element={<ProtectedRoute><AsetDetail /></ProtectedRoute>} />
-                <Route path="/peta" element={<ProtectedRoute><PetaMonitoring /></ProtectedRoute>} />
-                <Route
-                    path="/kategori"
-                    element={
-                        <ProtectedRoute adminOnly>
-                            <KategoriManagement />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            </Routes>
-        </BrowserRouter>
+        <ToastProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                    <Route path="/aset" element={<ProtectedRoute><AsetList /></ProtectedRoute>} />
+                    <Route path="/aset/tambah" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
+                    <Route path="/aset/edit/:id" element={<ProtectedRoute><AsetForm /></ProtectedRoute>} />
+                    <Route path="/aset/:id" element={<ProtectedRoute><AsetDetail /></ProtectedRoute>} />
+                    <Route path="/peta" element={<ProtectedRoute><PetaMonitoring /></ProtectedRoute>} />
+                    <Route
+                        path="/kategori"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <KategoriManagement />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                </Routes>
+            </BrowserRouter>
+        </ToastProvider>
     );
 }
 
