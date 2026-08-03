@@ -17,34 +17,28 @@ async function getAllKategori(req, res) {
 }
 
 async function createKategori(req, res) {
-    const { nama_kategori, deskripsi, skema_formulir, created_by } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, created_by } = req.body;
 
-    if (!nama_kategori || !skema_formulir) {
-        return res.status(400).json({ error: 'nama_kategori dan skema_formulir wajib diisi' });
+    if (!nama_kategori || !skema_formulir || !tipe_geometri) {
+        return res.status(400).json({ error: 'nama_kategori, skema_formulir, dan tipe_geometri wajib diisi' });
+    }
+    if (!['titik', 'garis', 'area'].includes(tipe_geometri)) {
+        return res.status(400).json({ error: 'tipe_geometri harus titik, garis, atau area' });
     }
 
     const { data, error } = await supabase
         .from('kategori_aset')
-        .insert([{
-            nama_kategori,
-            deskripsi,
-            versi_skema: 1,
-            skema_formulir,
-            created_by
-        }])
+        .insert([{ nama_kategori, deskripsi, versi_skema: 1, skema_formulir, tipe_geometri, created_by }])
         .select()
         .single();
 
-    if (error) {
-        return res.status(500).json({ error: error.message });
-    }
-
+    if (error) return res.status(500).json({ error: error.message });
     res.status(201).json({ data });
 }
 
 async function updateKategori(req, res) {
     const { id } = req.params;
-    const { nama_kategori, deskripsi, skema_formulir, naikkan_versi, is_active } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, naikkan_versi, is_active } = req.body;
 
     // Ambil versi_skema saat ini
     const { data: current, error: currentError } = await supabase
@@ -63,6 +57,7 @@ async function updateKategori(req, res) {
 
     if (nama_kategori !== undefined) updatePayload.nama_kategori = nama_kategori;
     if (deskripsi !== undefined) updatePayload.deskripsi = deskripsi;
+    if (tipe_geometri !== undefined) updatePayload.tipe_geometri = tipe_geometri;
     if (is_active !== undefined) updatePayload.is_active = is_active;
 
     // Kalau skema_formulir berubah, naikkan versi_skema

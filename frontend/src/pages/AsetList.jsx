@@ -138,7 +138,7 @@ export default function AsetList() {
                                         <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Lokasi</th>
                                         <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Kondisi</th>
                                         <th className="p-3 text-xs text-text-muted uppercase tracking-wider">Status</th>
-                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider text-right">Aksi</th>
+                                        <th className="p-3 text-xs text-text-muted uppercase tracking-wider text-left">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-border">
@@ -162,7 +162,13 @@ export default function AsetList() {
                                                     <div className="w-8 h-8 bg-card-strong rounded flex items-center justify-center shrink-0">
                                                         <span className="material-symbols-outlined text-navy text-[18px]">construction</span>
                                                     </div>
-                                                    <span className="font-semibold text-sm">{aset.nama_aset}</span>
+                                                    <button
+                                                        onClick={() => navigate(`/peta?selectedId=${aset.id}`)}
+                                                        className="font-semibold text-sm text-navy hover:underline text-left"
+                                                        title="Lihat di Peta"
+                                                    >
+                                                        {aset.nama_aset}
+                                                    </button>
                                                 </div>
                                             </td>
                                             <td className="p-3 text-sm text-text-muted">{aset.kategori_aset?.nama_kategori}</td>
@@ -177,31 +183,43 @@ export default function AsetList() {
                                                     {aset.status_validasi}
                                                 </span>
                                             </td>
-                                            <td className="p-3 text-right">
-                                                {user?.role === 'admin' && aset.status_validasi === 'pending' ? (
-                                                    <div className="flex gap-1 justify-end">
-                                                        <button
-                                                            onClick={() => handleApprove(aset.id, 'approved')}
-                                                            className="p-2 rounded-lg bg-[#D1FAE5] text-[#065F46] hover:opacity-80"
-                                                            title="Approve"
-                                                        >
-                                                            <span className="material-symbols-outlined text-[18px]">check</span>
-                                                        </button>
-                                                        <button
-                                                            onClick={() => handleApprove(aset.id, 'rejected')}
-                                                            className="p-2 rounded-lg bg-[#FEE2E2] text-[#991B1B] hover:opacity-80"
-                                                            title="Reject"
-                                                        >
-                                                            <span className="material-symbols-outlined text-[18px]">close</span>
-                                                        </button>
-                                                    </div>
-                                                ) : (
+                                            <td className="p-3 text-left">
+                                                <div className="flex items-center gap-1 justify-start">
                                                     <button
-                                                        onClick={() => navigate(`/aset/${aset.id}`)}
-                                                        className="p-2 rounded-lg bg-card-strong hover:bg-amber transition-colors">
+                                                        onClick={() => navigate(`/peta?selectedId=${aset.id}`)}
+                                                        className="p-2 rounded-lg bg-card-strong hover:bg-amber transition-colors"
+                                                        title="Lihat Detail di Peta"
+                                                    >
                                                         <span className="material-symbols-outlined text-[18px]">visibility</span>
                                                     </button>
-                                                )}
+                                                    {(user?.role === 'admin' || user?.role === 'operator') && (
+                                                        <button
+                                                            onClick={() => navigate(`/aset/edit/${aset.id}`)}
+                                                            className="p-2 rounded-lg bg-amber-100 text-amber-900 hover:bg-amber transition-colors"
+                                                            title="Edit / Update Aset"
+                                                        >
+                                                            <span className="material-symbols-outlined text-[18px]">edit</span>
+                                                        </button>
+                                                    )}
+                                                    {user?.role === 'admin' && aset.status_validasi === 'pending' && (
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleApprove(aset.id, 'approved')}
+                                                                className="p-2 rounded-lg bg-[#D1FAE5] text-[#065F46] hover:opacity-80"
+                                                                title="Approve"
+                                                            >
+                                                                <span className="material-symbols-outlined text-[18px]">check</span>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleApprove(aset.id, 'rejected')}
+                                                                className="p-2 rounded-lg bg-[#FEE2E2] text-[#991B1B] hover:opacity-80"
+                                                                title="Reject"
+                                                            >
+                                                                <span className="material-symbols-outlined text-[18px]">close</span>
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

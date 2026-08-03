@@ -9,8 +9,9 @@ export default function KategoriManagement() {
     const [editingKategori, setEditingKategori] = useState(null);
     const [namaKategori, setNamaKategori] = useState('');
     const [deskripsi, setDeskripsi] = useState('');
+    const [tipeGeometri, setTipeGeometri] = useState('');
     const [naikkanVersi, setNaikkanVersi] = useState(false);
-    const [fields, setFields] = useState([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+    const [fields, setFields] = useState([]);
     
     // Accordion state
     const [isAktifOpen, setIsAktifOpen] = useState(true);
@@ -47,14 +48,16 @@ export default function KategoriManagement() {
         setEditingKategori(null);
         setNamaKategori('');
         setDeskripsi('');
+        setTipeGeometri('');
         setNaikkanVersi(false);
-        setFields([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+        setFields([]);
     }
 
     function startEdit(kategori) {
         setEditingKategori(kategori);
         setNamaKategori(kategori.nama_kategori || '');
         setDeskripsi(kategori.deskripsi || '');
+        setTipeGeometri(kategori.tipe_geometri || '');
         setNaikkanVersi(false);
         
         const loadedFields = kategori.skema_formulir?.fields || [];
@@ -77,7 +80,7 @@ export default function KategoriManagement() {
                 };
             }));
         } else {
-            setFields([{ key: '', label: '', type: 'text', required: false, options: [''] }]);
+            setFields([]);
         }
 
         // Scroll to form on small screens
@@ -89,10 +92,6 @@ export default function KategoriManagement() {
     }
 
     function removeField(index) {
-        if (fields.length === 1) {
-            alert('Kategori harus memiliki minimal 1 field.');
-            return;
-        }
         setFields(fields.filter((_, i) => i !== index));
     }
 
@@ -188,6 +187,7 @@ export default function KategoriManagement() {
                 await axiosClient.patch(`/kategori/${editingKategori.id}`, {
                     nama_kategori: namaKategori,
                     deskripsi,
+                    tipe_geometri: tipeGeometri,
                     skema_formulir,
                     naikkan_versi: naikkanVersi
                 });
@@ -196,6 +196,7 @@ export default function KategoriManagement() {
                 await axiosClient.post('/kategori', {
                     nama_kategori: namaKategori,
                     deskripsi,
+                    tipe_geometri: tipeGeometri,
                     skema_formulir,
                     created_by: user?.id
                 });
@@ -287,15 +288,15 @@ export default function KategoriManagement() {
                                                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                         <button
                                                             onClick={() => startEdit(k)}
-                                                            className="text-[#091426] hover:bg-[#091426]/10 text-xs font-bold px-2 py-1 rounded flex items-center gap-0.5"
+                                                            className="h-7 px-2.5 text-[#091426] hover:bg-[#091426]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
                                                             title="Edit Kategori"
                                                         >
-                                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                                            <span className="material-symbols-outlined text-[15px]">edit</span>
                                                             Edit
                                                         </button>
                                                         <button
                                                             onClick={() => handleDeactivate(k.id)}
-                                                            className="text-[#ba1a1a] hover:bg-[#ba1a1a]/10 text-xs font-bold px-2 py-1 rounded"
+                                                            className="h-7 px-2.5 text-[#ba1a1a] hover:bg-[#ba1a1a]/10 text-xs font-bold rounded flex items-center justify-center transition-colors"
                                                         >
                                                             Nonaktifkan
                                                         </button>
@@ -357,15 +358,15 @@ export default function KategoriManagement() {
                                                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                         <button
                                                             onClick={() => startEdit(k)}
-                                                            className="text-[#091426] hover:bg-[#091426]/10 text-xs font-bold px-2 py-1 rounded flex items-center gap-0.5"
+                                                            className="h-7 px-2.5 text-[#091426] hover:bg-[#091426]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
                                                             title="Edit Kategori"
                                                         >
-                                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                                            <span className="material-symbols-outlined text-[15px]">edit</span>
                                                             Edit
                                                         </button>
                                                         <button
                                                             onClick={() => handleActivate(k.id)}
-                                                            className="text-[#107c41] hover:bg-[#107c41]/10 text-xs font-bold px-2 py-1 rounded"
+                                                            className="h-7 px-2.5 text-[#107c41] hover:bg-[#107c41]/10 text-xs font-bold rounded flex items-center justify-center transition-colors"
                                                         >
                                                             Aktifkan
                                                         </button>
@@ -425,6 +426,27 @@ export default function KategoriManagement() {
                                     />
                                 </div>
 
+                                <div>
+                                    <label className="block text-sm font-bold text-[#0b1c30] mb-1.5">
+                                        Tipe Geometri di Peta <span className="text-[#ba1a1a]">*</span>
+                                    </label>
+                                    <select
+                                        value={tipeGeometri}
+                                        onChange={(e) => setTipeGeometri(e.target.value)}
+                                        className={`w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] pl-3 pr-8 text-sm transition-colors bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat ${
+                                            !tipeGeometri ? 'text-[#9ca3af]' : 'text-[#0b1c30]'
+                                        }`}
+                                        required
+                                    >
+                                        <option value="" disabled hidden>
+                                            Pilih Tipe Geometri
+                                        </option>
+                                        <option value="titik" className="text-[#0b1c30]">Titik (contoh: Rambu, Lampu Jalan)</option>
+                                        <option value="garis" className="text-[#0b1c30]">Garis (contoh: Guardrail, Drainase)</option>
+                                        <option value="area" className="text-[#0b1c30]">Area (contoh: Segmen Perkerasan Jalan)</option>
+                                    </select>
+                                </div>
+
                                 {editingKategori && (
                                     <div className="p-3 bg-[#eff4ff] border border-[#c5c6cd] rounded-[0.25rem]">
                                         <label className="flex items-center gap-2.5 text-xs font-bold text-[#091426] cursor-pointer">
@@ -443,6 +465,23 @@ export default function KategoriManagement() {
                                 )}
 
                                 <div className="pt-4 border-t border-[#c5c6cd]">
+                                    {/* Info: field bawaan yang selalu ada */}
+                                    <div className="mb-4 p-3 rounded-[0.25rem] bg-[#eff4ff] border border-[#c5c6cd] flex gap-2.5">
+                                        <span className="material-symbols-outlined text-[#091426] text-base mt-0.5 shrink-0">info</span>
+                                        <div className="text-[11.5px] text-[#45474c] leading-relaxed">
+                                            <p className="font-bold text-[#091426] mb-1">Field bawaan yang otomatis ada di form tambah aset:</p>
+                                            <ul className="list-disc list-inside space-y-0.5">
+                                                <li><span className="font-semibold">Nama Aset</span> — nama/identitas aset</li>
+                                                <li><span className="font-semibold">Kode Aset</span> — kode unik aset</li>
+                                                <li><span className="font-semibold">Kondisi</span> — baik / rusak ringan / rusak berat</li>
+                                                <li><span className="font-semibold">Tanggal Pemasangan</span> — kapan aset dipasang</li>
+                                                <li><span className="font-semibold">Lokasi / Koordinat</span> — posisi geometri di peta</li>
+                                                <li><span className="font-semibold">Catatan</span> — keterangan tambahan opsional</li>
+                                            </ul>
+                                            <p className="mt-1.5 text-[#75777c]">Tambahkan atribut spesifik di bawah ini jika kategori ini membutuhkan data teknis tambahan.</p>
+                                        </div>
+                                    </div>
+
                                     <div className="flex items-center justify-between mb-3">
                                         <h3 className="text-[12px] font-bold uppercase tracking-widest text-[#45474c]">
                                             Atribut Spesifik
@@ -510,12 +549,17 @@ export default function KategoriManagement() {
                                                         <select
                                                             value={field.type}
                                                             onChange={(e) => updateField(i, 'type', e.target.value)}
-                                                            className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] pl-2 pr-8 text-sm bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat"
+                                                            className={`w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] pl-2 pr-8 text-sm transition-colors bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat ${
+                                                                !field.type ? 'text-[#9ca3af]' : 'text-[#0b1c30]'
+                                                            }`}
                                                         >
-                                                            <option value="text">Teks</option>
-                                                            <option value="number">Angka</option>
-                                                            <option value="select">Pilihan</option>
-                                                            <option value="date">Tanggal</option>
+                                                            <option value="" disabled hidden>
+                                                                Pilih Tipe Data
+                                                            </option>
+                                                            <option value="text" className="text-[#0b1c30]">Teks</option>
+                                                            <option value="number" className="text-[#0b1c30]">Angka</option>
+                                                            <option value="select" className="text-[#0b1c30]">Pilihan</option>
+                                                            <option value="date" className="text-[#0b1c30]">Tanggal</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -581,6 +625,14 @@ export default function KategoriManagement() {
                                                 )}
                                             </div>
                                         ))}
+
+                                        {fields.length === 0 && (
+                                            <div className="flex flex-col items-center justify-center py-6 rounded-[0.25rem] border border-dashed border-[#c5c6cd] bg-[#fafafa] text-center">
+                                                <span className="material-symbols-outlined text-[#c5c6cd] text-3xl mb-2">format_list_bulleted_add</span>
+                                                <p className="text-sm font-semibold text-[#75777c]">Belum ada atribut spesifik</p>
+                                                <p className="text-xs text-[#9ca3af] mt-0.5">Klik "Tambah Atribut" di bawah jika kategori ini butuh data teknis khusus.</p>
+                                            </div>
+                                        )}
                                     </div>
 
                                     <button
