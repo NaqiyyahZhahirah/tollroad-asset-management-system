@@ -155,7 +155,7 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
     }, [existingAssets]);
 
     return (
-        <div className="h-full min-h-[450px] relative">
+        <div className="h-full min-h-[480px] sm:min-h-[450px] relative overflow-visible">
             <MapContainer
                 center={PURBALEUNYI_CENTER}
                 zoom={PURBALEUNYI_DEFAULT_ZOOM}
@@ -228,16 +228,16 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
 
             {/* Instruction Banner – bawah peta */}
             {!disabled && (
-                <div className="absolute bottom-3 left-3 right-3 z-[1000] max-w-[calc(100%-1.5rem)] bg-card/95 backdrop-blur-md px-4 py-2.5 rounded-xl text-xs text-navy border border-border shadow-lg flex items-start gap-2 pointer-events-none overflow-visible">
-                    <span className="material-symbols-outlined text-amber-dark text-[16px] shrink-0 mt-0.5">edit_location_alt</span>
-                    <span className="font-semibold leading-snug whitespace-normal break-words">
+                <div className="absolute bottom-2 left-2 right-2 z-[1000] sm:bottom-3 sm:left-3 sm:right-3 bg-card/95 backdrop-blur-md px-3 py-2.5 rounded-xl text-[11px] sm:text-xs text-navy border border-border shadow-lg flex items-start gap-2 pointer-events-none overflow-visible max-h-[96px] sm:max-h-none">
+                    <span className="material-symbols-outlined text-amber-dark text-[15px] sm:text-[16px] shrink-0 mt-0.5">edit_location_alt</span>
+                    <span className="font-semibold leading-snug whitespace-normal break-words pr-1">
                         {instructionText[tipeGeometri] || instructionText.titik}
                     </span>
                 </div>
             )}
 
             {/* Layer Control – kanan atas di bawah search bar */}
-            <div className="absolute top-16 right-3 z-[1000] flex flex-col items-end gap-2">
+            <div className="absolute top-16 right-2 sm:right-3 z-[1000] flex flex-col items-end gap-2">
                 <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy">
                     <div className="flex items-center justify-between gap-3">
                         <span className="flex items-center gap-1.5 text-text-muted">
