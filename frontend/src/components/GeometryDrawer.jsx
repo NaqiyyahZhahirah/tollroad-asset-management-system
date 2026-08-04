@@ -228,9 +228,11 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
 
             {/* Instruction Banner – bawah peta */}
             {!disabled && (
-                <div className="absolute bottom-3 left-3 right-3 z-[1000] bg-card/95 backdrop-blur-md px-4 py-2.5 rounded-xl text-xs text-navy border border-border shadow-lg flex items-center gap-2 pointer-events-none">
-                    <span className="material-symbols-outlined text-amber-dark text-[16px] shrink-0">edit_location_alt</span>
-                    <span className="font-semibold">{instructionText[tipeGeometri] || instructionText.titik}</span>
+                <div className="absolute bottom-3 left-3 right-3 z-[1000] max-w-[calc(100%-1.5rem)] bg-card/95 backdrop-blur-md px-4 py-2.5 rounded-xl text-xs text-navy border border-border shadow-lg flex items-start gap-2 pointer-events-none overflow-visible">
+                    <span className="material-symbols-outlined text-amber-dark text-[16px] shrink-0 mt-0.5">edit_location_alt</span>
+                    <span className="font-semibold leading-snug whitespace-normal break-words">
+                        {instructionText[tipeGeometri] || instructionText.titik}
+                    </span>
                 </div>
             )}
 
