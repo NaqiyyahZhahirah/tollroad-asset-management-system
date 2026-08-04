@@ -38,7 +38,7 @@ async function createKategori(req, res) {
 
 async function updateKategori(req, res) {
     const { id } = req.params;
-    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, is_active } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, is_active, naikkan_versi } = req.body;
 
     // Ambil versi_skema saat ini
     const { data: current, error: currentError } = await supabase
@@ -52,10 +52,13 @@ async function updateKategori(req, res) {
     }
 
     const updatePayload = {
-        updated_at: new Date().toISOString(),
-        // Otomatis menaikkan versi_skema setiap kali kategori di-edit
-        versi_skema: (current.versi_skema || 1) + 1
+        updated_at: new Date().toISOString()
     };
+
+    // Naikkan versi_skema hanya jika admin mencentang checkbox di frontend
+    if (naikkan_versi === true) {
+        updatePayload.versi_skema = (current.versi_skema || 1) + 1;
+    }
 
     if (nama_kategori !== undefined) updatePayload.nama_kategori = nama_kategori;
     if (deskripsi !== undefined) updatePayload.deskripsi = deskripsi;
