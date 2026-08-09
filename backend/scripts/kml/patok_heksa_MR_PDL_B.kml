@@ -1,0 +1,5741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>patok heksa MR PDL B.kml</name>
+	<Schema name="patok heksa MR PDL B" id="S_patok_heksa_MR_PDL_B_SSSDD">
+		<SimpleField type="string" name="RUAS"><displayName>&lt;b&gt;RUAS&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="JALUR"><displayName>&lt;b&gt;JALUR&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="KM"><displayName>&lt;b&gt;KM&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="X"><displayName>&lt;b&gt;X&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="Y"><displayName>&lt;b&gt;Y&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="hlightPointStyle">
+		<IconStyle>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle_highlight.png</href>
+			</Icon>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>RUAS</b></td><td>$[patok heksa MR PDL B/RUAS]</td></tr>
+  <tr><td><b>JALUR</b></td><td>$[patok heksa MR PDL B/JALUR]</td></tr>
+  <tr><td><b>KM</b></td><td>$[patok heksa MR PDL B/KM]</td></tr>
+  <tr><td><b>X</b></td><td>$[patok heksa MR PDL B/X]</td></tr>
+  <tr><td><b>Y</b></td><td>$[patok heksa MR PDL B/Y]</td></tr>
+</table>]]></text>
+		</BalloonStyle>
+	</Style>
+	<Style id="normPointStyle">
+		<IconStyle>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+			</Icon>
+		</IconStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>RUAS</b></td><td>$[patok heksa MR PDL B/RUAS]</td></tr>
+  <tr><td><b>JALUR</b></td><td>$[patok heksa MR PDL B/JALUR]</td></tr>
+  <tr><td><b>KM</b></td><td>$[patok heksa MR PDL B/KM]</td></tr>
+  <tr><td><b>X</b></td><td>$[patok heksa MR PDL B/X]</td></tr>
+  <tr><td><b>Y</b></td><td>$[patok heksa MR PDL B/Y]</td></tr>
+</table>]]></text>
+		</BalloonStyle>
+	</Style>
+	<StyleMap id="pointStyleMap">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#normPointStyle</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hlightPointStyle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="layer 0">
+		<name>patok heksa MR PDL B</name>
+		<Placemark>
+			<name>121+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">121+600</SimpleData>
+					<SimpleData name="X">-6.85733</SimpleData>
+					<SimpleData name="Y">107.505</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.504703172518,-6.857334910132944,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>121+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">121+800</SimpleData>
+					<SimpleData name="X">-6.85917</SimpleData>
+					<SimpleData name="Y">107.505</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.504782232935,-6.859165252353052,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>122+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">122+0</SimpleData>
+					<SimpleData name="X">-6.86094</SimpleData>
+					<SimpleData name="Y">107.505</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.505040487587,-6.860939857180739,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>122+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">122+200</SimpleData>
+					<SimpleData name="X">-6.86271</SimpleData>
+					<SimpleData name="Y">107.505</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.505473413012,-6.862713375949284,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>122+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">122+400</SimpleData>
+					<SimpleData name="X">-6.86441</SimpleData>
+					<SimpleData name="Y">107.506</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.506077299126,-6.864413768515593,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>122+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">122+600</SimpleData>
+					<SimpleData name="X">-6.86606</SimpleData>
+					<SimpleData name="Y">107.507</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.50685431465,-6.866064125733081,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>122+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">122+800</SimpleData>
+					<SimpleData name="X">-6.86764</SimpleData>
+					<SimpleData name="Y">107.508</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.50779438578,-6.867644749264061,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>123+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">123+0</SimpleData>
+					<SimpleData name="X">-6.8691</SimpleData>
+					<SimpleData name="Y">107.509</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.50887996035,-6.869102223988611,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>123+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">123+200</SimpleData>
+					<SimpleData name="X">-6.87059</SimpleData>
+					<SimpleData name="Y">107.51</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.510013643406,-6.870591462679617,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>123+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">123+400</SimpleData>
+					<SimpleData name="X">-6.87202</SimpleData>
+					<SimpleData name="Y">107.511</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.511107414363,-6.872018988383042,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>123+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">123+600</SimpleData>
+					<SimpleData name="X">-6.87348</SimpleData>
+					<SimpleData name="Y">107.512</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.512220681986,-6.873483331580042,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>123+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">123+800</SimpleData>
+					<SimpleData name="X">-6.87489</SimpleData>
+					<SimpleData name="Y">107.513</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.513303154342,-6.874887645611203,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>124+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">124+0</SimpleData>
+					<SimpleData name="X">-6.87635</SimpleData>
+					<SimpleData name="Y">107.514</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.514353750126,-6.876348989584473,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>124+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">124+200</SimpleData>
+					<SimpleData name="X">-6.87783</SimpleData>
+					<SimpleData name="Y">107.515</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.515360147935,-6.877831481589429,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>124+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">124+400</SimpleData>
+					<SimpleData name="X">-6.87936</SimpleData>
+					<SimpleData name="Y">107.516</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.516375360026,-6.879359562436946,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>124+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">124+600</SimpleData>
+					<SimpleData name="X">-6.88083</SimpleData>
+					<SimpleData name="Y">107.517</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.517333229347,-6.880828322034692,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>124+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">124+800</SimpleData>
+					<SimpleData name="X">-6.88235</SimpleData>
+					<SimpleData name="Y">107.518</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.518335275475,-6.88234934192355,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>125+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">125+0</SimpleData>
+					<SimpleData name="X">-6.88385</SimpleData>
+					<SimpleData name="Y">107.519</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.519326031971,-6.883853003754798,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>125+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">125+200</SimpleData>
+					<SimpleData name="X">-6.88535</SimpleData>
+					<SimpleData name="Y">107.52</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.52033083129,-6.885353693327407,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>125+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">125+400</SimpleData>
+					<SimpleData name="X">-6.88685</SimpleData>
+					<SimpleData name="Y">107.521</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.521303681287,-6.886850892132681,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>125+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">125+600</SimpleData>
+					<SimpleData name="X">-6.88837</SimpleData>
+					<SimpleData name="Y">107.522</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.522300251463,-6.888373300187682,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>125+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">125+800</SimpleData>
+					<SimpleData name="X">-6.88981</SimpleData>
+					<SimpleData name="Y">107.523</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.523362445939,-6.889812976950287,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>126+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">126+0</SimpleData>
+					<SimpleData name="X">-6.89118</SimpleData>
+					<SimpleData name="Y">107.525</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.524602926542,-6.891183472172296,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>126+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">126+200</SimpleData>
+					<SimpleData name="X">-6.89243</SimpleData>
+					<SimpleData name="Y">107.526</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.52596053488,-6.892433254872565,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>126+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">126+400</SimpleData>
+					<SimpleData name="X">-6.89354</SimpleData>
+					<SimpleData name="Y">107.527</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.527468152957,-6.893544461682353,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>126+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">126+600</SimpleData>
+					<SimpleData name="X">-6.89456</SimpleData>
+					<SimpleData name="Y">107.529</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.528980962937,-6.894560814431294,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>126+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">126+800</SimpleData>
+					<SimpleData name="X">-6.89572</SimpleData>
+					<SimpleData name="Y">107.53</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.530314875678,-6.895715491106609,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>127+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">127+0</SimpleData>
+					<SimpleData name="X">-6.89709</SimpleData>
+					<SimpleData name="Y">107.531</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.531493849954,-6.897092517106755,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>127+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">127+200</SimpleData>
+					<SimpleData name="X">-6.89854</SimpleData>
+					<SimpleData name="Y">107.532</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.532473290573,-6.898535762527869,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>127+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">127+400</SimpleData>
+					<SimpleData name="X">-6.90012</SimpleData>
+					<SimpleData name="Y">107.533</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.533234850278,-6.900121635719096,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>127+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">127+600</SimpleData>
+					<SimpleData name="X">-6.90181</SimpleData>
+					<SimpleData name="Y">107.534</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.533865617852,-6.901812704927521,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>127+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">127+800</SimpleData>
+					<SimpleData name="X">-6.90349</SimpleData>
+					<SimpleData name="Y">107.535</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<gx:balloonVisibility>1</gx:balloonVisibility>
+			<Point>
+				<coordinates>107.534567660454,-6.903485755924523,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>128+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">128+0</SimpleData>
+					<SimpleData name="X">-6.90505</SimpleData>
+					<SimpleData name="Y">107.535</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.535415692822,-6.905053781099646,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>128+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">128+200</SimpleData>
+					<SimpleData name="X">-6.90657</SimpleData>
+					<SimpleData name="Y">107.536</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.536443076088,-6.906570064494028,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>128+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">128+400</SimpleData>
+					<SimpleData name="X">-6.90795</SimpleData>
+					<SimpleData name="Y">107.538</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.537580860807,-6.907952372446911,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>128+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">128+600</SimpleData>
+					<SimpleData name="X">-6.90926</SimpleData>
+					<SimpleData name="Y">107.539</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.538880092822,-6.909262045045002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>128+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">128+800</SimpleData>
+					<SimpleData name="X">-6.91058</SimpleData>
+					<SimpleData name="Y">107.54</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.540160868977,-6.910575380043415,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>129+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">129+0</SimpleData>
+					<SimpleData name="X">-6.91195</SimpleData>
+					<SimpleData name="Y">107.541</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.541207363251,-6.911950179512283,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>129+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">129+200</SimpleData>
+					<SimpleData name="X">-6.91359</SimpleData>
+					<SimpleData name="Y">107.542</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.542119941007,-6.913590467866926,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>129+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">129+400</SimpleData>
+					<SimpleData name="X">-6.91511</SimpleData>
+					<SimpleData name="Y">107.543</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.542739719314,-6.915111331875297,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>129+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">129+600</SimpleData>
+					<SimpleData name="X">-6.91682</SimpleData>
+					<SimpleData name="Y">107.543</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.543192020359,-6.916818352645013,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>129+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">129+800</SimpleData>
+					<SimpleData name="X">-6.91859</SimpleData>
+					<SimpleData name="Y">107.544</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.543510730154,-6.918590167239136,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>130+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">130+0</SimpleData>
+					<SimpleData name="X">-6.92041</SimpleData>
+					<SimpleData name="Y">107.544</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.543844807405,-6.920407608826482,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>130+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">130+200</SimpleData>
+					<SimpleData name="X">-6.92217</SimpleData>
+					<SimpleData name="Y">107.544</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.544154374941,-6.922168990502994,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>130+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">130+400</SimpleData>
+					<SimpleData name="X">-6.92399</SimpleData>
+					<SimpleData name="Y">107.544</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.54448868349,-6.923986226096758,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>130+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">130+600</SimpleData>
+					<SimpleData name="X">-6.92575</SimpleData>
+					<SimpleData name="Y">107.545</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.544889830435,-6.925745167882043,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>130+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">130+800</SimpleData>
+					<SimpleData name="X">-6.92746</SimpleData>
+					<SimpleData name="Y">107.546</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.545508920447,-6.927464573060198,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>131+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">131+0</SimpleData>
+					<SimpleData name="X">-6.92912</SimpleData>
+					<SimpleData name="Y">107.546</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.54633548579,-6.929117888996554,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>131+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">131+200</SimpleData>
+					<SimpleData name="X">-6.93066</SimpleData>
+					<SimpleData name="Y">107.547</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.547380797198,-6.930664501415409,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>131+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">131+400</SimpleData>
+					<SimpleData name="X">-6.93211</SimpleData>
+					<SimpleData name="Y">107.548</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.548418771801,-6.932108332813329,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>131+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">131+600</SimpleData>
+					<SimpleData name="X">-6.9336</SimpleData>
+					<SimpleData name="Y">107.549</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.549496794853,-6.93359517800054,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>131+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">131+800</SimpleData>
+					<SimpleData name="X">-6.93509</SimpleData>
+					<SimpleData name="Y">107.551</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.550584744899,-6.935087188503505,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>132+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">132+0</SimpleData>
+					<SimpleData name="X">-6.93659</SimpleData>
+					<SimpleData name="Y">107.552</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.551667900413,-6.936592293040469,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>132+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">132+200</SimpleData>
+					<SimpleData name="X">-6.9381</SimpleData>
+					<SimpleData name="Y">107.553</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.552740839453,-6.938096420513422,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>132+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">132+400</SimpleData>
+					<SimpleData name="X">-6.93959</SimpleData>
+					<SimpleData name="Y">107.554</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.553815442077,-6.939592567212294,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>132+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">132+600</SimpleData>
+					<SimpleData name="X">-6.94104</SimpleData>
+					<SimpleData name="Y">107.555</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.554861563619,-6.941041973863094,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>132+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">132+800</SimpleData>
+					<SimpleData name="X">-6.94255</SimpleData>
+					<SimpleData name="Y">107.556</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.555962377956,-6.942548504402133,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>133+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">133+0</SimpleData>
+					<SimpleData name="X">-6.944</SimpleData>
+					<SimpleData name="Y">107.557</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.556989168957,-6.944004547797567,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>133+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">133+200</SimpleData>
+					<SimpleData name="X">-6.94546</SimpleData>
+					<SimpleData name="Y">107.558</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.558049595124,-6.945457519507214,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>133+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">133+400</SimpleData>
+					<SimpleData name="X">-6.94693</SimpleData>
+					<SimpleData name="Y">107.559</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.559100442538,-6.946931685543976,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>133+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">133+600</SimpleData>
+					<SimpleData name="X">-6.94839</SimpleData>
+					<SimpleData name="Y">107.56</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.560157256316,-6.9483913727037,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>133+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">133+800</SimpleData>
+					<SimpleData name="X">-6.94979</SimpleData>
+					<SimpleData name="Y">107.561</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.561377507904,-6.94979302871184,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>134+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">134+0</SimpleData>
+					<SimpleData name="X">-6.95106</SimpleData>
+					<SimpleData name="Y">107.563</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.562764245979,-6.951062415583495,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>134+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">134+200</SimpleData>
+					<SimpleData name="X">-6.95216</SimpleData>
+					<SimpleData name="Y">107.564</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.564265929279,-6.952155940258966,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>134+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">134+400</SimpleData>
+					<SimpleData name="X">-6.95304</SimpleData>
+					<SimpleData name="Y">107.566</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.565815398089,-6.953039317391349,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>134+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">134+600</SimpleData>
+					<SimpleData name="X">-6.95391</SimpleData>
+					<SimpleData name="Y">107.567</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.567417833864,-6.953908070418866,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>134+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">134+800</SimpleData>
+					<SimpleData name="X">-6.9548</SimpleData>
+					<SimpleData name="Y">107.569</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.569056796458,-6.954797272418678,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>135+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">135+0</SimpleData>
+					<SimpleData name="X">-6.95567</SimpleData>
+					<SimpleData name="Y">107.571</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.570680467095,-6.955665638229076,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>135+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">135+200</SimpleData>
+					<SimpleData name="X">-6.95653</SimpleData>
+					<SimpleData name="Y">107.572</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.572280722761,-6.956534774452927,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>135+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">135+400</SimpleData>
+					<SimpleData name="X">-6.9574</SimpleData>
+					<SimpleData name="Y">107.574</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.573899058086,-6.957396123372916,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>135+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">135+600</SimpleData>
+					<SimpleData name="X">-6.95825</SimpleData>
+					<SimpleData name="Y">107.575</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.575464879897,-6.958245721510159,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>135+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">135+800</SimpleData>
+					<SimpleData name="X">-6.9591</SimpleData>
+					<SimpleData name="Y">107.577</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.577036897899,-6.959104830640994,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>136+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">136+0</SimpleData>
+					<SimpleData name="X">-6.95995</SimpleData>
+					<SimpleData name="Y">107.579</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.578612926107,-6.959951936512643,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>136+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">136+200</SimpleData>
+					<SimpleData name="X">-6.96086</SimpleData>
+					<SimpleData name="Y">107.58</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.580255534439,-6.960863256935048,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>136+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">136+400</SimpleData>
+					<SimpleData name="X">-6.96164</SimpleData>
+					<SimpleData name="Y">107.582</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.581946837328,-6.961636645688827,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>136+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">136+600</SimpleData>
+					<SimpleData name="X">-6.96223</SimpleData>
+					<SimpleData name="Y">107.584</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.583651095758,-6.962226561217053,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>136+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">136+800</SimpleData>
+					<SimpleData name="X">-6.96261</SimpleData>
+					<SimpleData name="Y">107.585</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.585425801719,-6.962607475118514,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>137+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">137+0</SimpleData>
+					<SimpleData name="X">-6.96281</SimpleData>
+					<SimpleData name="Y">107.587</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.587331063752,-6.962808040681471,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>137+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">137+200</SimpleData>
+					<SimpleData name="X">-6.9628</SimpleData>
+					<SimpleData name="Y">107.589</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.589164529874,-6.962797196855435,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>137+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">137+400</SimpleData>
+					<SimpleData name="X">-6.96268</SimpleData>
+					<SimpleData name="Y">107.591</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.590999523948,-6.962676474982096,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>137+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">137+600</SimpleData>
+					<SimpleData name="X">-6.96252</SimpleData>
+					<SimpleData name="Y">107.593</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.592889009655,-6.962522919910718,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>137+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">137+800</SimpleData>
+					<SimpleData name="X">-6.9624</SimpleData>
+					<SimpleData name="Y">107.595</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.59462297526,-6.962398711480438,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>138+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">138+0</SimpleData>
+					<SimpleData name="X">-6.96226</SimpleData>
+					<SimpleData name="Y">107.596</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.596469183909,-6.962259483412224,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>138+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">138+200</SimpleData>
+					<SimpleData name="X">-6.96213</SimpleData>
+					<SimpleData name="Y">107.598</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.598214103485,-6.962134258096906,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>138+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">138+400</SimpleData>
+					<SimpleData name="X">-6.96198</SimpleData>
+					<SimpleData name="Y">107.6</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.600088335079,-6.961980851759253,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>138+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">138+600</SimpleData>
+					<SimpleData name="X">-6.96187</SimpleData>
+					<SimpleData name="Y">107.602</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.601885422925,-6.961868222891361,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>138+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">138+800</SimpleData>
+					<SimpleData name="X">-6.96174</SimpleData>
+					<SimpleData name="Y">107.604</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.603671560992,-6.961739953351691,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>139+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">139+0</SimpleData>
+					<SimpleData name="X">-6.96161</SimpleData>
+					<SimpleData name="Y">107.605</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.605490546673,-6.961609125376298,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>139+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">139+200</SimpleData>
+					<SimpleData name="X">-6.96149</SimpleData>
+					<SimpleData name="Y">107.607</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.607259977239,-6.961488130798221,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>139+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">139+400</SimpleData>
+					<SimpleData name="X">-6.96134</SimpleData>
+					<SimpleData name="Y">107.609</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.609080377911,-6.961343549099048,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>139+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">139+600</SimpleData>
+					<SimpleData name="X">-6.96122</SimpleData>
+					<SimpleData name="Y">107.611</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.610883990425,-6.961216097425254,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>139+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">139+800</SimpleData>
+					<SimpleData name="X">-6.96109</SimpleData>
+					<SimpleData name="Y">107.613</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.61270468471,-6.961092364751666,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>140+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">140+0</SimpleData>
+					<SimpleData name="X">-6.96096</SimpleData>
+					<SimpleData name="Y">107.615</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.614511651909,-6.96096023840756,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>140+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">140+200</SimpleData>
+					<SimpleData name="X">-6.96096</SimpleData>
+					<SimpleData name="Y">107.616</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.616335453201,-6.960964429949675,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>140+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">140+400</SimpleData>
+					<SimpleData name="X">-6.96125</SimpleData>
+					<SimpleData name="Y">107.618</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.618111691422,-6.961247886177344,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>140+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">140+600</SimpleData>
+					<SimpleData name="X">-6.96182</SimpleData>
+					<SimpleData name="Y">107.62</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.619787026597,-6.961815875895663,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>140+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">140+800</SimpleData>
+					<SimpleData name="X">-6.96254</SimpleData>
+					<SimpleData name="Y">107.621</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.621451140076,-6.962544433369233,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>141+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">141+0</SimpleData>
+					<SimpleData name="X">-6.96325</SimpleData>
+					<SimpleData name="Y">107.623</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.623100974222,-6.963248282630867,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>141+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">141+200</SimpleData>
+					<SimpleData name="X">-6.96385</SimpleData>
+					<SimpleData name="Y">107.625</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.624819408061,-6.963850362306763,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>141+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">141+400</SimpleData>
+					<SimpleData name="X">-6.96432</SimpleData>
+					<SimpleData name="Y">107.627</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.626567060744,-6.964317418221007,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>141+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">141+600</SimpleData>
+					<SimpleData name="X">-6.96463</SimpleData>
+					<SimpleData name="Y">107.628</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.628344845784,-6.964633309492347,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>141+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">141+800</SimpleData>
+					<SimpleData name="X">-6.96485</SimpleData>
+					<SimpleData name="Y">107.63</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.630121130618,-6.964849027295907,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>142+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">142+0</SimpleData>
+					<SimpleData name="X">-6.96508</SimpleData>
+					<SimpleData name="Y">107.632</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.631943538393,-6.965080872198883,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>142+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">142+200</SimpleData>
+					<SimpleData name="X">-6.96531</SimpleData>
+					<SimpleData name="Y">107.634</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.63372360281,-6.965310779578717,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>142+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">142+400</SimpleData>
+					<SimpleData name="X">-6.96554</SimpleData>
+					<SimpleData name="Y">107.636</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.635523163806,-6.965538221815242,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>142+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">142+600</SimpleData>
+					<SimpleData name="X">-6.96577</SimpleData>
+					<SimpleData name="Y">107.637</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.637366045215,-6.965766182597712,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>142+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">142+800</SimpleData>
+					<SimpleData name="X">-6.96599</SimpleData>
+					<SimpleData name="Y">107.639</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.639148396393,-6.96598782247992,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>143+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">143+0</SimpleData>
+					<SimpleData name="X">-6.96604</SimpleData>
+					<SimpleData name="Y">107.641</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.640954607698,-6.966035693714556,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>143+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">143+200</SimpleData>
+					<SimpleData name="X">-6.9658</SimpleData>
+					<SimpleData name="Y">107.643</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.642857487488,-6.965798336810105,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>143+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">143+400</SimpleData>
+					<SimpleData name="X">-6.96539</SimpleData>
+					<SimpleData name="Y">107.645</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.644627612247,-6.965385801820895,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>143+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">143+600</SimpleData>
+					<SimpleData name="X">-6.96493</SimpleData>
+					<SimpleData name="Y">107.646</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.646398112474,-6.964931663529404,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>143+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">143+800</SimpleData>
+					<SimpleData name="X">-6.96473</SimpleData>
+					<SimpleData name="Y">107.648</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.64816212288,-6.964728110886503,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>144+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">144+0</SimpleData>
+					<SimpleData name="X">-6.96478</SimpleData>
+					<SimpleData name="Y">107.65</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.649939317494,-6.964776843453304,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>144+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">144+200</SimpleData>
+					<SimpleData name="X">-6.96502</SimpleData>
+					<SimpleData name="Y">107.652</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.651706027815,-6.965021770736919,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>144+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">144+400</SimpleData>
+					<SimpleData name="X">-6.96531</SimpleData>
+					<SimpleData name="Y">107.654</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.653546912828,-6.965312309878644,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>144+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">144+600</SimpleData>
+					<SimpleData name="X">-6.96559</SimpleData>
+					<SimpleData name="Y">107.655</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.655335585626,-6.965591403187467,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>144+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">144+800</SimpleData>
+					<SimpleData name="X">-6.96586</SimpleData>
+					<SimpleData name="Y">107.657</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.657067012271,-6.96586150101667,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>145+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">145+0</SimpleData>
+					<SimpleData name="X">-6.96618</SimpleData>
+					<SimpleData name="Y">107.659</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.658855940762,-6.966177586969202,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>145+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">145+200</SimpleData>
+					<SimpleData name="X">-6.96658</SimpleData>
+					<SimpleData name="Y">107.661</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.660593388312,-6.966576999521894,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>145+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">145+400</SimpleData>
+					<SimpleData name="X">-6.96706</SimpleData>
+					<SimpleData name="Y">107.662</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.66230173097,-6.967056246744281,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>145+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">145+600</SimpleData>
+					<SimpleData name="X">-6.96749</SimpleData>
+					<SimpleData name="Y">107.664</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.664124673019,-6.967491883247313,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>145+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">145+800</SimpleData>
+					<SimpleData name="X">-6.9677</SimpleData>
+					<SimpleData name="Y">107.666</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.665941706298,-6.967697497844361,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>146+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">146+0</SimpleData>
+					<SimpleData name="X">-6.96773</SimpleData>
+					<SimpleData name="Y">107.668</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.667752858896,-6.96773245122523,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>146+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">146+200</SimpleData>
+					<SimpleData name="X">-6.96763</SimpleData>
+					<SimpleData name="Y">107.67</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.669595982041,-6.967627105808041,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>146+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">146+400</SimpleData>
+					<SimpleData name="X">-6.96767</SimpleData>
+					<SimpleData name="Y">107.671</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.671357642814,-6.967666446425684,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>146+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">146+600</SimpleData>
+					<SimpleData name="X">-6.96784</SimpleData>
+					<SimpleData name="Y">107.673</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.673147096239,-6.96784151040176,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>146+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">146+800</SimpleData>
+					<SimpleData name="X">-6.96802</SimpleData>
+					<SimpleData name="Y">107.675</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.67495274254,-6.968019976772202,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>147+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">147+0</SimpleData>
+					<SimpleData name="X">-6.96821</SimpleData>
+					<SimpleData name="Y">107.677</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.676742031164,-6.968209525418501,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>147+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">147+200</SimpleData>
+					<SimpleData name="X">-6.96839</SimpleData>
+					<SimpleData name="Y">107.679</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.678542129721,-6.968393282772814,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>147+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">147+400</SimpleData>
+					<SimpleData name="X">-6.96856</SimpleData>
+					<SimpleData name="Y">107.68</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.680380151622,-6.968564638725841,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>147+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">147+600</SimpleData>
+					<SimpleData name="X">-6.96875</SimpleData>
+					<SimpleData name="Y">107.682</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.682130857635,-6.968751950941998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>147+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">147+800</SimpleData>
+					<SimpleData name="X">-6.96892</SimpleData>
+					<SimpleData name="Y">107.684</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.683910194388,-6.968923510695902,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>148+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">148+0</SimpleData>
+					<SimpleData name="X">-6.96911</SimpleData>
+					<SimpleData name="Y">107.686</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.685703617965,-6.969105234322748,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>148+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">148+200</SimpleData>
+					<SimpleData name="X">-6.9693</SimpleData>
+					<SimpleData name="Y">107.688</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.687583693349,-6.969298279140739,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>148+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">148+400</SimpleData>
+					<SimpleData name="X">-6.96946</SimpleData>
+					<SimpleData name="Y">107.689</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.689335301775,-6.969464075945105,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>148+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">148+600</SimpleData>
+					<SimpleData name="X">-6.96965</SimpleData>
+					<SimpleData name="Y">107.691</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.691156197677,-6.969649308593824,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>148+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">148+800</SimpleData>
+					<SimpleData name="X">-6.96979</SimpleData>
+					<SimpleData name="Y">107.693</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.693007364901,-6.969790249001848,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>149+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">149+0</SimpleData>
+					<SimpleData name="X">-6.96978</SimpleData>
+					<SimpleData name="Y">107.695</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.694845607767,-6.969782826873656,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>149+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">149+200</SimpleData>
+					<SimpleData name="X">-6.96966</SimpleData>
+					<SimpleData name="Y">107.697</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.696718041254,-6.969663029954711,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>149+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">149+400</SimpleData>
+					<SimpleData name="X">-6.96941</SimpleData>
+					<SimpleData name="Y">107.699</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.698500419675,-6.969414367512674,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>149+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">149+600</SimpleData>
+					<SimpleData name="X">-6.96906</SimpleData>
+					<SimpleData name="Y">107.7</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.700311728676,-6.969056990204248,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>149+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">149+800</SimpleData>
+					<SimpleData name="X">-6.96856</SimpleData>
+					<SimpleData name="Y">107.702</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.702070439982,-6.968555574417277,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>150+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">150+0</SimpleData>
+					<SimpleData name="X">-6.96795</SimpleData>
+					<SimpleData name="Y">107.704</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.703833709628,-6.967946414290955,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>150+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">150+200</SimpleData>
+					<SimpleData name="X">-6.9672</SimpleData>
+					<SimpleData name="Y">107.706</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.705599492726,-6.967196811025335,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>150+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">150+400</SimpleData>
+					<SimpleData name="X">-6.9664</SimpleData>
+					<SimpleData name="Y">107.707</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.707118495732,-6.966401323650824,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>150+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">150+600</SimpleData>
+					<SimpleData name="X">-6.96557</SimpleData>
+					<SimpleData name="Y">107.709</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.708745455661,-6.965571126467445,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>150+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">150+800</SimpleData>
+					<SimpleData name="X">-6.96472</SimpleData>
+					<SimpleData name="Y">107.71</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.710333452398,-6.964721471831297,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>151+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">151+0</SimpleData>
+					<SimpleData name="X">-6.96386</SimpleData>
+					<SimpleData name="Y">107.712</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.711968782232,-6.963859139503372,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>151+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">151+200</SimpleData>
+					<SimpleData name="X">-6.96304</SimpleData>
+					<SimpleData name="Y">107.714</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.713568870424,-6.963041182676822,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>151+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">151+400</SimpleData>
+					<SimpleData name="X">-6.96218</SimpleData>
+					<SimpleData name="Y">107.715</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.715169292774,-6.962183712957852,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>151+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">151+600</SimpleData>
+					<SimpleData name="X">-6.96133</SimpleData>
+					<SimpleData name="Y">107.717</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.716757671881,-6.961330933194148,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>151+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">151+800</SimpleData>
+					<SimpleData name="X">-6.96051</SimpleData>
+					<SimpleData name="Y">107.718</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.718340413185,-6.960513601608476,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>152+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">152+0</SimpleData>
+					<SimpleData name="X">-6.95968</SimpleData>
+					<SimpleData name="Y">107.72</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.719915671704,-6.959684003734319,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>152+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">152+200</SimpleData>
+					<SimpleData name="X">-6.95884</SimpleData>
+					<SimpleData name="Y">107.722</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.721528504513,-6.958839167540097,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>152+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">152+400</SimpleData>
+					<SimpleData name="X">-6.95802</SimpleData>
+					<SimpleData name="Y">107.723</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.723139506693,-6.958018167756219,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>152+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">152+600</SimpleData>
+					<SimpleData name="X">-6.95714</SimpleData>
+					<SimpleData name="Y">107.725</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.72475032602,-6.957144740262229,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>152+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">152+800</SimpleData>
+					<SimpleData name="X">-6.9563</SimpleData>
+					<SimpleData name="Y">107.726</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.726328873348,-6.956303284395404,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>153+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">153+0</SimpleData>
+					<SimpleData name="X">-6.9555</SimpleData>
+					<SimpleData name="Y">107.728</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.727892753587,-6.955502946623568,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>153+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">153+200</SimpleData>
+					<SimpleData name="X">-6.95466</SimpleData>
+					<SimpleData name="Y">107.73</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.729505722054,-6.95466275671844,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>153+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">153+400</SimpleData>
+					<SimpleData name="X">-6.95379</SimpleData>
+					<SimpleData name="Y">107.731</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.73111105237,-6.953788027910432,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>153+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">153+600</SimpleData>
+					<SimpleData name="X">-6.95296</SimpleData>
+					<SimpleData name="Y">107.733</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.732638060178,-6.952955841187221,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>153+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">153+800</SimpleData>
+					<SimpleData name="X">-6.95206</SimpleData>
+					<SimpleData name="Y">107.734</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.734309249848,-6.952058273108499,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>154+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">154+0</SimpleData>
+					<SimpleData name="X">-6.95119</SimpleData>
+					<SimpleData name="Y">107.736</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.735882924271,-6.951194934211086,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>154+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">154+200</SimpleData>
+					<SimpleData name="X">-6.95033</SimpleData>
+					<SimpleData name="Y">107.737</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.737446668226,-6.950333907244842,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>154+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">154+400</SimpleData>
+					<SimpleData name="X">-6.94948</SimpleData>
+					<SimpleData name="Y">107.739</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.73900271704,-6.949481172573546,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>154+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">154+600</SimpleData>
+					<SimpleData name="X">-6.94859</SimpleData>
+					<SimpleData name="Y">107.741</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.740632815095,-6.948590615421883,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>154+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">154+800</SimpleData>
+					<SimpleData name="X">-6.94773</SimpleData>
+					<SimpleData name="Y">107.742</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.742206897864,-6.947733987815415,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>155+0</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">155+0</SimpleData>
+					<SimpleData name="X">-6.94689</SimpleData>
+					<SimpleData name="Y">107.744</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.743827063713,-6.946885537189578,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>155+200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">155+200</SimpleData>
+					<SimpleData name="X">-6.94613</SimpleData>
+					<SimpleData name="Y">107.745</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.745456054937,-6.946134096965353,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>155+400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">155+400</SimpleData>
+					<SimpleData name="X">-6.9455</SimpleData>
+					<SimpleData name="Y">107.747</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.747189108268,-6.945498719325631,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>155+600</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">155+600</SimpleData>
+					<SimpleData name="X">-6.94466</SimpleData>
+					<SimpleData name="Y">107.749</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.749037557551,-6.944662122164345,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>155+800</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<Style id="inline">
+				<IconStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffffffaa</color>
+					<colorMode>normal</colorMode>
+				</PolyStyle>
+			</Style>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_patok_heksa_MR_PDL_B_SSSDD">
+					<SimpleData name="RUAS">PADALEUNYI</SimpleData>
+					<SimpleData name="JALUR">B</SimpleData>
+					<SimpleData name="KM">155+800</SimpleData>
+					<SimpleData name="X">-6.94407</SimpleData>
+					<SimpleData name="Y">107.751</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>107.75055783978,-6.944069193195901,0</coordinates>
+			</Point>
+		</Placemark>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.6.10201"></atom:link>
+	</Folder>
+</Document>
+</kml>
