@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../api/axiosClient';
 import { useAuthStore } from '../store/authStore';
@@ -34,8 +34,8 @@ export default function AsetList() {
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [deleting, setDeleting] = useState(false);
     const [bulkLoading, setBulkLoading] = useState(false);
-    // Prompt modal state
     const [rejectPrompt, setRejectPrompt] = useState({ open: false, mode: null, targetId: null, count: 0 });
+    const [filterKelompok, setFilterKelompok] = useState('');
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const toast = useToast();
@@ -48,11 +48,17 @@ export default function AsetList() {
         fetchAset();
     }, [filterKategori, filterValidasi]);
 
-    // Reset to first page whenever filters or page size change
     useEffect(() => {
         setCurrentPage(1);
         setSelectedIds([]);
-    }, [filterKategori, filterValidasi, pageSize]);
+    }, [filterKategori, filterValidasi, filterKelompok, pageSize]);
+
+    useEffect(() => {
+        if (filterKelompok && filterKategori) {
+            const stillValid = filteredKategoriOptions.some((k) => k.id === filterKategori);
+            if (!stillValid) setFilterKategori('');
+        }
+    }, [filterKelompok]);
 
     async function fetchAset() {
         setLoading(true);
@@ -77,7 +83,6 @@ export default function AsetList() {
         setSelectedIds(e.target.checked ? paginatedAset.map((a) => a.id) : []);
     }
 
-    // --- Single approve/reject ---
     function handleApprove(id, status) {
         if (status === 'rejected') {
             setRejectPrompt({ open: true, mode: 'single', targetId: id, count: 1 });
@@ -100,7 +105,6 @@ export default function AsetList() {
         }
     }
 
-    // --- Bulk approve/reject ---
     function handleBulkAction(status) {
         const pendingIds = selectedIds.filter((id) => {
             const aset = asetData.find((a) => a.id === id);
@@ -145,7 +149,6 @@ export default function AsetList() {
         }
     }
 
-    // --- Delete ---
     async function handleDeleteConfirm() {
         if (!deleteTarget) return;
         setDeleting(true);
@@ -161,15 +164,43 @@ export default function AsetList() {
         }
     }
 
-    const totalPages = Math.max(1, Math.ceil(asetData.length / pageSize));
-    const paginatedAset = asetData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    const kelompokOptions = useMemo(() => {
+        const seen = new Map();
+        kategoriList.forEach((k) => {
+            if (k.kelompok_aset?.id && !seen.has(k.kelompok_aset.id)) {
+                seen.set(k.kelompok_aset.id, k.kelompok_aset.nama_kelompok);
+            }
+        });
+        return Array.from(seen, ([id, nama_kelompok]) => ({ id, nama_kelompok }));
+    }, [kategoriList]);
+
+    const filteredKategoriOptions = useMemo(() => {
+        if (!filterKelompok) return kategoriList;
+        return kategoriList.filter((k) => k.kelompok_aset?.id === filterKelompok);
+    }, [kategoriList, filterKelompok]);
+
+    const kategoriKelompokMap = useMemo(() => {
+        const map = {};
+        kategoriList.forEach((k) => { map[k.id] = k.kelompok_aset?.nama_kelompok || null; });
+        return map;
+    }, [kategoriList]);
+
+    const displayedAsetData = useMemo(() => {
+        if (!filterKelompok) return asetData;
+        return asetData.filter((a) => kategoriKelompokMap[a.kategori_id] !== undefined
+            ? kategoriList.find((k) => k.id === a.kategori_id)?.kelompok_aset?.id === filterKelompok
+            : false
+        );
+    }, [asetData, filterKelompok, kategoriList, kategoriKelompokMap]);
+
+    const totalPages = Math.max(1, Math.ceil(displayedAsetData.length / pageSize));
+    const paginatedAset = displayedAsetData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     function handlePageChange(page) {
         if (page < 1 || page > totalPages) return;
         setCurrentPage(page);
     }
 
-    // Count pending in selection (for bulk action info)
     const pendingSelectedCount = selectedIds.filter((id) => {
         const aset = asetData.find((a) => a.id === id);
         return aset?.status_validasi === 'pending';
@@ -182,7 +213,6 @@ export default function AsetList() {
                 <TopBar />
                 <div className="flex-1 overflow-auto p-4 md:p-8 pb-20 md:pb-8">
 
-                    {/* Header */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                         <h2 className="text-xl md:text-2xl font-bold text-navy">Inventaris Aset</h2>
                         <button
@@ -194,15 +224,24 @@ export default function AsetList() {
                         </button>
                     </div>
 
-                    {/* Filters */}
                     <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-4">
+                        <select
+                            value={filterKelompok}
+                            onChange={(e) => setFilterKelompok(e.target.value)}
+                            className="h-9 pl-3 pr-8 bg-card border border-border focus:border-amber rounded-full text-sm text-text-muted cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat transition-colors"
+                        >
+                            <option value="">Semua Kelompok</option>
+                            {kelompokOptions.map((k) => (
+                                <option key={k.id} value={k.id}>{k.nama_kelompok}</option>
+                            ))}
+                        </select>
                         <select
                             value={filterKategori}
                             onChange={(e) => setFilterKategori(e.target.value)}
                             className="h-9 pl-3 pr-8 bg-card border border-border focus:border-amber rounded-full text-sm text-text-muted cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat transition-colors"
                         >
                             <option value="">Semua Kategori</option>
-                            {kategoriList.map((k) => (
+                            {filteredKategoriOptions.map((k) => (
                                 <option key={k.id} value={k.id}>{k.nama_kategori}</option>
                             ))}
                         </select>
@@ -219,7 +258,6 @@ export default function AsetList() {
                         ))}
                     </div>
 
-                    {/* Bulk Action Bar — tampil saat ada pilihan */}
                     {selectedIds.length > 0 && (
                         <div className="mb-3 flex items-center gap-3 flex-wrap bg-card border border-border rounded-xl px-4 py-3">
                             <span className="font-semibold text-navy text-sm">
@@ -266,8 +304,7 @@ export default function AsetList() {
                         </div>
                     )}
 
-                    {/* Table */}
-                    <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
+                    <div className="bg-card border border-border overflow-hidden shadow-sm">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead className="bg-navy text-white">
@@ -325,7 +362,12 @@ export default function AsetList() {
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td className="p-3 text-sm text-text-muted">{aset.kategori_aset?.nama_kategori}</td>
+                                            <td className="p-3 text-sm text-text-muted">
+                                                {aset.kategori_aset?.nama_kategori}
+                                                {kategoriKelompokMap[aset.kategori_id] && (
+                                                    <span className="block text-[10px] text-text-muted/70">{kategoriKelompokMap[aset.kategori_id]}</span>
+                                                )}
+                                            </td>
                                             <td className="p-3 text-sm text-text-muted">KM {aset.lokasi_km} Jalur {aset.jalur}</td>
                                             <td className="p-3">
                                                 <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold uppercase ${conditionBadge[aset.status_kondisi]}`}>
@@ -390,18 +432,15 @@ export default function AsetList() {
                             </table>
                         </div>
 
-                        {/* Pagination Footer */}
                         <div className="p-3 flex items-center justify-between bg-card-alt/50 border-t border-border text-sm text-text-muted flex-wrap gap-3">
-                            {/* Kiri: info + page size */}
                             <div className="flex items-center gap-3 flex-wrap">
                                 <span>
                                     {loading
                                         ? 'Memuat...'
                                         : asetData.length === 0
                                         ? 'Tidak ada data'
-                                        : `Menampilkan ${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, asetData.length)} dari ${asetData.length} aset`}
+                                        : `Menampilkan ${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, displayedAsetData.length)} dari ${displayedAsetData.length} aset`}
                                 </span>
-                                {/* Page size selector */}
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-xs">Per halaman:</span>
                                     <select
@@ -416,8 +455,7 @@ export default function AsetList() {
                                 </div>
                             </div>
 
-                            {/* Kanan: navigasi halaman */}
-                            {!loading && asetData.length > pageSize && (
+                            {!loading && displayedAsetData.length > pageSize && (
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={() => handlePageChange(1)}
@@ -482,7 +520,6 @@ export default function AsetList() {
                 </div>
             </main>
 
-            {/* Delete Confirmation Modal */}
             {deleteTarget && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                     <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-sm p-6 flex flex-col gap-4">
@@ -530,7 +567,6 @@ export default function AsetList() {
                 </div>
             )}
 
-            {/* Reject Reason Prompt Modal */}
             <PromptModal
                 open={rejectPrompt.open}
                 title={rejectPrompt.mode === 'bulk' ? `Reject ${rejectPrompt.count} Aset` : 'Reject Aset'}

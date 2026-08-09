@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosClient from '../api/axiosClient';
 import { useAuthStore } from '../store/authStore';
@@ -15,17 +15,25 @@ export default function AsetForm() {
     const [selectedKategori, setSelectedKategori] = useState(null);
     const [formData, setFormData] = useState({ status_kondisi: 'baik', ruas_tol: 'Purbaleunyi' });
     const [atributSpesifik, setAtributSpesifik] = useState({});
-    const [photos, setPhotos] = useState([]); // { file, preview, isExisting, id }
+    const [photos, setPhotos] = useState([]);
     const [error, setError] = useState('');
     const [saving, setSaving] = useState(false);
     const [loadingAsset, setLoadingAsset] = useState(isEdit);
     const [fetchingElevation, setFetchingElevation] = useState(false);
+    const groupedKategori = useMemo(() => {
+        const groups = {};
+        kategoriList.forEach((k) => {
+            const groupName = k.kelompok_aset?.nama_kelompok || 'Tanpa Kelompok';
+            if (!groups[groupName]) groups[groupName] = [];
+            groups[groupName].push(k);
+        });
+        return groups;
+    }, [kategoriList]);
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const toast = useToast();
 
     async function fetchElevation(lat, lng) {
-        // 1. Coba Open-Meteo (paling cepat & stabil)
         try {
             const ctrl1 = new AbortController();
             const t1 = setTimeout(() => ctrl1.abort(), 5000);
@@ -44,7 +52,6 @@ export default function AsetForm() {
             console.warn('Open-Meteo elevation failed, trying fallback...', e);
         }
 
-        // 2. Fallback: Open-Elevation
         try {
             const ctrl2 = new AbortController();
             const t2 = setTimeout(() => ctrl2.abort(), 7000);
@@ -128,11 +135,9 @@ export default function AsetForm() {
 
                 const aset = resAset.data.data;
 
-                // Cari objek kategori lengkap dari listKategori atau data join API
                 const matchedKategori = listKategori.find((k) => k.id === aset.kategori_id) || aset.kategori_aset;
                 setSelectedKategori(matchedKategori || null);
 
-                // Format tanggal_aset_dibuat menjadi YYYY-MM-DD agar input type="date" terisi sempurna
                 let formattedDate = '';
                 if (aset.tanggal_aset_dibuat) {
                     formattedDate = String(aset.tanggal_aset_dibuat).substring(0, 10);
@@ -302,7 +307,6 @@ export default function AsetForm() {
             <main className="flex-1 flex flex-col overflow-hidden">
                 <TopBar />
 
-                {/* Sticky title header - tanpa tombol aksi */}
                 <div className="bg-card px-4 md:px-8 py-4 border-b border-border z-10 shrink-0">
                     <h1 className="text-lg md:text-xl font-bold text-navy">{isEdit ? 'Edit Aset' : 'Tambah Aset Baru'}</h1>
                     <p className="text-sm text-text-muted">{isEdit ? 'Perbarui data lokasi dan spesifikasi aset.' : 'Isi data lokasi dan spesifikasi aset.'}</p>
@@ -314,11 +318,9 @@ export default function AsetForm() {
                     </div>
                 )}
 
-                {/* Content: map atas, form bawah */}
                 <div className="flex-1 overflow-y-auto p-4 md:p-8 pb-20 md:pb-8">
                     <div className="max-w-3xl mx-auto flex flex-col gap-6">
 
-                        {/* Rejection Notice Banner */}
                         {isEdit && formData.status_validasi === 'rejected' && (
                             <div className="p-4 bg-[#FEE2E2] border border-[#FCA5A5] rounded-2xl flex items-start gap-3 text-[#991B1B] shadow-sm">
                                 <span className="material-symbols-outlined text-xl shrink-0 mt-0.5">error</span>
@@ -337,7 +339,6 @@ export default function AsetForm() {
                             </div>
                         )}
 
-                        {/* Top: Map Picker */}
                         <div className="relative h-[360px] md:h-[420px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
                             <GeometryDrawer
                                 tipeGeometri={selectedKategori?.tipe_geometri || 'titik'}
@@ -347,17 +348,14 @@ export default function AsetForm() {
                             />
                         </div>
 
-                        {/* Bottom: Form */}
                         <form id="aset-form" onSubmit={handleSubmit} className="w-full flex flex-col gap-8 mt-2">
 
-                                {/* General Info */}
                                 <section>
                                     <div className="flex items-center gap-2 mb-4 border-b border-border pb-2">
                                         <span className="material-symbols-outlined text-amber-dark">info</span>
                                         <h2 className="text-lg font-bold text-navy">Informasi Umum</h2>
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
-                                        {/* Kategori */}
                                         <div className="col-span-2">
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Kategori Aset <span className="text-red-500">*</span>
@@ -369,13 +367,16 @@ export default function AsetForm() {
                                                 required
                                             >
                                                 <option value="" disabled hidden>Pilih kategori</option>
-                                                {kategoriList.map((k) => (
-                                                    <option key={k.id} value={k.id} className="text-navy">{k.nama_kategori}</option>
+                                                {Object.entries(groupedKategori).map(([groupName, kategoris]) => (
+                                                    <optgroup key={groupName} label={groupName}>
+                                                        {kategoris.map((k) => (
+                                                            <option key={k.id} value={k.id} className="text-navy">{k.nama_kategori}</option>
+                                                        ))}
+                                                    </optgroup>
                                                 ))}
                                             </select>
                                         </div>
 
-                                        {/* Nama Aset */}
                                         <div className="col-span-2">
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Nama Aset <span className="text-red-500">*</span>
@@ -390,7 +391,6 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        {/* Nomor Seri */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Nomor Seri <span className="text-red-500">*</span>
@@ -405,7 +405,6 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        {/* Ruas Tol */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Ruas Tol <span className="text-red-500">*</span>
@@ -420,7 +419,6 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        {/* Lokasi KM */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Lokasi KM <span className="text-red-500">*</span>
@@ -438,7 +436,6 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        {/* Jalur */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Jalur <span className="text-red-500">*</span>
@@ -455,7 +452,6 @@ export default function AsetForm() {
                                             </select>
                                         </div>
 
-                                        {/* Tanggal Pemasangan */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Tanggal Pemasangan <span className="text-red-500">*</span>
@@ -469,7 +465,6 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        {/* Elevasi */}
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide flex items-center justify-between">
                                                 <span>Elevasi (mdpl) <span className="text-red-500">*</span></span>
@@ -508,7 +503,6 @@ export default function AsetForm() {
                                     </div>
                                 </section>
 
-                                {/* Technical Specs - dinamis sesuai kategori */}
                                 {selectedKategori && (selectedKategori.skema_formulir?.fields?.length > 0) && (
                                     <section>
                                         <div className="flex items-center gap-2 mb-4 border-b border-border pb-2">
@@ -529,7 +523,6 @@ export default function AsetForm() {
                                     </section>
                                 )}
 
-                                {/* Condition */}
                                 <section>
                                     <div className="flex items-center gap-2 mb-4 border-b border-border pb-2">
                                         <span className="material-symbols-outlined text-amber-dark">assessment</span>
@@ -557,7 +550,6 @@ export default function AsetForm() {
                                     </div>
                                 </section>
 
-                                {/* Photo Upload */}
                                 <section className="mb-8">
                                     <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                                         <div className="flex items-center gap-2">
@@ -595,7 +587,6 @@ export default function AsetForm() {
                                     </div>
                                 </section>
 
-                                {/* Action Buttons at bottom of form */}
                                 <div className="pt-6 border-t border-border flex flex-col sm:flex-row gap-3 justify-end">
                                     <button
                                         type="button"
