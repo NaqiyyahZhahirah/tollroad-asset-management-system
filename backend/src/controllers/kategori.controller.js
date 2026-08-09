@@ -1,7 +1,7 @@
 const supabase = require('../config/supabase');
 
 async function getAllKategori(req, res) {
-    let query = supabase.from('kategori_aset').select('*');
+    let query = supabase.from('kategori_aset').select('*, kelompok_aset(id, nama_kelompok)');
 
     if (req.query.include_inactive !== 'true') {
         query = query.eq('is_active', true);
@@ -17,7 +17,7 @@ async function getAllKategori(req, res) {
 }
 
 async function createKategori(req, res) {
-    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, created_by } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, kelompok_id, created_by } = req.body;
 
     if (!nama_kategori || !skema_formulir || !tipe_geometri) {
         return res.status(400).json({ error: 'nama_kategori, skema_formulir, dan tipe_geometri wajib diisi' });
@@ -28,7 +28,7 @@ async function createKategori(req, res) {
 
     const { data, error } = await supabase
         .from('kategori_aset')
-        .insert([{ nama_kategori, deskripsi, versi_skema: 1, skema_formulir, tipe_geometri, created_by }])
+        .insert([{ nama_kategori, deskripsi, versi_skema: 1, skema_formulir, tipe_geometri, kelompok_id: kelompok_id || null, created_by }])
         .select()
         .single();
 
@@ -38,9 +38,8 @@ async function createKategori(req, res) {
 
 async function updateKategori(req, res) {
     const { id } = req.params;
-    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, is_active, naikkan_versi } = req.body;
+    const { nama_kategori, deskripsi, skema_formulir, tipe_geometri, kelompok_id, is_active, naikkan_versi } = req.body;
 
-    // Ambil versi_skema saat ini
     const { data: current, error: currentError } = await supabase
         .from('kategori_aset')
         .select('versi_skema')
@@ -55,7 +54,6 @@ async function updateKategori(req, res) {
         updated_at: new Date().toISOString()
     };
 
-    // Naikkan versi_skema hanya jika admin mencentang checkbox di frontend
     if (naikkan_versi === true) {
         updatePayload.versi_skema = (current.versi_skema || 1) + 1;
     }
@@ -64,6 +62,7 @@ async function updateKategori(req, res) {
     if (deskripsi !== undefined) updatePayload.deskripsi = deskripsi;
     if (tipe_geometri !== undefined) updatePayload.tipe_geometri = tipe_geometri;
     if (skema_formulir !== undefined) updatePayload.skema_formulir = skema_formulir;
+    if (kelompok_id !== undefined) updatePayload.kelompok_id = kelompok_id || null;
     if (is_active !== undefined) updatePayload.is_active = is_active;
 
     const { data, error } = await supabase
@@ -133,7 +132,6 @@ async function deleteKategoriPermanently(req, res) {
         });
     }
 
-    // Jika tidak ada aset yang memakai, hapus permanen dari database
     const { error: deleteError } = await supabase
         .from('kategori_aset')
         .delete()
