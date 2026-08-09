@@ -9,11 +9,12 @@ import AsetDetail from './pages/AsetDetail';
 import PetaMonitoring from './pages/PetaMonitoring';
 import KategoriManagement from './pages/KategoriManagement';
 import UserManagement from './pages/UserManagement';
+import ReferensiJalanList from './pages/ReferensiJalanList';
+import ReferensiJalanForm from './pages/ReferensiJalanForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import { ToastProvider } from './components/Toast';
 
 function App() {
-    // Matikan scroll wheel untuk mengubah nilai pada seluruh input type="number"
     useEffect(() => {
         function handleWheel() {
             if (document.activeElement && document.activeElement.type === 'number') {
@@ -48,6 +49,30 @@ function App() {
                         element={
                             <ProtectedRoute adminOnly>
                                 <UserManagement />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/referensi-jalan"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <ReferensiJalanList />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/referensi-jalan/tambah"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <ReferensiJalanForm />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/referensi-jalan/edit/:id"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <ReferensiJalanForm />
                             </ProtectedRoute>
                         }
                     />

@@ -4,7 +4,7 @@ import { useUiStore } from '../store/uiStore';
 
 const menuItems = [
     { to: '/dashboard', icon: 'dashboard', label: 'Dashboard' },
-    { to: '/aset', icon: 'inventory_2', label: 'Assets' },
+    { to: '/aset', icon: 'inventory_2', label: 'Asset' },
     { to: '/peta', icon: 'map', label: 'Map' },
 ];
 
@@ -47,7 +47,6 @@ export default function Sidebar() {
                         </button>
                     </div>
 
-                    {/* Profil Pengguna Singkat */}
                     <div className="px-6 py-4 flex items-center gap-3 border-b border-white/10 shrink-0 bg-white/5">
                         <div className="w-10 h-10 rounded-full bg-amber/20 text-amber flex items-center justify-center font-bold text-sm shrink-0 border border-amber/30">
                             {user?.nama?.charAt(0)?.toUpperCase() || '?'}
@@ -58,7 +57,6 @@ export default function Sidebar() {
                         </div>
                     </div>
 
-                    {/* Menu Navigasi */}
                     <nav className="flex flex-col flex-grow py-3 overflow-y-auto">
                         {menuItems.map((item) => (
                             <NavLink
@@ -92,6 +90,19 @@ export default function Sidebar() {
                                     <span className="text-sm">Kelola Kategori</span>
                                 </NavLink>
                                 <NavLink
+                                    to="/referensi-jalan"
+                                    className={({ isActive }) =>
+                                        `flex items-center px-6 py-3.5 gap-3 transition-all whitespace-nowrap ${
+                                            isActive
+                                                ? 'border-l-4 border-amber bg-white/15 text-white font-bold shadow-sm'
+                                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                                        }`
+                                    }
+                                >
+                                    <span className="material-symbols-outlined text-[20px]">signpost</span>
+                                    <span className="text-sm">Data Referensi Jalan</span>
+                                </NavLink>
+                                <NavLink
                                     to="/pengguna"
                                     className={({ isActive }) =>
                                         `flex items-center px-6 py-3.5 gap-3 transition-all whitespace-nowrap ${
@@ -108,7 +119,6 @@ export default function Sidebar() {
                         )}
                     </nav>
 
-                    {/* Sign Out Section Bottom */}
                     <div className="p-4 border-t border-white/10 shrink-0 mt-auto bg-black/20">
                         <button
                             onClick={handleLogout}

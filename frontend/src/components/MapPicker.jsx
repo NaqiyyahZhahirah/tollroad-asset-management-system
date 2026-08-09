@@ -1,5 +1,9 @@
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { useState } from 'react';
+import ReferensiJalanLayer from './ReferensiJalanLayer';
+import ReferensiJalanToggles from './ReferensiJalanToggles';
+
+const DEFAULT_REFERENSI_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
 
 function LocationMarker({ position, setPosition }) {
     useMapEvents({
@@ -20,11 +24,16 @@ function LocationMarker({ position, setPosition }) {
 
 export default function MapPicker({ onLocationSelect, initialPosition }) {
     const [position, setPosition] = useState(initialPosition || null);
+    const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
     const defaultCenter = initialPosition || [-6.9147, 107.6098];
 
     function handleSetPosition(pos) {
         setPosition(pos);
         onLocationSelect(pos[0], pos[1]);
+    }
+
+    function toggleReferensiKategori(key) {
+        setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
     }
 
     return (
@@ -34,6 +43,7 @@ export default function MapPicker({ onLocationSelect, initialPosition }) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; OpenStreetMap contributors'
                 />
+                <ReferensiJalanLayer visible={visibleReferensi} />
                 <LocationMarker position={position} setPosition={handleSetPosition} />
             </MapContainer>
 
@@ -42,6 +52,14 @@ export default function MapPicker({ onLocationSelect, initialPosition }) {
                 <p className="text-sm text-navy font-mono">
                     {position ? `${position[0].toFixed(6)}, ${position[1].toFixed(6)}` : 'Tap peta untuk pilih lokasi'}
                 </p>
+            </div>
+
+            <div className="absolute top-4 right-4 z-[1000] bg-white/95 backdrop-blur shadow-md p-2.5 rounded-lg border border-border w-40">
+                <p className="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-purple-600">signpost</span>
+                    Ref. Jalan
+                </p>
+                <ReferensiJalanToggles visible={visibleReferensi} onToggle={toggleReferensiKategori} />
             </div>
         </div>
     );

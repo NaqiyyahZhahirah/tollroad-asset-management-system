@@ -5,7 +5,8 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet-draw';
 import axiosClient from '../api/axiosClient';
 import MapMask from './MapMask';
-import TollRouteLayer from './TollRouteLayer';
+import ReferensiJalanLayer from './ReferensiJalanLayer';
+import ReferensiJalanToggles from './ReferensiJalanToggles';
 import { MapSearchBar, MapSearchLayer } from './MapSearchBar';
 import {
     PURBALEUNYI_BOUNDS,
@@ -16,6 +17,7 @@ import {
 
 const geometryToLeafletShape = { titik: 'marker', garis: 'polyline', area: 'polygon' };
 const pinColor = { baik: '#10b981', perlu_perawatan: '#f59e0b', rusak: '#dc2626' };
+const DEFAULT_REFERENSI_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
 
 function existingIcon(color) {
     return L.divIcon({
@@ -126,7 +128,7 @@ function CtrlScrollZoom() {
 export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeometryChange, disabled = false }) {
     const [existingAssets, setExistingAssets] = useState([]);
     const [showExisting, setShowExisting] = useState(true);
-    const [showTollRoute, setShowTollRoute] = useState(true);
+    const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
     const [flyTarget, setFlyTarget] = useState(null);
 
     useEffect(() => {
@@ -134,6 +136,10 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
             .then((res) => setExistingAssets(res.data.data || []))
             .catch(() => setExistingAssets([]));
     }, []);
+
+    function toggleReferensiKategori(key) {
+        setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
+    }
 
     const instructionText = {
         titik: 'Pilih lokasi aset: tap tombol marker di kiri atas, lalu klik lokasi di peta.',
@@ -176,10 +182,9 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                     maxZoom={19}
                 />
 
-                {showTollRoute && <TollRouteLayer />}
+                <ReferensiJalanLayer visible={visibleReferensi} />
                 <MapMask />
 
-                {/* Fly-to + red pin hasil pencarian */}
                 <MapSearchLayer target={flyTarget} />
 
                 {showExisting && sortedExisting.map((aset) => (
@@ -213,10 +218,8 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                 />
             </MapContainer>
 
-            {/* Search bar – responsif tanpa menutupi toolbar */}
             <MapSearchBar onFly={setFlyTarget} className="top-3 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-[340px]" />
 
-            {/* Overlay bila kategori belum dipilih */}
             {disabled && (
                 <div className="absolute inset-0 z-[1050] bg-black/25 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
                     <div className="bg-card/95 backdrop-blur-md border border-amber px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
@@ -226,7 +229,6 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                 </div>
             )}
 
-            {/* Instruction Banner – bawah peta */}
             {!disabled && (
                 <div className="absolute bottom-2 left-2 right-2 z-[1000] sm:bottom-3 sm:left-3 sm:right-3 bg-card/95 backdrop-blur-md px-3 py-2.5 rounded-xl text-[11px] sm:text-xs text-navy border border-border shadow-lg flex items-start gap-2 pointer-events-none overflow-visible max-h-[96px] sm:max-h-none">
                     <span className="material-symbols-outlined text-amber-dark text-[15px] sm:text-[16px] shrink-0 mt-0.5">edit_location_alt</span>
@@ -236,22 +238,13 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                 </div>
             )}
 
-            {/* Layer Control – kanan atas di bawah search bar */}
             <div className="absolute top-16 right-2 sm:right-3 z-[1000] flex flex-col items-end gap-2">
-                <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy">
-                    <div className="flex items-center justify-between gap-3">
-                        <span className="flex items-center gap-1.5 text-text-muted">
-                            <span className="material-symbols-outlined text-[16px] text-blue-600">alt_route</span>
-                            Garis Tol
-                        </span>
-                        <button
-                            type="button"
-                            onClick={() => setShowTollRoute((v) => !v)}
-                            className={`w-9 h-5 rounded-full transition-colors relative p-0.5 ${showTollRoute ? 'bg-blue-600' : 'bg-gray-300'}`}
-                        >
-                            <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showTollRoute ? 'translate-x-4' : 'translate-x-0'}`} />
-                        </button>
-                    </div>
+                <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy w-44">
+                    <span className="flex items-center gap-1.5 text-text-muted">
+                        <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
+                        Ref. Jalan
+                    </span>
+                    <ReferensiJalanToggles visible={visibleReferensi} onToggle={toggleReferensiKategori} />
                     <div className="w-full h-px bg-border" />
                     <div className="flex items-center justify-between gap-3">
                         <span className="flex items-center gap-1.5 text-text-muted">

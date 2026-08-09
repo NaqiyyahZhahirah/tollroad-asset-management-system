@@ -8,7 +8,8 @@ import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import { useToast } from '../components/Toast';
 import MapMask from '../components/MapMask';
-import TollRouteLayer from '../components/TollRouteLayer';
+import ReferensiJalanLayer from '../components/ReferensiJalanLayer';
+import ReferensiJalanToggles from '../components/ReferensiJalanToggles';
 import { MapSearchBar, MapSearchLayer } from '../components/MapSearchBar';
 import {
     PURBALEUNYI_BOUNDS,
@@ -19,6 +20,8 @@ import {
 
 const pinColor = { baik: '#10b981', perlu_perawatan: '#f59e0b', rusak: '#dc2626' };
 const actionIcon = { create: 'upload', approve: 'check_circle', reject: 'cancel', update: 'edit' };
+
+const DEFAULT_REFERENSI_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
 
 function getAssetStyle(aset, isSelected, isOther) {
     const isRejected = aset.status_validasi === 'rejected';
@@ -133,21 +136,21 @@ function FilterPanel({
     activeCount,
     totalCount,
     filteredCount,
-    showTollRoute,
-    onToggleTollRoute,
+    visibleReferensi,
+    onToggleReferensi,
     showRejected,
     onToggleShowRejected,
     isAdmin
 }) {
     const [open, setOpen] = useState(false);
+    const anyReferensiOn = Object.values(visibleReferensi).some(Boolean);
 
     return (
         <div className="absolute top-16 right-4 z-[1000] flex flex-col items-end gap-2">
-            {/* Toggle button */}
             <button
                 onClick={() => setOpen((v) => !v)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-xl border backdrop-blur-md font-bold text-sm transition-colors ${
-                    activeCount > 0 || showTollRoute || showRejected
+                    activeCount > 0 || anyReferensiOn  || showRejected
                         ? 'bg-navy text-white border-navy'
                         : 'bg-card/90 text-navy border-border'
                 }`}
@@ -162,14 +165,12 @@ function FilterPanel({
                 <span className="material-symbols-outlined text-[16px] ml-1">{open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}</span>
             </button>
 
-            {/* Asset count badge */}
             <div className="bg-card/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-border shadow text-xs font-semibold text-navy">
                 Menampilkan <span className="font-black">{filteredCount}</span>/{totalCount} aset
             </div>
 
-            {/* Filter Dropdown Panel */}
             {open && (
-                <div className="bg-card/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-border w-72 p-4 space-y-4">
+                <div className="bg-card/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-border w-72 p-4 space-y-4 max-h-[70vh] overflow-y-auto">
                     <div className="flex items-center justify-between">
                         <h3 className="text-xs font-black text-navy uppercase tracking-wider">Filter &amp; Layer Peta</h3>
                         {activeCount > 0 && (
@@ -183,28 +184,19 @@ function FilterPanel({
                         )}
                     </div>
 
-                    {/* Toggle Garis Jalan Tol */}
-                    <div className="p-2.5 bg-app-bg rounded-xl border border-border flex items-center justify-between">
+                    <div className="p-2.5 bg-app-bg rounded-xl border border-border space-y-2.5">
                         <span className="text-xs font-bold text-navy flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[18px] text-blue-600">alt_route</span>
-                            Garis Jalan Tol
+                            <span className="material-symbols-outlined text-[18px] text-purple-600">signpost</span>
+                            Data Referensi Jalan
                         </span>
-                        <button
-                            type="button"
-                            onClick={() => onToggleTollRoute(!showTollRoute)}
-                            className={`w-9 h-5 rounded-full transition-colors relative p-0.5 ${showTollRoute ? 'bg-blue-600' : 'bg-gray-300'}`}
-                            title="Aktifkan / nonaktifkan garis jalan tol"
-                        >
-                            <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showTollRoute ? 'translate-x-4' : 'translate-x-0'}`} />
-                        </button>
+                        <ReferensiJalanToggles visible={visibleReferensi} onToggle={onToggleReferensi} />
                     </div>
 
-                    {/* Toggle Tampilkan yang ditolak (Khusus Admin) */}
                     {isAdmin && (
                         <div className="p-2.5 bg-app-bg rounded-xl border border-border flex items-center justify-between">
                             <span className="text-xs font-bold text-navy flex items-center gap-2">
                                 <span className="material-symbols-outlined text-[18px] text-gray-500">cancel</span>
-                                Tampilkan yang ditolak
+                                Tampilkan aset ditolak
                             </span>
                             <button
                                 type="button"
@@ -217,7 +209,6 @@ function FilterPanel({
                         </div>
                     )}
 
-                    {/* Kondisi */}
                     <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-text-muted uppercase tracking-wide">Kondisi Aset</label>
                         <select
@@ -232,7 +223,6 @@ function FilterPanel({
                         </select>
                     </div>
 
-                    {/* Tipe Geometri */}
                     <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-text-muted uppercase tracking-wide">Tipe Geometri</label>
                         <select
@@ -247,7 +237,6 @@ function FilterPanel({
                         </select>
                     </div>
 
-                    {/* Tanggal pemasangan range */}
                     <div className="space-y-1.5">
                         <label className="text-[10px] font-bold text-text-muted uppercase tracking-wide">Tanggal Pemasangan</label>
                         <div className="flex items-center gap-2">
@@ -286,7 +275,7 @@ export default function PetaMonitoring() {
     const [rejectReason, setRejectReason] = useState('');
     const [processing, setProcessing] = useState(false);
     const [previewPhoto, setPreviewPhoto] = useState(null);
-    const [showTollRoute, setShowTollRoute] = useState(true);
+    const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
     const [showRejected, setShowRejected] = useState(false);
     const [searchFlyTarget, setSearchFlyTarget] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -329,6 +318,10 @@ export default function PetaMonitoring() {
 
     function resetFilters() {
         setFilters({ kondisi: '', geomType: '', dateFrom: '', dateTo: '' });
+    }
+
+    function toggleReferensiKategori(key) {
+        setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
     }
 
     const activeFilterCount = Object.values(filters).filter(Boolean).length;
@@ -428,7 +421,6 @@ export default function PetaMonitoring() {
                 <TopBar />
                 <div className="flex-1 relative overflow-hidden">
 
-                    {/* ── Main Map Canvas ── */}
                     <div className="w-full h-full">
                         <MapContainer
                             center={PURBALEUNYI_CENTER}
@@ -444,19 +436,14 @@ export default function PetaMonitoring() {
                                 subdomains="abcd"
                                 maxZoom={19}
                             />
-
-                            {/* Rute tol dari Overpass API — dirender SEBELUM mask */}
-                            {showTollRoute && <TollRouteLayer />}
-
-                            {/* Mask / dim di luar koridor Purbaleunyi */}
+                            
+                            <ReferensiJalanLayer visible={visibleReferensi} />
                             <MapMask />
 
                             <ZoomControl />
                             <MapFlyTo selectedAset={selectedAset} />
                             <MapSearchLayer target={searchFlyTarget} />
 
-                            {/* Render aset GeoJSON — diurutkan agar Polygon paling bawah,
-                                LineString di tengah, dan Point (marker) paling atas */}
                             {sortedFiltered.map((aset) => {
                                 const isSelected = selectedAset?.id === aset.id;
                                 const isOther = selectedAset && !isSelected;
@@ -482,10 +469,8 @@ export default function PetaMonitoring() {
                             })}
                         </MapContainer>
 
-                        {/* ── Search Bar Mengambang ── */}
                         <MapSearchBar onFly={setSearchFlyTarget} className="top-3 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-[340px]" />
 
-                        {/* ── Filter Panel Mengambang ── */}
                         <FilterPanel
                             filters={filters}
                             onChange={handleFilterChange}
@@ -493,14 +478,13 @@ export default function PetaMonitoring() {
                             activeCount={activeFilterCount}
                             totalCount={asetData.length}
                             filteredCount={filtered.length}
-                            showTollRoute={showTollRoute}
-                            onToggleTollRoute={setShowTollRoute}
+                            visibleReferensi={visibleReferensi}
+                            onToggleReferensi={toggleReferensiKategori}
                             showRejected={showRejected}
                             onToggleShowRejected={setShowRejected}
                             isAdmin={user?.role === 'admin'}
                         />
 
-                        {/* ── Legenda ── */}
                         <div className="absolute bottom-4 left-4 z-[1000] bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg border border-border w-52">
                             <h4 className="text-[10px] font-bold text-text-muted uppercase mb-2 tracking-wider">Legenda Kondisi &amp; Layer</h4>
                             <div className="space-y-1.5">
@@ -528,21 +512,13 @@ export default function PetaMonitoring() {
                                         </span>
                                     </div>
                                 )}
-                                <div className="pt-1.5 border-t border-border mt-1.5 flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <div className={`w-4 h-0.5 rounded transition-colors ${showTollRoute ? 'bg-[#1d4ed8]' : 'bg-gray-300'}`} style={{ flexShrink: 0 }} />
-                                        <span className="text-xs font-semibold text-navy">Jalur Tol</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* ── Detail Panel Aset ── */}
                     {selectedAset && (
                         <div className="absolute top-0 right-0 h-full w-full md:w-[480px] xl:w-[540px] bg-card/98 backdrop-blur-xl shadow-2xl border-l border-border z-[1000] flex flex-col">
 
-                            {/* Panel Header */}
                             <div className="p-4 border-b border-border flex justify-between items-center bg-card-alt shrink-0">
                                 <div className="overflow-hidden">
                                     <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">Detail Aset Lengkap</span>
@@ -564,10 +540,8 @@ export default function PetaMonitoring() {
                                 </div>
                             </div>
 
-                            {/* Panel Content */}
                             <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-5">
 
-                                {/* Status badges */}
                                 <div>
                                     <div className="flex flex-wrap items-center gap-2 mb-2">
                                         <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold uppercase ${
@@ -595,7 +569,6 @@ export default function PetaMonitoring() {
                                     <p className="text-xs text-text-muted font-mono mt-0.5">No. Seri: {selectedAset.nomor_seri || '-'}</p>
                                 </div>
 
-                                {/* Informasi Umum & Lokasi */}
                                 <section className="space-y-2">
                                     <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-1">
                                         <span className="material-symbols-outlined text-amber-dark text-[16px]">location_on</span>
@@ -622,7 +595,6 @@ export default function PetaMonitoring() {
                                     </div>
                                 </section>
 
-                                {/* Metadata & Audit */}
                                 <section className="space-y-2">
                                     <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-1">
                                         <span className="material-symbols-outlined text-amber-dark text-[16px]">history_edu</span>
@@ -649,7 +621,6 @@ export default function PetaMonitoring() {
                                     </div>
                                 </section>
 
-                                {/* Spesifikasi Teknis Dinamis */}
                                 {selectedAset.atribut_spesifik && Object.keys(selectedAset.atribut_spesifik).length > 0 && (
                                     <section className="space-y-2">
                                         <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-1">
@@ -675,7 +646,6 @@ export default function PetaMonitoring() {
                                     </section>
                                 )}
 
-                                {/* Foto Dokumentasi */}
                                 <section className="space-y-2">
                                     <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-1">
                                         <span className="material-symbols-outlined text-amber-dark text-[16px]">add_a_photo</span>
@@ -701,7 +671,6 @@ export default function PetaMonitoring() {
                                     )}
                                 </section>
 
-                                {/* Aksi Admin - Validasi */}
                                 {user?.role === 'admin' && selectedAset.status_validasi === 'pending' && (
                                     <section className="bg-card-strong p-4 rounded-xl border border-amber/30 space-y-3">
                                         <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5">
@@ -756,7 +725,6 @@ export default function PetaMonitoring() {
                                     </section>
                                 )}
 
-                                {/* Riwayat Aktivitas */}
                                 <section className="space-y-2 pb-4">
                                     <h4 className="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-1.5 border-b border-border pb-1">
                                         <span className="material-symbols-outlined text-amber-dark text-[16px]">history</span>
@@ -789,7 +757,6 @@ export default function PetaMonitoring() {
                     )}
                 </div>
 
-                {/* Photo Zoom Modal */}
                 {previewPhoto && (
                     <div
                         className="fixed inset-0 z-[2000] bg-black/80 flex items-center justify-center p-4"
