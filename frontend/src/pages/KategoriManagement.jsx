@@ -14,19 +14,24 @@ export default function KategoriManagement() {
     const [naikkanVersi, setNaikkanVersi] = useState(false);
     const [fields, setFields] = useState([]);
     
-    // Accordion state
     const [isAktifOpen, setIsAktifOpen] = useState(true);
     const [isNonaktifOpen, setIsNonaktifOpen] = useState(true);
 
-    // Drag and drop state
     const [draggedIndex, setDraggedIndex] = useState(null);
-    const [confirmModal, setConfirmModal] = useState(null); // { title, message, action }
+    const [confirmModal, setConfirmModal] = useState(null); 
+
+    const [kelompokList, setKelompokList] = useState([]);
+    const [kelompokId, setKelompokId] = useState('');
+    const [showTambahKelompok, setShowTambahKelompok] = useState(false);
+    const [namaKelompokBaru, setNamaKelompokBaru] = useState('');
+    const [deskripsiKelompokBaru, setDeskripsiKelompokBaru] = useState('');
 
     const { user } = useAuthStore();
     const toast = useToast();
 
     useEffect(() => {
         fetchKategori();
+        fetchKelompok();
     }, []);
 
     async function fetchKategori() {
@@ -35,6 +40,34 @@ export default function KategoriManagement() {
             setKategoriList(res.data.data || []);
         } catch (err) {
             console.error('Error fetching kategori:', err);
+        }
+    }
+
+    async function fetchKelompok() {
+        try {
+            const res = await axiosClient.get('/kelompok');
+            setKelompokList(res.data.data || []);
+        } catch (err) {
+            console.error('Error fetching kelompok:', err);
+        }
+    }
+
+    async function handleTambahKelompok(e) {
+        e.preventDefault();
+        if (!namaKelompokBaru.trim()) return;
+
+        try {
+            await axiosClient.post('/kelompok', {
+                nama_kelompok: namaKelompokBaru,
+                deskripsi: deskripsiKelompokBaru
+            });
+            toast.success('Kelompok berhasil ditambahkan');
+            setNamaKelompokBaru('');
+            setDeskripsiKelompokBaru('');
+            setShowTambahKelompok(false);
+            fetchKelompok();
+        } catch (err) {
+            toast.error(err.response?.data?.error || 'Gagal menambahkan kelompok');
         }
     }
 
@@ -52,6 +85,7 @@ export default function KategoriManagement() {
         setNamaKategori('');
         setDeskripsi('');
         setTipeGeometri('');
+        setKelompokId(''); 
         setNaikkanVersi(false);
         setFields([]);
     }
@@ -61,6 +95,7 @@ export default function KategoriManagement() {
         setNamaKategori(kategori.nama_kategori || '');
         setDeskripsi(kategori.deskripsi || '');
         setTipeGeometri(kategori.tipe_geometri || '');
+        setKelompokId(kategori.kelompok_id || '');
         setNaikkanVersi(false);
         
         const loadedFields = kategori.skema_formulir?.fields || [];
@@ -86,7 +121,6 @@ export default function KategoriManagement() {
             setFields([]);
         }
 
-        // Scroll to form on small screens
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -102,12 +136,10 @@ export default function KategoriManagement() {
         const updated = [...fields];
         updated[index][key] = value;
 
-        // Auto-generate key based on label (lowercase, underscore for spaces)
         if (key === 'label') {
             updated[index]['key'] = generateKeyFromLabel(value);
         }
 
-        // Initialize options array if type is changed to select
         if (key === 'type' && value === 'select') {
             if (!Array.isArray(updated[index].options) || updated[index].options.length === 0) {
                 updated[index].options = [''];
@@ -117,7 +149,6 @@ export default function KategoriManagement() {
         setFields(updated);
     }
 
-    // Dynamic Select Option Helpers
     function addOption(fieldIndex) {
         const updated = [...fields];
         const currentOpts = Array.isArray(updated[fieldIndex].options) ? updated[fieldIndex].options : [];
@@ -141,7 +172,6 @@ export default function KategoriManagement() {
         setFields(updated);
     }
 
-    // Drag and Drop reordering handlers
     function handleDragStart(e, index) {
         setDraggedIndex(index);
         e.dataTransfer.effectAllowed = 'move';
@@ -191,6 +221,7 @@ export default function KategoriManagement() {
                     nama_kategori: namaKategori,
                     deskripsi,
                     tipe_geometri: tipeGeometri,
+                    kelompok_id: kelompokId || null,   // ← tambah ini
                     skema_formulir,
                     naikkan_versi: naikkanVersi
                 });
@@ -200,6 +231,7 @@ export default function KategoriManagement() {
                     nama_kategori: namaKategori,
                     deskripsi,
                     tipe_geometri: tipeGeometri,
+                    kelompok_id: kelompokId || null,   // ← tambah ini
                     skema_formulir,
                     created_by: user?.id
                 });
@@ -283,9 +315,7 @@ export default function KategoriManagement() {
                 <section className="flex-1 overflow-y-auto p-6">
                     <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6">
 
-                        {/* ==== Panel Kiri: Kategori Aktif & Nonaktif ==== */}
                         <div className="space-y-4">
-                            {/* Kotak Kategori Aktif */}
                             <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
                                 <button
                                     type="button"
@@ -320,11 +350,18 @@ export default function KategoriManagement() {
                                                 >
                                                     <div>
                                                         <p className="text-sm font-bold text-[#0b1c30]">{k.nama_kategori}</p>
-                                                        <p className="text-[11px] uppercase tracking-widest text-[#45474c] mt-1">
-                                                            v{k.versi_skema}
-                                                        </p>
+                                                        <div className="flex items-center gap-1.5 mt-1">
+                                                            <p className="text-[11px] uppercase tracking-widest text-[#45474c]">
+                                                                v{k.versi_skema}
+                                                            </p>
+                                                            {k.kelompok_aset?.nama_kelompok && (
+                                                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#eff4ff] text-[#091426] border border-[#c5c6cd]">
+                                                                    {k.kelompok_aset.nama_kelompok}
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <div className="flex items-center gap-1">
                                                         <button
                                                             onClick={() => startEdit(k)}
                                                             className="h-7 px-2.5 text-[#091426] hover:bg-[#091426]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
@@ -353,7 +390,6 @@ export default function KategoriManagement() {
                                 )}
                             </section>
 
-                            {/* Kotak Kategori Nonaktif */}
                             <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
                                 <button
                                     type="button"
@@ -394,7 +430,7 @@ export default function KategoriManagement() {
                                                             v{k.versi_skema}
                                                         </p>
                                                     </div>
-                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <div className="flex items-center gap-1">
                                                         <button
                                                             onClick={() => handleDelete(k)}
                                                             className="h-7 px-2.5 text-[#ba1a1a] hover:bg-[#ba1a1a]/10 text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors"
@@ -424,7 +460,6 @@ export default function KategoriManagement() {
                             </section>
                         </div>
 
-                        {/* ==== Panel Kanan: Bikin / Edit Kategori ==== */}
                         <section className="bg-white border border-[#c5c6cd] rounded-[0.25rem] overflow-hidden shadow-sm">
                             <div className="px-6 py-4 border-b border-navy/30 bg-navy text-white flex items-center justify-between">
                                 <div>
@@ -466,6 +501,62 @@ export default function KategoriManagement() {
                                 </div>
 
                                 <div>
+                                    <div className="flex items-center justify-between mb-1.5">
+                                        <label className="block text-sm font-bold text-[#0b1c30]">
+                                            Kelompok Aset
+                                        </label>
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowTambahKelompok(!showTambahKelompok)}
+                                            className="text-xs font-bold text-[#855300] flex items-center gap-1 hover:underline"
+                                        >
+                                            <span className="material-symbols-outlined text-sm">add_circle</span>
+                                            Kelompok Baru
+                                        </button>
+                                    </div>
+
+                                    {showTambahKelompok && (
+                                        <div className="mb-2 p-3 bg-[#eff4ff] border border-[#c5c6cd] rounded-[0.25rem] space-y-2">
+                                            <input
+                                                placeholder="Nama Kelompok (misal: Struktur)"
+                                                value={namaKelompokBaru}
+                                                onChange={(e) => setNamaKelompokBaru(e.target.value)}
+                                                className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm bg-white"
+                                            />
+                                            <input
+                                                placeholder="Deskripsi (opsional)"
+                                                value={deskripsiKelompokBaru}
+                                                onChange={(e) => setDeskripsiKelompokBaru(e.target.value)}
+                                                className="w-full h-9 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] px-3 text-sm bg-white"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={handleTambahKelompok}
+                                                className="w-full h-9 bg-[#091426] text-white text-xs font-bold rounded-[0.125rem] hover:opacity-90"
+                                            >
+                                                Simpan Kelompok
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    <select
+                                        value={kelompokId}
+                                        onChange={(e) => setKelompokId(e.target.value)}
+                                        className={`w-full h-11 border border-[#c5c6cd] focus:border-[#fea619] focus:ring-0 rounded-[0.125rem] pl-3 pr-8 text-sm transition-colors bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat ${
+                                            !kelompokId ? 'text-[#9ca3af]' : 'text-[#0b1c30]'
+                                        }`}
+                                        required
+                                    >
+                                        <option value="" disabled hidden>
+                                            Pilih Kelompok Aset
+                                        </option>
+                                        {kelompokList.map((k) => (
+                                            <option key={k.id} value={k.id} className="text-[#0b1c30]">{k.nama_kelompok}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div>
                                     <label className="block text-sm font-bold text-[#0b1c30] mb-1.5">
                                         Tipe Geometri di Peta <span className="text-[#ba1a1a]">*</span>
                                     </label>
@@ -504,18 +595,17 @@ export default function KategoriManagement() {
                                 )}
 
                                 <div className="pt-4 border-t border-[#c5c6cd]">
-                                    {/* Info: field bawaan yang selalu ada */}
                                     <div className="mb-4 p-3 rounded-[0.25rem] bg-[#eff4ff] border border-[#c5c6cd] flex gap-2.5">
                                         <span className="material-symbols-outlined text-[#091426] text-base mt-0.5 shrink-0">info</span>
                                         <div className="text-[11.5px] text-[#45474c] leading-relaxed">
                                             <p className="font-bold text-[#091426] mb-1">Field bawaan yang otomatis ada di form tambah aset:</p>
                                             <ul className="list-disc list-inside space-y-0.5">
-                                                <li><span className="font-semibold">Nama Aset</span> — nama/identitas aset</li>
-                                                <li><span className="font-semibold">Kode Aset</span> — kode unik aset</li>
-                                                <li><span className="font-semibold">Kondisi</span> — baik / rusak ringan / rusak berat</li>
-                                                <li><span className="font-semibold">Tanggal Pemasangan</span> — kapan aset dipasang</li>
-                                                <li><span className="font-semibold">Lokasi / Koordinat</span> — posisi geometri di peta</li>
-                                                <li><span className="font-semibold">Catatan</span> — keterangan tambahan opsional</li>
+                                                <li><span className="font-semibold">Nama Aset</span>: nama/identitas aset</li>
+                                                <li><span className="font-semibold">Kode Aset</span>: kode unik aset</li>
+                                                <li><span className="font-semibold">Kondisi</span>: baik / rusak ringan / rusak berat</li>
+                                                <li><span className="font-semibold">Tanggal Pemasangan</span>: kapan aset dipasang</li>
+                                                <li><span className="font-semibold">Lokasi / Koordinat</span>: posisi geometri di peta</li>
+                                                <li><span className="font-semibold">Catatan</span>: keterangan tambahan opsional</li>
                                             </ul>
                                             <p className="mt-1.5 text-[#75777c]">Tambahkan atribut spesifik di bawah ini jika kategori ini membutuhkan data teknis tambahan.</p>
                                         </div>
@@ -542,7 +632,6 @@ export default function KategoriManagement() {
                                                     draggedIndex === i ? 'opacity-40 border-dashed border-[#fea619]' : ''
                                                 }`}
                                             >
-                                                {/* Header Field Row: Drag Handle + Field Title/Number + Delete Button */}
                                                 <div className="flex items-center justify-between pb-2 border-b border-[#e0e0e0]">
                                                     <div className="flex items-center gap-2">
                                                         <span
@@ -710,7 +799,6 @@ export default function KategoriManagement() {
                 </section>
             </main>
 
-            {/* Confirmation Modal */}
             {confirmModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                     <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-sm p-6 flex flex-col gap-4">
