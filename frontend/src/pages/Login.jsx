@@ -59,7 +59,6 @@ export default function Login() {
                     </div>
                 </section>
 
-                {/* Right: Form */}
                 <section className="flex-1 flex flex-col justify-center px-6 md:px-10 py-10 bg-card">
                     <div className="max-w-sm mx-auto w-full">
                         <div className="mb-6">
@@ -101,13 +100,23 @@ export default function Login() {
                                     <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">lock</span>
                                     <input
                                         id="password"
-                                        type="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         placeholder="••••••••"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
-                                        className="w-full h-11 pl-10 pr-4 bg-card border border-border rounded-lg focus:border-amber focus:outline-none transition-all text-sm text-text-dark"
+                                        className="w-full h-11 pl-10 pr-10 bg-card border border-border rounded-lg focus:border-amber focus:outline-none transition-all text-sm text-text-dark"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-navy"
+                                        tabIndex={-1}
+                                    >
+                                        <span className="material-symbols-outlined text-[20px]">
+                                            {showPassword ? 'visibility_off' : 'visibility'}
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
 
@@ -126,9 +135,6 @@ export default function Login() {
                                 <span className="material-symbols-outlined text-[16px]">verified_user</span>
                                 <p className="text-xs">Akses terbatas untuk tim internal</p>
                             </div>
-                            {/* <p className="text-[11px] text-text-muted/60 text-center mt-1">
-                                © 2026 Jasa Marga Tollroad Maintenance. All rights reserved.
-                            </p> */}
                         </div>
                     </div>
                 </section>
