@@ -5,13 +5,11 @@ import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import { useToast } from '../components/Toast';
 
-// ─── Utility ──────────────────────────────────────────────────────────────────
 function generatePassword(length = 12) {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%';
     return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
 }
 
-// ─── Badge components (Matching AsetList pill badges) ──────────────────────────
 function RoleBadge({ role }) {
     const isAdmin = role === 'admin';
     return (
@@ -35,7 +33,6 @@ function StatusBadge({ active }) {
 
 const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
 
-// ─── Add User Modal ───────────────────────────────────────────────────────────
 function AddUserModal({ onClose, onSuccess }) {
     const toast = useToast();
     const [form, setForm] = useState({
@@ -191,7 +188,6 @@ function AddUserModal({ onClose, onSuccess }) {
     );
 }
 
-// ─── Reset Password Modal ─────────────────────────────────────────────────────
 function ResetPasswordModal({ user: targetUser, onClose }) {
     const toast = useToast();
     const [newPassword, setNewPassword] = useState('');
@@ -291,7 +287,6 @@ function ResetPasswordModal({ user: targetUser, onClose }) {
     );
 }
 
-// ─── Confirm Modal ────────────────────────────────────────────────────────────
 function ConfirmModal({ modal, onClose }) {
     if (!modal) return null;
     return (
@@ -327,7 +322,6 @@ function ConfirmModal({ modal, onClose }) {
     );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
 export default function UserManagement() {
     const { user: currentUser } = useAuthStore();
     const toast = useToast();
@@ -361,18 +355,15 @@ export default function UserManagement() {
 
     useEffect(() => { fetchUsers(); }, [fetchUsers]);
 
-    // Reset pagination when filters or search change
     useEffect(() => {
         setCurrentPage(1);
     }, [roleFilter, statusFilter, search, pageSize]);
 
-    // Filter search client-side
     const filteredUsers = users.filter(u => {
         const q = search.toLowerCase();
         return !q || u.nama?.toLowerCase().includes(q) || u.email?.toLowerCase().includes(q) || u.wilayah_kerja?.toLowerCase().includes(q);
     });
 
-    // Pagination slice
     const totalPages = Math.ceil(filteredUsers.length / pageSize) || 1;
     const paginatedUsers = filteredUsers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
@@ -438,7 +429,6 @@ export default function UserManagement() {
                 <TopBar />
                 <div className="flex-1 overflow-auto p-4 md:p-8 pb-20 md:pb-8">
 
-                    {/* Header */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                         <h2 className="text-xl md:text-2xl font-bold text-navy">Kelola Pengguna</h2>
                         <button
@@ -450,9 +440,7 @@ export default function UserManagement() {
                         </button>
                     </div>
 
-                    {/* Filters Toolbar (Pill buttons without icons) */}
                     <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-4">
-                        {/* Role & Status Pill Tabs */}
                         <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
                             {ROLE_TABS.map(t => (
                                 <button
@@ -485,7 +473,6 @@ export default function UserManagement() {
                             ))}
                         </div>
 
-                        {/* Search Box */}
                         <div className="relative min-w-[240px]">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
                             <input
@@ -497,8 +484,7 @@ export default function UserManagement() {
                         </div>
                     </div>
 
-                    {/* Table */}
-                    <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
+                    <div className="bg-card border border-border overflow-hidden shadow-sm">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead className="bg-navy text-white">
@@ -519,7 +505,6 @@ export default function UserManagement() {
                                     )}
                                     {!loading && paginatedUsers.map((u) => (
                                         <tr key={u.id} className={`hover:bg-card-hover transition-colors ${!u.is_active ? 'opacity-60' : ''}`}>
-                                            {/* Pengguna col */}
                                             <td className="p-3">
                                                 <div className="flex items-center gap-3">
                                                     <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
@@ -539,21 +524,16 @@ export default function UserManagement() {
                                                 </div>
                                             </td>
 
-                                            {/* Wilayah */}
                                             <td className="p-3 text-sm text-text-muted hidden md:table-cell">
                                                 {u.wilayah_kerja || <span className="text-text-muted/40 italic">—</span>}
                                             </td>
 
-                                            {/* Role */}
                                             <td className="p-3"><RoleBadge role={u.role} /></td>
 
-                                            {/* Status */}
                                             <td className="p-3"><StatusBadge active={u.is_active} /></td>
 
-                                            {/* Actions */}
                                             <td className="p-3 text-left">
                                                 <div className="flex items-center gap-2 justify-start">
-                                                    {/* Toggle Role (Equalized width: w-28) */}
                                                     <button
                                                         onClick={() => handleToggleRole(u)}
                                                         disabled={isSelf(u)}
@@ -568,7 +548,6 @@ export default function UserManagement() {
                                                         <span>{u.role === 'admin' ? 'Operator' : 'Admin'}</span>
                                                     </button>
 
-                                                    {/* Toggle Active (Equalized width: w-28) */}
                                                     <button
                                                         onClick={() => handleToggleActive(u)}
                                                         disabled={isSelf(u)}
@@ -589,7 +568,6 @@ export default function UserManagement() {
                                                         <span>{u.is_active ? 'Nonaktifkan' : 'Aktifkan'}</span>
                                                     </button>
 
-                                                    {/* Reset Password (Equalized width: w-24) */}
                                                     <button
                                                         onClick={() => setResetTarget(u)}
                                                         title="Reset Password"
@@ -606,9 +584,7 @@ export default function UserManagement() {
                             </table>
                         </div>
 
-                        {/* Pagination Footer (Matching AsetList pagination) */}
                         <div className="p-3 flex items-center justify-between bg-card-alt/50 border-t border-border text-sm text-text-muted flex-wrap gap-3">
-                            {/* Kiri: info + page size */}
                             <div className="flex items-center gap-3 flex-wrap">
                                 <span>
                                     {loading
@@ -617,7 +593,6 @@ export default function UserManagement() {
                                         ? 'Tidak ada data'
                                         : `Menampilkan ${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, filteredUsers.length)} dari ${filteredUsers.length} pengguna`}
                                 </span>
-                                {/* Page size selector */}
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-xs">Per halaman:</span>
                                     <select
@@ -632,7 +607,6 @@ export default function UserManagement() {
                                 </div>
                             </div>
 
-                            {/* Kanan: navigasi halaman */}
                             {!loading && filteredUsers.length > pageSize && (
                                 <div className="flex items-center gap-1">
                                     <button
@@ -699,7 +673,6 @@ export default function UserManagement() {
                 </div>
             </main>
 
-            {/* Modals */}
             {showAddModal && (
                 <AddUserModal
                     onClose={() => setShowAddModal(false)}
