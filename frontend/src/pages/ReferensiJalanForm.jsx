@@ -9,13 +9,14 @@ import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import { useToast } from '../components/Toast';
 import ReferensiJalanLayer from '../components/ReferensiJalanLayer';
+import ReferensiJalanToggles from '../components/ReferensiJalanToggles';
 import {
     PURBALEUNYI_BOUNDS,
     PURBALEUNYI_CENTER,
     PURBALEUNYI_MIN_ZOOM,
     PURBALEUNYI_DEFAULT_ZOOM
 } from '../utils/purbaleunyiBounds';
-
+const DEFAULT_REFERENSI_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
 const KATEGORI_OPTIONS = [
     { value: 'main_road', label: 'Main Road (Garis)', shape: 'polyline' },
     { value: 'ramp', label: 'Ramp / Akses (Garis)', shape: 'polyline' },
@@ -92,6 +93,10 @@ function DrawControl({ shape, initialGeometry, onGeometryChange }) {
     return null;
 }
 
+function toggleReferensiKategori(key) {
+    setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
+}
+
 export default function ReferensiJalanForm() {
     const { id } = useParams();
     const isEdit = Boolean(id);
@@ -104,6 +109,8 @@ export default function ReferensiJalanForm() {
     const [initialGeometry, setInitialGeometry] = useState(null);
     const [saving, setSaving] = useState(false);
     const [loadingData, setLoadingData] = useState(isEdit);
+    const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
+    const [showPatokKm, setShowPatokKm] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const toast = useToast();
@@ -212,13 +219,28 @@ export default function ReferensiJalanForm() {
                                     subdomains="abcd"
                                     maxZoom={19}
                                 />
-                                <ReferensiJalanLayer />
+                                <ReferensiJalanLayer visible={visibleReferensi} showKm={showPatokKm} />
                                 <DrawControl
                                     shape={selectedOption.shape}
                                     initialGeometry={initialGeometry}
                                     onGeometryChange={setGeometry}
                                 />
                             </MapContainer>
+
+                            <div className="absolute top-2 right-2 z-[1000] flex flex-col items-end gap-2">
+                                <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy w-44">
+                                    <span className="flex items-center gap-1.5 text-text-muted">
+                                        <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
+                                        Ref. Jalan
+                                    </span>
+                                    <ReferensiJalanToggles
+                                        visible={visibleReferensi}
+                                        onToggle={toggleReferensiKategori}
+                                        showKm={showPatokKm}
+                                        onToggleKm={() => setShowPatokKm((v) => !v)}
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 mt-2">

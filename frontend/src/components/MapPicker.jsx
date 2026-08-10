@@ -25,6 +25,7 @@ function LocationMarker({ position, setPosition }) {
 export default function MapPicker({ onLocationSelect, initialPosition }) {
     const [position, setPosition] = useState(initialPosition || null);
     const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
+    const [showPatokKm, setShowPatokKm] = useState(false);
     const defaultCenter = initialPosition || [-6.9147, 107.6098];
 
     function handleSetPosition(pos) {
@@ -43,7 +44,7 @@ export default function MapPicker({ onLocationSelect, initialPosition }) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; OpenStreetMap contributors'
                 />
-                <ReferensiJalanLayer visible={visibleReferensi} />
+                <ReferensiJalanLayer visible={visibleReferensi} showKm={showPatokKm} />
                 <LocationMarker position={position} setPosition={handleSetPosition} />
             </MapContainer>
 
@@ -59,7 +60,12 @@ export default function MapPicker({ onLocationSelect, initialPosition }) {
                     <span className="material-symbols-outlined text-[14px] text-purple-600">signpost</span>
                     Ref. Jalan
                 </p>
-                <ReferensiJalanToggles visible={visibleReferensi} onToggle={toggleReferensiKategori} />
+                <ReferensiJalanToggles
+                    visible={visibleReferensi}
+                    onToggle={toggleReferensiKategori}
+                    showKm={showPatokKm}
+                    onToggleKm={() => setShowPatokKm((v) => !v)}
+                />
             </div>
         </div>
     );

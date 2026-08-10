@@ -99,36 +99,11 @@ function DrawControl({ tipeGeometri, initialGeometry, onGeometryChange, disabled
     return null;
 }
 
-function CtrlScrollZoom() {
-    const map = useMap();
-
-    useEffect(() => {
-        const container = map.getContainer();
-
-        function handleWheel(e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-                if (e.deltaY < 0) {
-                    map.zoomIn();
-                } else if (e.deltaY > 0) {
-                    map.zoomOut();
-                }
-            }
-        }
-
-        container.addEventListener('wheel', handleWheel, { passive: false });
-        return () => {
-            container.removeEventListener('wheel', handleWheel);
-        };
-    }, [map]);
-
-    return null;
-}
-
 export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeometryChange, disabled = false }) {
     const [existingAssets, setExistingAssets] = useState([]);
     const [showExisting, setShowExisting] = useState(true);
     const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
+    const [showPatokKm, setShowPatokKm] = useState(false);
     const [flyTarget, setFlyTarget] = useState(null);
 
     useEffect(() => {
@@ -170,11 +145,9 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                 maxBounds={PURBALEUNYI_BOUNDS}
                 maxBoundsViscosity={1.0}
                 zoomControl={false}
-                scrollWheelZoom={false}
                 className="[&_.leaflet-top.leaflet-left]:!top-16 transition-all"
                 style={{ height: '100%', width: '100%' }}
             >
-                <CtrlScrollZoom />
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -182,7 +155,7 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                     maxZoom={19}
                 />
 
-                <ReferensiJalanLayer visible={visibleReferensi} />
+                <ReferensiJalanLayer visible={visibleReferensi} showKm={showPatokKm} />
                 <MapMask />
 
                 <MapSearchLayer target={flyTarget} />
@@ -244,7 +217,12 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                         <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
                         Ref. Jalan
                     </span>
-                    <ReferensiJalanToggles visible={visibleReferensi} onToggle={toggleReferensiKategori} />
+                    <ReferensiJalanToggles
+                        visible={visibleReferensi}
+                        onToggle={toggleReferensiKategori}
+                        showKm={showPatokKm}
+                        onToggleKm={() => setShowPatokKm((v) => !v)}
+                    />
                     <div className="w-full h-px bg-border" />
                     <div className="flex items-center justify-between gap-3">
                         <span className="flex items-center gap-1.5 text-text-muted">

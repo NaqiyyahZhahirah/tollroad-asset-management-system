@@ -138,6 +138,8 @@ function FilterPanel({
     filteredCount,
     visibleReferensi,
     onToggleReferensi,
+    showPatokKm,
+    onTogglePatokKm,
     showRejected,
     onToggleShowRejected,
     isAdmin
@@ -189,7 +191,12 @@ function FilterPanel({
                             <span className="material-symbols-outlined text-[18px] text-purple-600">signpost</span>
                             Data Referensi Jalan
                         </span>
-                        <ReferensiJalanToggles visible={visibleReferensi} onToggle={onToggleReferensi} />
+                        <ReferensiJalanToggles
+                            visible={visibleReferensi}
+                            onToggle={onToggleReferensi}
+                            showKm={showPatokKm}
+                            onToggleKm={onTogglePatokKm}
+                        />
                     </div>
 
                     {isAdmin && (
@@ -276,6 +283,7 @@ export default function PetaMonitoring() {
     const [processing, setProcessing] = useState(false);
     const [previewPhoto, setPreviewPhoto] = useState(null);
     const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
+    const [showPatokKm, setShowPatokKm] = useState(false);
     const [showRejected, setShowRejected] = useState(false);
     const [searchFlyTarget, setSearchFlyTarget] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -437,7 +445,7 @@ export default function PetaMonitoring() {
                                 maxZoom={19}
                             />
                             
-                            <ReferensiJalanLayer visible={visibleReferensi} />
+                            <ReferensiJalanLayer visible={visibleReferensi} showKm={showPatokKm} />
                             <MapMask />
 
                             <ZoomControl />
@@ -480,6 +488,8 @@ export default function PetaMonitoring() {
                             filteredCount={filtered.length}
                             visibleReferensi={visibleReferensi}
                             onToggleReferensi={toggleReferensiKategori}
+                            showPatokKm={showPatokKm}
+                            onTogglePatokKm={() => setShowPatokKm((v) => !v)}
                             showRejected={showRejected}
                             onToggleShowRejected={setShowRejected}
                             isAdmin={user?.role === 'admin'}
