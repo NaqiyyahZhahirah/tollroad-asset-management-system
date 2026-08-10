@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import axiosClient from '../api/axiosClient';
@@ -17,9 +17,16 @@ function gerbangTolIcon() {
     });
 }
 
-function patokHeksaIcon() {
+function patokHeksaIcon(km, showLabel) {
+    const label = showLabel && km != null
+        ? `<span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:10px;font-weight:700;color:#374151;background:rgba(255,255,255,0.85);padding:0 3px;border-radius:2px;">KM ${km}</span>`
+        : '';
+
     return L.divIcon({
-        html: `<div style="width:8px;height:8px;background:#6b7280;border-radius:50%;border:1px solid white"></div>`,
+        html: `<div style="position:relative;width:8px;height:8px;">
+                 <div style="width:8px;height:8px;background:#6b7280;border-radius:50%;border:1px solid white;"></div>
+                 ${label}
+               </div>`,
         className: '',
         iconSize: [8, 8],
         iconAnchor: [4, 4]
@@ -28,7 +35,7 @@ function patokHeksaIcon() {
 
 const DEFAULT_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
 
-export default function ReferensiJalanLayer({ visible = DEFAULT_VISIBLE }) {
+export default function ReferensiJalanLayer({ visible = DEFAULT_VISIBLE, showKm = false }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -60,9 +67,11 @@ export default function ReferensiJalanLayer({ visible = DEFAULT_VISIBLE }) {
                 if (item.kategori === 'patok_heksa') {
                     return (
                         <GeoJSON
-                            key={item.id}
+                            key={`${item.id}-${showKm}`}
                             data={item.koordinat_geojson}
-                            pointToLayer={(feature, latlng) => L.marker(latlng, { icon: patokHeksaIcon() })}
+                            pointToLayer={(feature, latlng) =>
+                                L.marker(latlng, { icon: patokHeksaIcon(item.lokasi_km, showKm) })
+                            }
                             eventHandlers={{
                                 click: (e) => { e.target.bindPopup(`<b>${item.nama}</b>`).openPopup(); }
                             }}

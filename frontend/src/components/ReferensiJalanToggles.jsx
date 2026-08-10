@@ -33,23 +33,40 @@ function LayerIndicator({ shape, color, dashed }) {
     );
 }
 
-export default function ReferensiJalanToggles({ visible, onToggle }) {
+export default function ReferensiJalanToggles({ visible, onToggle, showKm, onToggleKm }) {
     return (
         <div className="space-y-2">
             {KATEGORI_LIST.map((k) => (
-                <div key={k.key} className="flex items-center justify-between gap-3">
-                    <span className="flex items-center gap-2 text-xs font-bold text-text-muted">
-                        <LayerIndicator shape={k.shape} color={k.color} dashed={k.dashed} />
-                        {k.label}
-                    </span>
-                    <button
-                        type="button"
-                        onClick={() => onToggle(k.key)}
-                        className="w-9 h-5 rounded-full transition-colors relative p-0.5 shrink-0"
-                        style={{ backgroundColor: visible[k.key] ? k.color : '#d1d5db' }}
-                    >
-                        <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${visible[k.key] ? 'translate-x-4' : 'translate-x-0'}`} />
-                    </button>
+                <div key={k.key}>
+                    <div className="flex items-center justify-between gap-3">
+                        <span className="flex items-center gap-2 text-xs font-bold text-text-muted">
+                            <LayerIndicator shape={k.shape} color={k.color} dashed={k.dashed} />
+                            {k.label}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={() => onToggle(k.key)}
+                            className="w-9 h-5 rounded-full transition-colors relative p-0.5 shrink-0"
+                            style={{ backgroundColor: visible[k.key] ? k.color : '#d1d5db' }}
+                        >
+                            <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${visible[k.key] ? 'translate-x-4' : 'translate-x-0'}`} />
+                        </button>
+                    </div>
+
+                    {k.key === 'patok_heksa' && visible.patok_heksa && (
+                        <div className="flex items-center justify-between gap-3 mt-2 ml-5 pl-2 border-l-2 border-border">
+                            <span className="text-[11px] font-semibold text-text-muted">
+                                Tampilkan KM
+                            </span>
+                            <button
+                                type="button"
+                                onClick={onToggleKm}
+                                className={`w-8 h-4.5 rounded-full transition-colors relative p-0.5 shrink-0 ${showKm ? 'bg-gray-500' : 'bg-gray-300'}`}
+                            >
+                                <div className={`w-3.5 h-3.5 rounded-full bg-white shadow transition-transform ${showKm ? 'translate-x-3.5' : 'translate-x-0'}`} />
+                            </button>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
