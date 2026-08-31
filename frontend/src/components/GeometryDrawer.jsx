@@ -14,6 +14,7 @@ import {
     PURBALEUNYI_MIN_ZOOM,
     PURBALEUNYI_DEFAULT_ZOOM
 } from '../utils/purbaleunyiBounds';
+import { createPortal } from 'react-dom';
 
 const geometryToLeafletShape = { titik: 'marker', garis: 'polyline', area: 'polygon' };
 const pinColor = { baik: '#10b981', perlu_perawatan: '#f59e0b', rusak: '#dc2626' };
@@ -99,18 +100,21 @@ function DrawControl({ tipeGeometri, initialGeometry, onGeometryChange, disabled
     return null;
 }
 
-export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeometryChange, disabled = false }) {
+export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeometryChange, disabled = false, showExistingAssets = true }) {
     const [existingAssets, setExistingAssets] = useState([]);
     const [showExisting, setShowExisting] = useState(true);
     const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
     const [showPatokKm, setShowPatokKm] = useState(false);
     const [flyTarget, setFlyTarget] = useState(null);
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [refPanelOpen, setRefPanelOpen] = useState(true);
 
     useEffect(() => {
+        if (!showExistingAssets) return;
         axiosClient.get('/aset')
             .then((res) => setExistingAssets(res.data.data || []))
             .catch(() => setExistingAssets([]));
-    }, []);
+    }, [showExistingAssets]);
 
     function toggleReferensiKategori(key) {
         setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -135,8 +139,8 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
         });
     }, [existingAssets]);
 
-    return (
-        <div className="h-full min-h-[480px] sm:min-h-[450px] relative overflow-visible">
+    const content = (
+        <>
             <MapContainer
                 center={PURBALEUNYI_CENTER}
                 zoom={PURBALEUNYI_DEFAULT_ZOOM}
@@ -148,8 +152,9 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
                 className="[&_.leaflet-top.leaflet-left]:!top-16 transition-all"
                 style={{ height: '100%', width: '100%' }}
             >
+
                 <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                    url={`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?api_key=${import.meta.env.VITE_CARTO_API_KEY}`}
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     subdomains="abcd"
                     maxZoom={19}
@@ -160,7 +165,7 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
 
                 <MapSearchLayer target={flyTarget} />
 
-                {showExisting && sortedExisting.map((aset) => (
+                {showExistingAssets && showExisting && sortedExisting.map((aset) => (
                     <GeoJSON
                         key={aset.id}
                         data={aset.koordinat_geojson}
@@ -192,6 +197,16 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
             </MapContainer>
 
             <MapSearchBar onFly={setFlyTarget} className="top-3 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-[340px]" />
+            <button
+                type="button"
+                onClick={() => setIsFullscreen((v) => !v)}
+                className="absolute top-3 right-2 sm:right-3 z-[1000] bg-card/95 backdrop-blur-md p-2 rounded-xl shadow-xl border border-border"
+                title={isFullscreen ? "Keluar layar penuh" : "Layar penuh"}
+            >
+                <span className="material-symbols-outlined text-navy text-[20px]">
+                    {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}
+                </span>
+            </button>
 
             {disabled && (
                 <div className="absolute inset-0 z-[1050] bg-black/25 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
@@ -212,33 +227,60 @@ export default function GeometryDrawer({ tipeGeometri, initialGeometry, onGeomet
             )}
 
             <div className="absolute top-16 right-2 sm:right-3 z-[1000] flex flex-col items-end gap-2">
-                <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy w-44">
-                    <span className="flex items-center gap-1.5 text-text-muted">
-                        <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
-                        Ref. Jalan
-                    </span>
-                    <ReferensiJalanToggles
-                        visible={visibleReferensi}
-                        onToggle={toggleReferensiKategori}
-                        showKm={showPatokKm}
-                        onToggleKm={() => setShowPatokKm((v) => !v)}
-                    />
-                    <div className="w-full h-px bg-border" />
-                    <div className="flex items-center justify-between gap-3">
-                        <span className="flex items-center gap-1.5 text-text-muted">
-                            <span className="material-symbols-outlined text-[16px] text-emerald-600">layers</span>
-                            Aset Lain ({existingAssets.length})
-                        </span>
-                        <button
-                            type="button"
-                            onClick={() => setShowExisting((v) => !v)}
-                            className={`w-9 h-5 rounded-full transition-colors relative p-0.5 ${showExisting ? 'bg-emerald-600' : 'bg-gray-300'}`}
-                        >
-                            <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showExisting ? 'translate-x-4' : 'translate-x-0'}`} />
-                        </button>
+                <button
+                    type="button"
+                    onClick={() => setRefPanelOpen((v) => !v)}
+                    className="bg-card/95 backdrop-blur-md p-2 rounded-xl shadow-xl border border-border flex items-center gap-1.5 text-xs font-bold text-navy"
+                >
+                    <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
+                    Ref. Jalan
+                    <span className="material-symbols-outlined text-[16px]">{refPanelOpen ? 'expand_less' : 'expand_more'}</span>
+                </button>
+
+                {refPanelOpen && (
+                    <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy w-44">
+                        <ReferensiJalanToggles
+                            visible={visibleReferensi}
+                            onToggle={toggleReferensiKategori}
+                            showKm={showPatokKm}
+                            onToggleKm={() => setShowPatokKm((v) => !v)}
+                        />
+                        {showExistingAssets && (
+                            <>
+                                <div className="w-full h-px bg-border" />
+                                <div className="flex items-center justify-between gap-3">
+                                    <span className="flex items-center gap-1.5 text-text-muted">
+                                        <span className="material-symbols-outlined text-[16px] text-emerald-600">layers</span>
+                                        Aset Lain ({existingAssets.length})
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowExisting((v) => !v)}
+                                        className={`w-9 h-5 rounded-full transition-colors relative p-0.5 ${showExisting ? 'bg-emerald-600' : 'bg-gray-300'}`}
+                                    >
+                                        <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${showExisting ? 'translate-x-4' : 'translate-x-0'}`} />
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
-                </div>
+                )}
             </div>
+        </>
+    );
+
+    if (isFullscreen) {
+        return createPortal(
+            <div className="fixed inset-0 z-[9999] bg-white">
+                {content}
+            </div>,
+            document.body
+        );
+    }
+
+    return (
+        <div className="h-full min-h-[480px] sm:min-h-[450px] relative overflow-visible">
+            {content}
         </div>
     );
 }

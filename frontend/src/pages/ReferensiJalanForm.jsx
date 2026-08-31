@@ -1,101 +1,17 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet-draw/dist/leaflet.draw.css';
-import 'leaflet-draw';
 import axiosClient from '../api/axiosClient';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import { useToast } from '../components/Toast';
-import ReferensiJalanLayer from '../components/ReferensiJalanLayer';
-import ReferensiJalanToggles from '../components/ReferensiJalanToggles';
-import {
-    PURBALEUNYI_BOUNDS,
-    PURBALEUNYI_CENTER,
-    PURBALEUNYI_MIN_ZOOM,
-    PURBALEUNYI_DEFAULT_ZOOM
-} from '../utils/purbaleunyiBounds';
-const DEFAULT_REFERENSI_VISIBLE = { main_road: true, ramp: true, gerbang_tol: true, patok_heksa: true };
+import GeometryDrawer from '../components/GeometryDrawer';
+
 const KATEGORI_OPTIONS = [
-    { value: 'main_road', label: 'Main Road (Garis)', shape: 'polyline' },
-    { value: 'ramp', label: 'Ramp / Akses (Garis)', shape: 'polyline' },
-    { value: 'gerbang_tol', label: 'Gerbang Tol (Titik)', shape: 'marker' },
-    { value: 'patok_heksa', label: 'Patok Heksa (Titik)', shape: 'marker' }
+    { value: 'main_road', label: 'Main Road (Garis)', tipeGeometri: 'garis' },
+    { value: 'ramp', label: 'Ramp / Akses (Garis)', tipeGeometri: 'garis' },
+    { value: 'gerbang_tol', label: 'Gerbang Tol (Titik)', tipeGeometri: 'titik' },
+    { value: 'patok_heksa', label: 'Patok Heksa (Titik)', tipeGeometri: 'titik' }
 ];
-
-function DrawControl({ shape, initialGeometry, onGeometryChange }) {
-    const map = useMap();
-    const drawnItemsRef = useRef(new L.FeatureGroup());
-
-    useEffect(() => {
-        const drawnItems = drawnItemsRef.current;
-        map.addLayer(drawnItems);
-
-        if (initialGeometry) {
-            try {
-                const geoJsonLayer = L.geoJSON(initialGeometry, {
-                    style: { color: '#fea619', weight: 4 }
-                });
-                geoJsonLayer.eachLayer((layer) => drawnItems.addLayer(layer));
-                const bounds = drawnItems.getBounds();
-                if (bounds.isValid()) {
-                    map.fitBounds(bounds, { maxZoom: 16, padding: [40, 40] });
-                }
-            } catch (err) {
-                console.error('Error loading initial geometry:', err);
-            }
-        }
-
-        const drawOptions = {
-            marker: false, polyline: false, polygon: false,
-            circle: false, rectangle: false, circlemarker: false
-        };
-        if (shape) {
-            drawOptions[shape] = shape === 'marker'
-                ? {}
-                : { shapeOptions: { color: '#7c3aed', weight: 4 } };
-        }
-
-        const drawControl = new L.Control.Draw({
-            position: 'topleft',
-            draw: drawOptions,
-            edit: { featureGroup: drawnItems, remove: true }
-        });
-        map.addControl(drawControl);
-
-        function handleCreated(e) {
-            drawnItems.clearLayers();
-            drawnItems.addLayer(e.layer);
-            onGeometryChange(e.layer.toGeoJSON().geometry);
-        }
-        function handleEdited(e) {
-            e.layers.eachLayer((layer) => onGeometryChange(layer.toGeoJSON().geometry));
-        }
-        function handleDeleted() {
-            onGeometryChange(null);
-        }
-
-        map.on(L.Draw.Event.CREATED, handleCreated);
-        map.on(L.Draw.Event.EDITED, handleEdited);
-        map.on(L.Draw.Event.DELETED, handleDeleted);
-
-        return () => {
-            map.removeControl(drawControl);
-            map.off(L.Draw.Event.CREATED, handleCreated);
-            map.off(L.Draw.Event.EDITED, handleEdited);
-            map.off(L.Draw.Event.DELETED, handleDeleted);
-            map.removeLayer(drawnItems);
-            drawnItems.clearLayers();
-        };
-    }, [map, shape, initialGeometry, onGeometryChange]);
-
-    return null;
-}
-
-function toggleReferensiKategori(key) {
-    setVisibleReferensi((prev) => ({ ...prev, [key]: !prev[key] }));
-}
 
 export default function ReferensiJalanForm() {
     const { id } = useParams();
@@ -109,8 +25,6 @@ export default function ReferensiJalanForm() {
     const [initialGeometry, setInitialGeometry] = useState(null);
     const [saving, setSaving] = useState(false);
     const [loadingData, setLoadingData] = useState(isEdit);
-    const [visibleReferensi, setVisibleReferensi] = useState(DEFAULT_REFERENSI_VISIBLE);
-    const [showPatokKm, setShowPatokKm] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const toast = useToast();
@@ -205,42 +119,12 @@ export default function ReferensiJalanForm() {
                 <div className="flex-1 overflow-y-auto p-4 md:p-8 pb-20 md:pb-8">
                     <div className="max-w-3xl mx-auto flex flex-col gap-6">
 
-                        <div className="relative h-[360px] md:h-[420px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
-                            <MapContainer
-                                center={PURBALEUNYI_CENTER}
-                                zoom={PURBALEUNYI_DEFAULT_ZOOM}
-                                minZoom={PURBALEUNYI_MIN_ZOOM}
-                                maxBounds={PURBALEUNYI_BOUNDS}
-                                className="w-full h-full"
-                            >
-                                <TileLayer
-                                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                                    subdomains="abcd"
-                                    maxZoom={19}
-                                />
-                                <ReferensiJalanLayer visible={visibleReferensi} showKm={showPatokKm} />
-                                <DrawControl
-                                    shape={selectedOption.shape}
-                                    initialGeometry={initialGeometry}
-                                    onGeometryChange={setGeometry}
-                                />
-                            </MapContainer>
-
-                            <div className="absolute top-2 right-2 z-[1000] flex flex-col items-end gap-2">
-                                <div className="bg-card/95 backdrop-blur-md p-2.5 rounded-2xl shadow-xl border border-border flex flex-col gap-2 text-xs font-bold text-navy w-44">
-                                    <span className="flex items-center gap-1.5 text-text-muted">
-                                        <span className="material-symbols-outlined text-[16px] text-purple-600">signpost</span>
-                                        Ref. Jalan
-                                    </span>
-                                    <ReferensiJalanToggles
-                                        visible={visibleReferensi}
-                                        onToggle={toggleReferensiKategori}
-                                        showKm={showPatokKm}
-                                        onToggleKm={() => setShowPatokKm((v) => !v)}
-                                    />
-                                </div>
-                            </div>
+                        <div className="relative h-[420px] md:h-[500px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
+                            <GeometryDrawer
+                                tipeGeometri={selectedOption.tipeGeometri}
+                                initialGeometry={initialGeometry}
+                                onGeometryChange={setGeometry}
+                            />
                         </div>
 
                         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 mt-2">
@@ -315,7 +199,7 @@ export default function ReferensiJalanForm() {
                                     <div className="col-span-2 p-3 bg-app-bg rounded-lg border border-border text-xs text-text-muted">
                                         {geometry
                                             ? 'Geometri sudah digambar di peta'
-                                            : `Gambar ${selectedOption.shape === 'marker' ? 'titik' : 'garis'} di peta menggunakan tool di kiri atas peta.`}
+                                            : `Gambar ${selectedOption.tipeGeometri === 'titik' ? 'titik' : 'garis'} di peta menggunakan tool di kiri atas peta.`}
                                     </div>
                                 </div>
                             </section>

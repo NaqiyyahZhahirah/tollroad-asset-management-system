@@ -32,6 +32,8 @@ export default function AsetForm() {
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const toast = useToast();
+    const currentYear = new Date().getFullYear();
+    const YEAR_OPTIONS = Array.from({ length: currentYear - 1989 }, (_, i) => currentYear - i);
 
     async function fetchElevation(lat, lng) {
         try {
@@ -76,6 +78,16 @@ export default function AsetForm() {
     async function handleGeometryChange(geojson) {
         setFormData((prev) => ({ ...prev, koordinat_geojson: geojson }));
         if (!geojson) return;
+
+        if (geojson.type === 'LineString' && geojson.coordinates?.length >= 2) {
+            const panjang = calculatePolylineLength(geojson.coordinates);
+            setFormData((prev) => ({ ...prev, panjang_bentang: Math.round(panjang * 100) / 100 }));
+        }
+
+        if (geojson.type === 'Polygon' && geojson.coordinates?.[0]?.length >= 3) {
+            const luas = calculatePolygonArea(geojson.coordinates);
+            setFormData((prev) => ({ ...prev, luas_area: Math.round(luas * 100) / 100 }));
+        }
 
         let lat, lng;
         if (geojson.type === 'Point' && Array.isArray(geojson.coordinates)) {
@@ -152,6 +164,8 @@ export default function AsetForm() {
                     jalur: aset.jalur || '',
                     tanggal_aset_dibuat: formattedDate,
                     elevasi_mdpl: aset.elevasi_mdpl !== undefined && aset.elevasi_mdpl !== null ? aset.elevasi_mdpl : '',
+                    luas_area: aset.luas_area !== undefined && aset.luas_area !== null ? aset.luas_area : '',
+                    panjang_bentang: aset.panjang_bentang !== undefined && aset.panjang_bentang !== null ? aset.panjang_bentang : '',
                     status_kondisi: aset.status_kondisi || 'baik',
                     status_validasi: aset.status_validasi || '',
                     catatan_validasi: aset.catatan_validasi || '',
@@ -205,6 +219,39 @@ export default function AsetForm() {
         setPhotos((prev) => prev.filter((_, i) => i !== index));
     }
 
+    function calculatePolylineLength(coordinates) {
+        const R = 6371000;
+        let total = 0;
+        for (let i = 1; i < coordinates.length; i++) {
+            const [lon1, lat1] = coordinates[i - 1];
+            const [lon2, lat2] = coordinates[i];
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) ** 2;
+            total += R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+        return total;
+    }
+
+    function calculatePolygonArea(coordinates) {
+        const ring = coordinates[0];
+        if (!ring || ring.length < 3) return 0;
+
+        const R = 6371000; // radius bumi (meter)
+        const toRad = (deg) => deg * Math.PI / 180;
+
+        let area = 0;
+        for (let i = 0; i < ring.length - 1; i++) {
+            const [lon1, lat1] = ring[i];
+            const [lon2, lat2] = ring[i + 1];
+            area += toRad(lon2 - lon1) * (2 + Math.sin(toRad(lat1)) + Math.sin(toRad(lat2)));
+        }
+        area = Math.abs(area * R * R / 2);
+        return area; // hasil dalam meter persegi
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         setError('');
@@ -228,10 +275,16 @@ export default function AsetForm() {
                     nomor_seri: formData.nomor_seri,
                     ruas_tol: formData.ruas_tol || 'Purbaleunyi',
                     lokasi_km: Number(formData.lokasi_km),
+                    lokasi_km_akhir: selectedKategori.tipe_geometri === 'garis' && formData.lokasi_km_akhir
+                        ? Number(formData.lokasi_km_akhir)
+                        : null,                    
                     jalur: formData.jalur,
                     koordinat_geojson: formData.koordinat_geojson,
                     elevasi_mdpl: formData.elevasi_mdpl ? Number(formData.elevasi_mdpl) : null,
+                    panjang_bentang: formData.panjang_bentang || null,
+                    luas_area: formData.luas_area || null,
                     status_kondisi: formData.status_kondisi,
+                    catatan_kondisi: formData.catatan_kondisi || null,
                     atribut_spesifik: atributSpesifik,
                     tanggal_aset_dibuat: formData.tanggal_aset_dibuat
                 });
@@ -255,10 +308,16 @@ export default function AsetForm() {
                     nomor_seri: formData.nomor_seri,
                     ruas_tol: formData.ruas_tol || 'Purbaleunyi',
                     lokasi_km: Number(formData.lokasi_km),
+                    lokasi_km_akhir: selectedKategori.tipe_geometri === 'garis' && formData.lokasi_km_akhir
+                        ? Number(formData.lokasi_km_akhir)
+                        : null,
                     jalur: formData.jalur,
                     koordinat_geojson: formData.koordinat_geojson,
                     elevasi_mdpl: formData.elevasi_mdpl ? Number(formData.elevasi_mdpl) : null,
+                    panjang_bentang: formData.panjang_bentang || null,
+                    luas_area: formData.luas_area || null,
                     status_kondisi: formData.status_kondisi,
+                    catatan_kondisi: formData.catatan_kondisi || null,
                     atribut_spesifik: atributSpesifik,
                     tanggal_aset_dibuat: formData.tanggal_aset_dibuat,
                     input_by: user.id
@@ -339,7 +398,7 @@ export default function AsetForm() {
                             </div>
                         )}
 
-                        <div className="relative h-[360px] md:h-[420px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
+                        <div className="relative h-[420px] md:h-[500px] rounded-2xl border border-border overflow-hidden shadow-md z-0 shrink-0">
                             <GeometryDrawer
                                 tipeGeometri={selectedKategori?.tipe_geometri || 'titik'}
                                 initialGeometry={formData.koordinat_geojson}
@@ -393,20 +452,6 @@ export default function AsetForm() {
 
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
-                                                Nomor Seri <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                placeholder="contoh: GR-2024-001"
-                                                value={formData.nomor_seri || ''}
-                                                onChange={(e) => handleFieldChange('nomor_seri', e.target.value)}
-                                                className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
-                                                required
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
                                                 Ruas Tol <span className="text-red-500">*</span>
                                             </label>
                                             <input
@@ -419,22 +464,93 @@ export default function AsetForm() {
                                             />
                                         </div>
 
-                                        <div>
-                                            <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
-                                                Lokasi KM <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                type="number"
-                                                onWheel={(e) => e.target.blur()}
-                                                step="0.01"
-                                                min="0"
-                                                placeholder="contoh: 91.5"
-                                                value={formData.lokasi_km || ''}
-                                                onChange={(e) => handleFieldChange('lokasi_km', e.target.value)}
-                                                className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
-                                                required
-                                            />
-                                        </div>
+                                        {selectedKategori?.tipe_geometri === 'garis' && (
+                                            <div>
+                                                <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                                    Panjang Bentang (meter)
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    placeholder="contoh: 125"
+                                                    value={formData.panjang_bentang ?? ''}
+                                                    onChange={(e) => handleFieldChange('panjang_bentang', e.target.value)}
+                                                    className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                                />
+                                            </div>
+                                        )}
+
+                                        {selectedKategori?.tipe_geometri === 'area' && (
+                                            <div>
+                                                <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                                    Luas Area (m²)
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    placeholder="contoh: 1500"
+                                                    value={formData.luas_area ?? ''}
+                                                    onChange={(e) => handleFieldChange('luas_area', e.target.value)}
+                                                    className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                                />
+                                            </div>
+                                        )}
+
+                                        {selectedKategori?.tipe_geometri === 'garis' ? (
+                                            <>
+                                                <div>
+                                                    <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                                        Lokasi KM Awal <span className="text-red-500">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        onWheel={(e) => e.target.blur()}
+                                                        step="0.01"
+                                                        min="0"
+                                                        placeholder="contoh: 91.5"
+                                                        value={formData.lokasi_km || ''}
+                                                        onChange={(e) => handleFieldChange('lokasi_km', e.target.value)}
+                                                        className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                                        Lokasi KM Akhir <span className="text-red-500">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        onWheel={(e) => e.target.blur()}
+                                                        step="0.01"
+                                                        min="0"
+                                                        placeholder="contoh: 92.0"
+                                                        value={formData.lokasi_km_akhir || ''}
+                                                        onChange={(e) => handleFieldChange('lokasi_km_akhir', e.target.value)}
+                                                        className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                                        required
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div>
+                                                <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                                    Lokasi KM <span className="text-red-500">*</span>
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    onWheel={(e) => e.target.blur()}
+                                                    step="0.01"
+                                                    min="0"
+                                                    placeholder="contoh: 91.5"
+                                                    value={formData.lokasi_km || ''}
+                                                    onChange={(e) => handleFieldChange('lokasi_km', e.target.value)}
+                                                    className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        )}
 
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
@@ -454,15 +570,19 @@ export default function AsetForm() {
 
                                         <div>
                                             <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
-                                                Tanggal Pemasangan <span className="text-red-500">*</span>
+                                                Tahun Pemasangan <span className="text-red-500">*</span>
                                             </label>
-                                            <input
-                                                type="date"
-                                                value={formData.tanggal_aset_dibuat || ''}
-                                                onChange={(e) => handleFieldChange('tanggal_aset_dibuat', e.target.value)}
-                                                className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
+                                            <select
+                                                value={formData.tanggal_aset_dibuat ? formData.tanggal_aset_dibuat.substring(0, 4) : ''}
+                                                onChange={(e) => handleFieldChange('tanggal_aset_dibuat', `${e.target.value}-01-01`)}
+                                                className={`w-full h-12 pl-4 pr-10 border border-border focus:border-amber outline-none rounded-lg text-sm appearance-none cursor-pointer bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:9px_9px] bg-[right_0.75rem_center] bg-no-repeat ${!formData.tanggal_aset_dibuat ? 'text-text-muted' : 'text-navy'}`}
                                                 required
-                                            />
+                                            >
+                                                <option value="" disabled hidden>Pilih Tahun</option>
+                                                {YEAR_OPTIONS.map((y) => (
+                                                    <option key={y} value={y} className="text-navy">{y}</option>
+                                                ))}
+                                            </select>
                                         </div>
 
                                         <div>
@@ -493,7 +613,7 @@ export default function AsetForm() {
                                                 type="number"
                                                 onWheel={(e) => e.target.blur()}
                                                 step="0.01"
-                                                placeholder={fetchingElevation ? "Memuat elevasi..." : "contoh: 750.5"}
+                                                placeholder={fetchingElevation ? "Memuat elevasi..." : "contoh: 750"}
                                                 value={formData.elevasi_mdpl !== undefined && formData.elevasi_mdpl !== null ? formData.elevasi_mdpl : ''}
                                                 onChange={(e) => handleFieldChange('elevasi_mdpl', e.target.value)}
                                                 className="w-full h-12 px-4 border border-border focus:border-amber outline-none rounded-lg text-sm"
@@ -548,6 +668,19 @@ export default function AsetForm() {
                                             </button>
                                         ))}
                                     </div>
+                                
+                                    <div className="mt-3">
+                                        <label className="block text-xs font-semibold mb-1 text-text-muted uppercase tracking-wide">
+                                            Catatan Kondisi (opsional)
+                                        </label>
+                                        <textarea
+                                            rows={3}
+                                            placeholder="Jelaskan kondisi khusus"
+                                            value={formData.catatan_kondisi || ''}
+                                            onChange={(e) => handleFieldChange('catatan_kondisi', e.target.value)}
+                                            className="w-full px-4 py-3 border border-border focus:border-amber outline-none rounded-lg text-sm resize-none"
+                                        />
+                                    </div>
                                 </section>
 
                                 <section className="mb-8">
@@ -578,7 +711,6 @@ export default function AsetForm() {
                                             <input
                                                 type="file"
                                                 accept="image/*"
-                                                capture="environment"
                                                 multiple
                                                 onChange={handlePhotoSelect}
                                                 className="hidden"

@@ -508,10 +508,10 @@ export default function KategoriManagement() {
                                         <button
                                             type="button"
                                             onClick={() => setShowTambahKelompok(!showTambahKelompok)}
-                                            className="text-xs font-bold text-[#855300] flex items-center gap-1 hover:underline"
+                                            className="text-xs font-bold text-[#855300] flex items-center gap-1"
                                         >
                                             <span className="material-symbols-outlined text-sm">add_circle</span>
-                                            Kelompok Baru
+                                            <span className="hover:underline">Kelompok Baru</span>
                                         </button>
                                     </div>
 
@@ -571,9 +571,9 @@ export default function KategoriManagement() {
                                         <option value="" disabled hidden>
                                             Pilih Tipe Geometri
                                         </option>
-                                        <option value="titik" className="text-[#0b1c30]">Titik (contoh: Rambu, Lampu Jalan)</option>
-                                        <option value="garis" className="text-[#0b1c30]">Garis (contoh: Guardrail, Drainase)</option>
-                                        <option value="area" className="text-[#0b1c30]">Area (contoh: Segmen Perkerasan Jalan)</option>
+                                        <option value="titik" className="text-[#0b1c30]">Point</option>
+                                        <option value="garis" className="text-[#0b1c30]">Polyline</option>
+                                        <option value="area" className="text-[#0b1c30]">Polygon</option>
                                     </select>
                                 </div>
 

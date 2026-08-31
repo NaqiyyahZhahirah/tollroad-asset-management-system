@@ -172,7 +172,7 @@ function FilterPanel({
             </div>
 
             {open && (
-                <div className="bg-card/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-border w-72 p-4 space-y-4 max-h-[70vh] overflow-y-auto">
+                <div className="bg-card/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-border w-80 p-4 space-y-4 max-h-[70vh] overflow-y-auto">
                     <div className="flex items-center justify-between">
                         <h3 className="text-xs font-black text-navy uppercase tracking-wider">Filter &amp; Layer Peta</h3>
                         {activeCount > 0 && (
@@ -188,7 +188,6 @@ function FilterPanel({
 
                     <div className="p-2.5 bg-app-bg rounded-xl border border-border space-y-2.5">
                         <span className="text-xs font-bold text-navy flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[18px] text-purple-600">signpost</span>
                             Data Referensi Jalan
                         </span>
                         <ReferensiJalanToggles
@@ -239,7 +238,7 @@ function FilterPanel({
                         >
                             <option value="">Semua Tipe</option>
                             <option value="Point">Titik (Point)</option>
-                            <option value="LineString">Garis (LineString)</option>
+                            <option value="LineString">Garis (Polyline)</option>
                             <option value="Polygon">Area (Polygon)</option>
                         </select>
                     </div>
@@ -439,7 +438,7 @@ export default function PetaMonitoring() {
                             className="w-full h-full z-0"
                         >
                             <TileLayer
-                                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                                url={`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?api_key=${import.meta.env.VITE_CARTO_API_KEY}`}
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                                 subdomains="abcd"
                                 maxZoom={19}

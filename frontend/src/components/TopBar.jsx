@@ -61,8 +61,7 @@ export default function TopBar() {
     }
 
     return (
-        <header className="bg-navy text-white flex items-center justify-between gap-3 w-full px-4 md:px-8 h-14 md:h-16 border-b border-navy/40 z-30 shrink-0 shadow-md">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
+        <header className="sticky top-0 bg-navy text-white flex items-center justify-between gap-3 w-full px-4 md:px-8 h-14 md:h-16 border-b border-navy/40 z-30 shrink-0 shadow-md">            <div className="flex items-center gap-3 flex-1 min-w-0">
                 <button
                     onClick={toggleSidebar}
                     className="p-2 -ml-2 hover:bg-white/10 rounded-full shrink-0 text-white transition-colors"

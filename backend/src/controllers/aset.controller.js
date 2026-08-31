@@ -51,7 +51,7 @@ async function getAsetById(req, res) {
 // POST bikin aset baru
 async function createAset(req, res) {
     const {
-        kategori_id, versi_skema_saat_input, nama_aset, nomor_seri, ruas_tol,
+        kategori_id, versi_skema_saat_input, nama_aset, ruas_tol,
         lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
         status_kondisi, atribut_spesifik, tanggal_aset_dibuat, input_by
     } = req.body;
@@ -88,7 +88,7 @@ async function createAset(req, res) {
         .insert([{
             kategori_id,
             versi_skema_saat_input: versi_skema_saat_input || kategori.versi_skema,
-            nama_aset, nomor_seri, ruas_tol: ruas_tol || 'Purbaleunyi',
+            nama_aset, ruas_tol: ruas_tol || 'Purbaleunyi',
             lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
             status_kondisi: status_kondisi || 'baik',
             status_validasi: 'pending',
@@ -157,7 +157,7 @@ async function updateStatusValidasi(req, res) {
 async function updateAset(req, res) {
     const { id } = req.params;
     const {
-        kategori_id, versi_skema_saat_input, nama_aset, nomor_seri, ruas_tol,
+        kategori_id, versi_skema_saat_input, nama_aset, ruas_tol,
         lokasi_km, jalur, koordinat_geojson, elevasi_mdpl,
         status_kondisi, atribut_spesifik, tanggal_aset_dibuat
     } = req.body;
@@ -215,7 +215,6 @@ async function updateAset(req, res) {
     if (kategori_id !== undefined) updatePayload.kategori_id = kategori_id;
     if (versi_skema_saat_input !== undefined) updatePayload.versi_skema_saat_input = versi_skema_saat_input;
     if (nama_aset !== undefined) updatePayload.nama_aset = nama_aset;
-    if (nomor_seri !== undefined) updatePayload.nomor_seri = nomor_seri;
     if (ruas_tol !== undefined) updatePayload.ruas_tol = ruas_tol;
     if (lokasi_km !== undefined) updatePayload.lokasi_km = Number(lokasi_km);
     if (jalur !== undefined) updatePayload.jalur = jalur;
