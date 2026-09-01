@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 
-/** Red teardrop pin diletakkan di peta saat hasil pencarian dipilih */
 function SearchPinMarker({ target }) {
     const map = useMap();
     const markerRef = useRef(null);
@@ -10,7 +9,6 @@ function SearchPinMarker({ target }) {
     useEffect(() => {
         if (!target) return;
 
-        // Buat icon pin merah
         const icon = L.divIcon({
             html: `
                 <div style="position:relative;width:32px;height:40px">
@@ -55,7 +53,29 @@ function SearchPinMarker({ target }) {
     return null;
 }
 
-/** Terbang ke koordinat hasil pencarian */
+function parseDMS(input) {
+    const regex = /(\d+)[°]\s*(\d+)['′]\s*(\d+(?:\.\d+)?)[\"″]\s*([NSEW])/gi;
+    const matches = [...input.matchAll(regex)];
+    if (matches.length !== 2) return null;
+
+    function toDecimal(deg, min, sec, dir) {
+        let decimal = Number(deg) + Number(min) / 60 + Number(sec) / 3600;
+        if (dir === 'S' || dir === 'W') decimal *= -1;
+        return decimal;
+    }
+
+    const parsed = matches.map(([, deg, min, sec, dir]) => ({
+        value: toDecimal(deg, min, sec, dir),
+        dir
+    }));
+
+    const latPart = parsed.find((p) => p.dir === 'N' || p.dir === 'S');
+    const lonPart = parsed.find((p) => p.dir === 'E' || p.dir === 'W');
+    if (!latPart || !lonPart) return null;
+
+    return { lat: latPart.value, lon: lonPart.value };
+}
+
 function FlyToTarget({ target }) {
     const map = useMap();
     useEffect(() => {
@@ -66,14 +86,6 @@ function FlyToTarget({ target }) {
     return null;
 }
 
-/**
- * MapSearchBar — search bar mengambang (absolute) di atas peta.
- * Taruh di luar <MapContainer> tapi di dalam div relative yang membungkus peta.
- *
- * Props:
- *   onFly(target)    — dipanggil saat hasil dipilih, set state flyTarget di parent
- *   className        — kelas tambahan untuk posisi (default: tengah atas)
- */
 export function MapSearchBar({ onFly, className = '' }) {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
@@ -93,7 +105,20 @@ export function MapSearchBar({ onFly, className = '' }) {
     }, []);
 
     const search = useCallback((q) => {
-        // Cek apakah input berupa koordinat  lat, lon  atau  lon, lat
+        const dmsResult = parseDMS(q);
+        if (dmsResult) {
+            setResults([{
+                place_id: 'coord-dms',
+                display_name: `Koordinat: ${dmsResult.lat.toFixed(6)}, ${dmsResult.lon.toFixed(6)}`,
+                lat: String(dmsResult.lat),
+                lon: String(dmsResult.lon),
+                zoom: 16
+            }]);
+            setOpen(true);
+            setLoading(false);
+            return;
+        }
+
         const coordMatch = q.match(/^(-?\d+\.?\d*)\s*[,\s]\s*(-?\d+\.?\d*)$/);
         if (coordMatch) {
             const a = parseFloat(coordMatch[1]);
@@ -152,7 +177,6 @@ export function MapSearchBar({ onFly, className = '' }) {
             ref={wrapperRef}
             className={`absolute z-[1100] w-[min(340px,60%)] ${className || 'top-4 left-1/2 -translate-x-1/2'}`}
         >
-            {/* Input */}
             <div className="flex items-center gap-2 bg-card/97 backdrop-blur-md border border-border rounded-xl shadow-xl px-3 h-10">
                 {loading
                     ? <span className="material-symbols-outlined text-[18px] text-text-muted animate-spin">progress_activity</span>
@@ -173,7 +197,6 @@ export function MapSearchBar({ onFly, className = '' }) {
                 )}
             </div>
 
-            {/* Dropdown Results */}
             {open && results.length > 0 && (
                 <div className="mt-1 bg-card/98 backdrop-blur-xl border border-border rounded-xl shadow-2xl overflow-hidden">
                     {results.map((item) => (
@@ -183,7 +206,6 @@ export function MapSearchBar({ onFly, className = '' }) {
                             onClick={() => handleSelect(item)}
                             className="w-full text-left px-3 py-2.5 hover:bg-card-hover transition-colors flex items-start gap-2 border-b border-border/50 last:border-0"
                         >
-                            {/* Red location pin icon */}
                             <span className="material-symbols-outlined text-[18px] text-red-500 shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>
                                 location_on
                             </span>
@@ -199,10 +221,7 @@ export function MapSearchBar({ onFly, className = '' }) {
     );
 }
 
-/**
- * MapSearchLayer — taruh DALAM <MapContainer>.
- * Menangani FlyTo dan red pin marker hasil pencarian.
- */
+
 export function MapSearchLayer({ target }) {
     return (
         <>
